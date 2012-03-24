@@ -2,10 +2,28 @@ Java EE6 Cookbook for Securing, Tuning and Extending Enterprise applications. (P
 
 ISBN# 978-1-849683-16-6
 
-<img src="javaeecookbook.jpg" />
+https://github.com/mickknutson/javaeecookbook/blob/master/javaeecookbook.jpg
 
 This is the readme for the code samples from the javaeecookbook
+ 
+Purchase the book:
+==================
+Packt:
+http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book
 
+Amazon:
+http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166
+
+Other sites:
+* http://shop.mensys.nl/uk/catalogue/mns_JavaEE6Cookbookforsecuringtuningandextendingenterpriseapplications.html
+* http://www.bookdepository.com/Java-EE6-Cookbook-for-Securing-Tuning-Extending-Enterprise-Applications-Mick-Knutson/9781849683166
+* http://www.bookrabbit.com/catalogue/detail/bookid/7463295
+
+Packt Twitter:
+https://twitter.com/#!/packtpub/statuses/141125819765506048
+
+
+Standard Javadoc header:
 /**
  * [Title]
  *
@@ -22,25 +40,16 @@ This is the readme for the code samples from the javaeecookbook
  * @see http://twitter.com/mickknutson
  * @see http://github.com/mickknutson
  * 
- * @since ${YEAR}
+ * @since 2011
  * 
  */
 
- 
-Additional URL's
-==================
-
-http://shop.mensys.nl/uk/catalogue/mns_JavaEE6Cookbookforsecuringtuningandextendingenterpriseapplications.html
-
-https://twitter.com/#!/packtpub/statuses/141125819765506048
-
-http://www.bookdepository.com/Java-EE6-Cookbook-for-Securing-Tuning-Extending-Enterprise-Applications-Mick-Knutson/9781849683166
-
-http://www.bookrabbit.com/catalogue/detail/bookid/7463295
 
 
 
 
 My Notes:
 ==========
+git push origin master
+
 git push -u origin master
