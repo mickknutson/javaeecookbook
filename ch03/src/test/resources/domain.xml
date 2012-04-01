@@ -1,0 +1,103 @@
+<domain log-root="${com.sun.aas.instanceRoot}/logs" application-root="${com.sun.aas.instanceRoot}/applications"
+        version="10.0">
+    <system-applications/>
+    <applications/>
+    <resources>
+        <jdbc-resource pool-name="__TimerPool" jndi-name="jdbc/__TimerPool" object-type="system-admin"/>
+    </resources>
+    <servers>
+        <server name="server" config-ref="server-config">
+            <resource-ref ref="jdbc/__TimerPool"/>
+            <resource-ref ref="jdbc/__default"/>
+        </server>
+    </servers>
+    <configs>
+        <config name="server-config">
+
+            <security-service activate-default-principal-to-role-mapping="true" jacc="simple">
+                <auth-realm name="AuthenticationRealm" classname="com.baselogic.glassfish.AuthenticationRealm">
+                    <property description="" name="jaas-context" value="authenticationRealm"/>
+                    <property description="" name="directory" value="ldap://track"/>
+                    <property description="" name="java.naming.security.principal" value="xxx"/>
+                    <property description="" name="java.naming.security.credentials" value="xxx"/>
+                    <property description="" name="java.naming.security.authentication" value="simple"/>
+                </auth-realm>
+                <auth-realm classname="com.sun.enterprise.security.auth.realm.file.FileRealm" name="admin-realm">
+                    <property value="admin-keyfile" name="file"/>
+                    <property value="fileRealm" name="jaas-context"/>
+                </auth-realm>
+                <auth-realm classname="com.sun.enterprise.security.auth.realm.file.FileRealm" name="file">
+                    <property value="keyfile" name="file"/>
+                    <property value="fileRealm" name="jaas-context"/>
+                </auth-realm>
+                <auth-realm classname="com.sun.enterprise.security.auth.realm.certificate.CertificateRealm"
+                            name="certificate"/>
+                <jacc-provider
+                        policy-configuration-factory-provider="com.sun.enterprise.security.provider.PolicyConfigurationFactoryImpl"
+                        policy-provider="com.sun.enterprise.security.provider.PolicyWrapper" name="default">
+                    <property value="${com.sun.aas.instanceRoot}/generated/policy" name="repository"/>
+                </jacc-provider>
+                <jacc-provider
+                        policy-configuration-factory-provider="com.sun.enterprise.security.jacc.provider.SimplePolicyConfigurationFactory"
+                        policy-provider="com.sun.enterprise.security.jacc.provider.SimplePolicyProvider" name="simple"/>
+                <audit-module classname="com.sun.enterprise.security.Audit" name="default">
+                    <property value="false" name="auditOn"/>
+                </audit-module>
+                <message-security-config auth-layer="SOAP">
+                    <provider-config provider-id="XWS_ClientProvider"
+                                     class-name="com.sun.xml.wss.provider.ClientSecurityAuthModule"
+                                     provider-type="client">
+                        <request-policy auth-source="content"/>
+                        <response-policy auth-source="content"/>
+                        <property value="s1as" name="encryption.key.alias"/>
+                        <property value="s1as" name="signature.key.alias"/>
+                        <property value="false" name="dynamic.username.password"/>
+                        <property value="false" name="debug"/>
+                    </provider-config>
+                    <provider-config provider-id="ClientProvider"
+                                     class-name="com.sun.xml.wss.provider.ClientSecurityAuthModule"
+                                     provider-type="client">
+                        <request-policy auth-source="content"/>
+                        <response-policy auth-source="content"/>
+                        <property value="s1as" name="encryption.key.alias"/>
+                        <property value="s1as" name="signature.key.alias"/>
+                        <property value="false" name="dynamic.username.password"/>
+                        <property value="false" name="debug"/>
+                        <property value="${com.sun.aas.instanceRoot}/config/wss-server-config-1.0.xml"
+                                  name="security.config"/>
+                    </provider-config>
+                    <provider-config provider-id="XWS_ServerProvider"
+                                     class-name="com.sun.xml.wss.provider.ServerSecurityAuthModule"
+                                     provider-type="server">
+                        <request-policy auth-source="content"/>
+                        <response-policy auth-source="content"/>
+                        <property value="s1as" name="encryption.key.alias"/>
+                        <property value="s1as" name="signature.key.alias"/>
+                        <property value="false" name="debug"/>
+                    </provider-config>
+                    <provider-config provider-id="ServerProvider"
+                                     class-name="com.sun.xml.wss.provider.ServerSecurityAuthModule"
+                                     provider-type="server">
+                        <request-policy auth-source="content"/>
+                        <response-policy auth-source="content"/>
+                        <property value="s1as" name="encryption.key.alias"/>
+                        <property value="s1as" name="signature.key.alias"/>
+                        <property value="false" name="debug"/>
+                        <property value="${com.sun.aas.instanceRoot}/config/wss-server-config-1.0.xml"
+                                  name="security.config"/>
+                    </provider-config>
+                </message-security-config>
+            </security-service>
+            <monitoring-service>
+                <module-monitoring-levels/>
+            </monitoring-service>
+
+            <java-config debug-enabled="false"
+                         debug-options="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=9009">
+                <!--<jvm-options>-Djava.security.auth.login.config=src/test/login.conf</jvm-options>-->
+            </java-config>
+
+        </config>
+    </configs>
+    <property name="administrative.domain.name" value="domain1"/>
+</domain>

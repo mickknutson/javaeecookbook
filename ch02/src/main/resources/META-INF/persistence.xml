@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+             http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <!--javax.persistence.spi.PersistenceProvider-->
+    <persistence-unit name="HSQL_PU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <!-- By default your mappings can be defined in orm.xml file, -->
+        <!-- which is discovered automatically.                       -->
+        <!--<mapping-file>META-INF/orm.xml</mapping-file>-->
+
+        <!-- Add additaional Jar's -->
+        <!--<jar-file>additional-jar.jar</jar-file>-->
+
+        <!-- Enables auto discovery of persistent classes, -->
+        <!-- otherwise they must be listed using <class> such as
+        <class>com.baselogic.javaee6omain.Customer</class>
+        -->
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
+        <properties>
+            <property name="eclipselink.target-database" value="HSQL"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="both" />
+            <property name="eclipselink.create-ddl-jdbc-file-name" value="./target/create.sql"/>
+            <property name="eclipselink.drop-ddl-jdbc-file-name" value="./target/drop.sql"/>
+
+            <property name="eclipselink.weaving" value="false"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
+
+            <!-- Embedded mode -->
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:./target/chapter02db"/>
+            <property name="javax.persistence.jdbc.user" value="sa"/>
+            <property name="javax.persistence.jdbc.password" value=""/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="DERBY_PU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>com.baselogic.javaee6.domain.Customer</class>
+        <properties>
+            <property name="eclipselink.target-database" value="DERBY"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="both" />
+            <property name="eclipselink.application-location" value="~/target"/>
+
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <!-- Embedded mode -->
+            <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:derby:memory:chapter02DB;create=true"/>
+            <property name="javax.persistence.jdbc.user" value="APP"/>
+            <property name="javax.persistence.jdbc.password" value="APP"/>
+        </properties>
+    </persistence-unit>
+
+</persistence>

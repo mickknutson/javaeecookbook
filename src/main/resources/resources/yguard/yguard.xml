@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- file build.xml in your project root directory -->
+<!-- Ant build script for yfiles -->
+<!-- The java based Ant tool is available from -->
+<!-- http://jakarta.apache.org/ant -->
+<!-- This file demonstrates the use of the yGuard byte -->
+<!-- code obfuscator from yWorks Gmbh -->
+<!-- yGuard can be downloaded from -->
+<!--- http://www.yworks.com/products/yguard -->
+
+<project name="yguard" default="yguard" basedir=".">
+
+    <!--<target name="yguardTask"/>-->
+    <path refid="obfuscateClassPath"/>
+
+    <target name="yguard" depends="yguardTask">
+
+        <echo message="=========================================================================================="/>
+        <echo message="obfuscateClassPath = ${obfuscateClassPath}" />
+        <echo message="=========================================================================================="/>
+        <echo message="original_jar: ${original_jar}"/>
+        <echo message="target_jar: ${target_jar}"/>
+        <echo message="shrinklog: ${shrinklog}"/>
+        <echo message="renamelog: ${renamelog}"/>
+        <echo message="=========================================================================================="/>
+
+        <!--<taskdef name="yguard" classname="com.yworks.yguard.YGuardTask"
+                 classpath="yguard.jar"/>-->
+        <!-- the following can be adjusted to your needs -->
+        <yguard>
+
+            <inoutpair in="${original_jar}" out="${target_jar}"/>
+
+            <externalclasses>
+                <pathelement path="${obfuscateClassPath}"/>
+            </externalclasses>
+
+            <shrink logfile="${shrinklog}">
+
+<!--
+                <keep>
+                    <class classes="protected"
+                           methods="protected" fields="protected">
+                        <patternset>
+                            <include name="com.baselogic.**.*"/>
+                            <exclude name="com.baselogic.javaee6.dao.*"/>
+                            <include name="com.baselogic.javaee6.domain.**.*"/>
+                        </patternset>
+                    </class>
+                </keep>
+-->
+            </shrink>
+
+            <rename logfile="${renamelog}">
+                <property name="error-checking" value="pedantic"/>
+            </rename>
+        </yguard>
+    </target>
+</project>

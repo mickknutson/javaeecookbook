@@ -1,0 +1,22 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="title">ERROR</ui:define>
+
+    <ui:define name="content">
+        <h2>ERROR</h2>
+        <h2>Invalid user name or password.</h2>
+
+        <p>Please enter a user name or password that is authorized to access this
+            application. For this application, this means a user that has been
+            created in the <code>file</code> realm and has been assigned to the
+            <em>group</em> you are attempting to accesses.</p>
+        <h:link outcome="login">Return to login page</h:link>
+    </ui:define>
+
+</ui:composition>
+</html>

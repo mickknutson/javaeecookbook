@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * XHTML Web page generated from a server using Faces framework;
+ *
+ * @author Mick Knutson
+ *         <a href="http://www.baselogic.com>Blog</a>< /br>
+ *         <a href="http://linkedin.com/in/mickknutson>LinkedIN</a>< /br>
+ *         <a href="http://twitter.com/mickknutson>Twitter</a>< /br>
+ *         <a href="http://www.mickknutson.com>Personal</a>< /br>
+ * @since 2011
+ * <i>To change this template use File | Settings | File Templates.</i>
+ */
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head id="head">
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8"/>
+    <base href="#{facesContext.externalContext.request.contextPath}"/>
+    <h:outputScript library="js" name="common.js"/>
+    <h:outputStylesheet library="styles" name="styles.css"/>
+    <link rel="shortcut icon" type="image/x-icon"
+          href="#{facesContext.externalContext.request.contextPath}/favicon.ico"/>
+
+    <title>
+        <ui:insert name="title">Default Title</ui:insert>
+    </title>
+
+</h:head>
+
+<h:body id="body">
+
+    <div id="container">
+        <div id="header">
+            <ui:insert name="header">
+                <ui:include src="/WEB-INF/templates/header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div id="nav">
+            <ul>
+                <ui:insert name="links">
+                    <ui:include src="/WEB-INF/templates/links.xhtml"/>
+                </ui:insert>
+            </ul>
+        </div>
+        <div id="body">
+            <div id="content">
+                <ui:insert name="content">Default Content</ui:insert>
+            </div>
+
+            <div class="sidebar">
+                <ul>
+                    <li>
+                        <h4>Panel</h4>
+                        <!--<ul>
+                            <li>
+                                <fieldset>
+                                    <legend>Login</legend>
+                                    <form method="post" action="j_security_check">
+                                        <p><h:outputText value="Username"/> <input type="text" name="j_username" /></p>
+                                        <p><h:outputText value="Password"/> <input type="password" name="j_password" /></p>
+                                        <p><input name="login" style="margin-left: 150px;" class="formbutton" value="Login" type="submit" /></p>
+                                    </form>
+                                </fieldset>
+                            </li>
+                        </ul>-->
+                    </li>
+
+                    <li>
+                        <h4><span>Navigation</span></h4>
+                        <ui:insert name="navigation">
+                            <ul class="blocklist">
+                                <ui:insert name="links">
+                                    <ui:include src="/WEB-INF/templates/links.xhtml"/>
+                                </ui:insert>
+                            </ul>
+                        </ui:insert>
+                    </li>
+
+                    <li>
+                        <h4>About</h4>
+                        <ul>
+                            <li>
+                                <ui:insert name="about">
+                                    <p style="margin: 0;">
+                                        Mr. Knutson is a professional Enterprise technology
+                                        consultant, Java Architect, project leader, Engineer,
+                                        Designer and Developer. He has been working in the
+                                        IT industry for over 19+ years. Mr. Knutson has a
+                                        vast array of experience working on JavaEE, J2EE,
+                                        Web Services, Mobile Computing and Enterprise Integration
+                                        services.
+                                    </p>
+                                </ui:insert>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!--<li>
+                        <h4>References</h4>
+                        <ul>
+                            <li>item 1</li>
+                            <li>item 2</li>
+                        </ul>
+                    </li>-->
+
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <ui:insert name="footer">
+        <ui:include src="/WEB-INF/templates/footer.xhtml"/>
+    </ui:insert>
+
+</h:body>
+</html>

@@ -1,0 +1,25 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="title">Java EE6 Cookbook</ui:define>
+
+    <ui:define name="content">
+        <h2>Introduction</h2>
+
+        <p>This is the introductory Home page. There is no security on this page and anyone can access this page
+        </p>
+
+        <h2>POST To a secured Servlet</h2>
+        <form method="post" action="#{facesContext.externalContext.request.contextPath}/declarative/entry">
+            <p><input style="margin-left: 150px;" class="formbutton" value="Secured Entry" type="submit" /></p>
+        </form>
+
+
+    </ui:define>
+
+</ui:composition>
+</html>

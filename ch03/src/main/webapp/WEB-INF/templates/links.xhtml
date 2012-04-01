@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+<h:body id="body">
+    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/index.xhtml">
+        <h:outputText
+                value="Home"/></h:outputLink></li>
+
+    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/admins/index.xhtml">
+        <h:outputText
+                value="Admins Area"/></h:outputLink></li>
+
+    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/customers/index.xhtml">
+        <h:outputText
+                value="Customers Area"/></h:outputLink></li>
+
+    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/patients/index.xhtml">
+        <h:outputText
+                value="Patients Area"/></h:outputLink></li>
+
+    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/declarative/entry">
+        <h:outputText
+                value="Servlet Declarative Entry"/></h:outputLink></li>
+
+    <li><h:outputLink value="#{facesContext.externalContext.request.contextPath}/logout">
+        <h:outputText
+                value="Logout"/></h:outputLink></li>
+
+</h:body>
+</html>

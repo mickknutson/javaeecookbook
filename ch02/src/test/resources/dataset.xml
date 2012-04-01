@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <CUSTOMER id='100100' USERNAME="user1" FIRSTNAME="Mick" LASTNAME="Knutson"/>
+    <CUSTOMER id='100200' USERNAME="user2" FIRSTNAME="Joe" LASTNAME="UserOne"/>
+    <CUSTOMER id='100300' USERNAME="user3" FIRSTNAME="Foo" LASTNAME="UserTwo"/>
+
+    <HOBBIES CUST_ID="100200" HOBBY_NAME="BASE-Jumping"/>
+    <HOBBIES CUST_ID="100200" HOBBY_NAME="Skydiving"/>
+    <HOBBIES CUST_ID="100200" HOBBY_NAME="Speed-Flying"/>
+
+    <PHONES AREACODE="415" PHONE_NUMBER="5551212" TYPE="WORK" CUST_ID="100200"/>
+
+    <CUST_ADDRESSES ADDRESS_KEY="PRIMARY" CITY="Exton"
+                    POSTCODE="91335"
+                    PROVINCE=""
+                    STATE="PA" STREET="555 Main Street"
+                    STREET2="Suite 101" TYPE="RESIDENTIAL"
+                    CUST_ID="100200"/>
+
+    <CUST_ADDRESSES ADDRESS_KEY="PRIMARY" CITY="Exton"
+                    POSTCODE="91335"
+                    PROVINCE=""
+                    STATE="PA" STREET="555 Boot Road"
+                    STREET2="A-123" TYPE="RESIDENTIAL"
+                    CUST_ID="100300" />
+
+</dataset>

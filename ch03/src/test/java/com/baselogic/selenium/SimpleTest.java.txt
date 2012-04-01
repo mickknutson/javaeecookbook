@@ -1,0 +1,20 @@
+package com.baselogic.selenium;
+
+import org.junit.Test;
+
+public class SimpleTest extends AbstractSeleniumTestCase{
+    @Test
+	public void testSimpleCase() throws Exception {
+		selenium = SeleniumTestHelper.getInstance().getSelenium();
+		selenium.open("/selenium-1.0/test");
+		selenium.type("text", "test");
+		selenium.select("choice", "label=Three");
+		selenium.click("//input[@name='radiogroup' and @value='button2']");
+		selenium.click("//input[@type='submit']");
+		selenium.waitForPageToLoad("30000");
+		selenium.waitForPageToLoad("");
+		verifyTrue(selenium.isTextPresent("Text entered: test"));
+		verifyTrue(selenium.isTextPresent("Choice: 3"));
+		verifyTrue(selenium.isTextPresent("Radio button pressed: button2"));
+	}
+}
