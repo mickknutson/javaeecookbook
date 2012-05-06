@@ -1,0 +1,107 @@
+;
+;  Sample "List of lists" for Mercury/32.
+;  Copyright (c) 1993-98 David Harris, all rights reserved.
+;
+;  The "List of lists" contains definitions for every mailing list
+;  serviced by the running copy of Mercury.
+;
+;  Each list definition begins with the short name of the list which
+;  must be on a line of its own flush against the left margin:
+;  subsequent lines, which define fields in the list definition, must
+;  be indented using at least one space.
+;
+;  The following keywords can be used when defining a list (M/O indicates
+;  whether the field is MANDATORY or OPTIONAL).
+;
+;  Keyword        M/O  Description
+;  ------------------------------------------------------------------
+;  FILE            M   The filename which contains the list members
+;  TITLE           O   Descriptive text added to the list address
+;  MODERATOR       O   List maintainer/owner's address (may be used multiply)
+;  MODERATED       O   If Y, only list moderators may post to the list
+;  PUBLIC          O   If N, only list moderators may add members to the list
+;                      (using the Maiser "add" and "remove" commands).
+;  WELCOME         O   Name of a text file to mail to new subscribers
+;  FAREWELL        O   Name of a text file to mail when a member unsubscribes
+;  ENUMERATE       O   If N, Maiser will not supply the list membership
+;  REPLY_TO_LIST   O   If Y, messages with no REPLY-TO field will have one
+;                      added which points to the list itself.
+;  RESTRICTED      O   If Y, only members may post to the list
+;  FANOUT          O   Number of jobs to create when exploding the list
+;  ANONYMOUS       O   If Y, originator information will be suppressed on
+;                      mail sent to the list; if T (totally anonymous),
+;                      then the Mercury log entry will also be suppressed.
+;  ERRORS_TO       O   Optional address to specify in the message envelope
+;                      (kosher RFC821/1123-compliant mail systems will send
+;                      errors associated with the message to this address).
+;  LIMIT           O   Maximum number of subscribers for this list.
+;  ARCHIVE         O   Name of a file into which to archive messages sent to
+;                      the list. You can use the following special sequences
+;                      in the filename:
+;                         ~Y   Year (2 digits)
+;                         ~M   Month (1 or 2 digits)
+;                         ~D   Day (1 or 2 digits)
+;                         ~W   Current week in the year.
+;  DIGEST_NAME     O   Name of the temporary file Mercury should use to
+;                      store digest information. If this keyword is absent,
+;                      the list will not support digests. The filename must
+;                      NOT have a path - it will be created in the location
+;                      pointed to by the "scratch" keyword in the [Mercury]
+;                      section of MERCURY.INI.
+;  DIGEST_MAXSIZE  O   Maximum size for a digest in bytes. Once a digest
+;                      exceeds this size it will be sent immediately. The
+;                      default is 32MB (ie, no practical limit).
+;  DIGEST_MAXWAIT  O   How often digests should be sent out in whole hours.
+;                      The default is 24 hours, which results in digests
+;                      being sent once each day.
+;  DIGEST_DEFAULT  O   Y or N: if 'Y', then new subscribers to the list will
+;                      automatically be added in digest mode.
+;  LIST_SIGNATURE  O   Filename; if present, represents a text fragment
+;                      that should be added automatically to all mail
+;                      distributed to the list.
+;  LIST_HELP       O   URL added to outgoing messages; where subscribers
+;                      can get assistance with subscription matters.
+;  LIST_HEADERS    O   Y or N, default N: if Y, Mercury will add specially-
+;                      formatted headers allowing automated subscription and
+;                      unsubscription from the list (Y is recommended).
+;  CONCEALED       O   Y or N; if Y, the Maiser LIST command will not
+;                      report this list.
+;  MAXIMUM_SIZE    O   Integer - messages larger than this number of
+;                      bytes may not be distributed to the list. 0 means
+;                      "no limit".
+;
+;  For technocrats, there is also the TITLE_IS_ADDRESS keyword; if present
+;  and set to Y, this tells Mercury that the TITLE field contains a full,
+;  legal, domain-extended RFC822 address and forces it to suppress its
+;  usual address formation rules for the list. This is the ONLY way to
+;  control the actual list address Mercury will print in mail sent to the
+;  list and should be used with extreme care, since invalid addresses can
+;  cause mail storms.
+;
+
+winpmail
+   File:          sys:system/mercury/winpmail.lis
+   Title:         WinPMail testers list
+   Moderator:     D.Harris@pmail.gen.nz
+   Moderated:     N
+   Fanout:        6
+   Public:        N
+   Archive:       sys:system/mercury/winpm~m.arc
+
+test-l
+   File:             sys:system/mercury/testl.lis
+   Title:            ""Test List" <test-l@pmail.gen.nz>"
+   Title_is_address: Y
+   Welcome:          sys:system/mercury/testlw.txt
+   Farewell:         sys:system/mercury/testlf.txt
+   Moderator:        D.Harris@pmail.gen.nz
+   Moderated:        N
+   Restricted:       N
+   Errors_to:        david@parnassus.pmail.gen.nz
+   Reply_to_list:    Y
+   Anonymous:        T
+   Public:           N
+   Digest_name:      TESTL.DIG
+   Digest_maxsize:   1
+   Archive:          sys:system/mercury/tt~m~y~w.arc
+

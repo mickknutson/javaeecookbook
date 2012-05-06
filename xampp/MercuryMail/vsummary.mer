@@ -1,0 +1,16 @@
+--------------------- VERP Error Processing Report -------------------
+
+This message contains details of system-initiated subscription controls
+applied to the mailing list '~p1'.
+
+It shows those subscriptions that have been either suspended or deleted
+(depending on the list's configuration) since the last report was
+generated.
+
+Suspended accounts can be re-enabled either using Mercury's list
+management web interface, or with the mail server MSET MAIL command.
+
+-------------- Summary of subscription controls follows --------------
+~R
+----------------------------------------------------------------------
+

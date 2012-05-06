@@ -1,0 +1,63 @@
+;  Mercury/32 template file.
+;  Mercury Mail Transport System, Copyright 1993-2007, David Harris.
+;
+;  This file is used as the default template by Mercury when constructing
+;  Subscription "Welcome" messages for moderated mailing lists with no
+;  digest option that have been configured to use the MercuryB mlss
+;  web-based subscription management service.
+;
+;  You can instruct Mercury/32 to use this file as a template by entering
+;  the word "standard" in the "Welcome file" field of the mailing list
+;  definition. Mercury will automatically determine the proper version of
+;  this template to use for the subscription.
+;
+;  You can edit this template using any text editor. Lines beginning with a
+;  ';', like this one, are comments and are ignored: all other lines are
+;  written into the message. You can place special markers in the body of the
+;  template, which Mercury will replace with information about the list: these
+;  markers consist of the two special characters ~p followed by a single digit
+;  identifying the piece of information you want substituted. The following
+;  substitutions are currently possible in this template file:
+;
+;     ~p0     The list's basic name (i.e, what appears to the left of the '@')
+;     ~p1     This system's hostname
+;     ~p2     The full title for the mailing list
+;     ~p3     The address of the mailing list's primary moderator
+;     ~p4     The subscriber's address
+;     ~p5     The subscriber's "personal name"
+;     ~p6     The formal mailing address for the list
+;     ~p7     The user's password (v4.53 and later only)
+;     ~p8     A properly-formed URL for accessing this host via the web
+;
+Welcome to the ~p2 mailing list!
+
+You have been successfully subscribed to this list and will begin
+receiving mail from it immediately. This welcome message contains some
+general information on your subscription and how to manage it.
+
+This mailing list is a "moderated" mailing list: that means that only
+certain people, known as "moderators" can post messages to the list's
+membership. The primary moderator for this list is:
+
+   ~p3
+
+Please contact a list moderator to arrange for mail to be posted to
+the list.
+
+To manage your subscription to this list, start your web browser and
+navigate to this link:
+
+   ~p8/mlss
+
+To login to the server, you will need to use your subscribed e-mail
+address and password, which are as follows:
+
+   Subscribed address: ~p4
+   Password: ~p7
+
+Using the web-based interface, you can turn receipt of mail from 
+the list on and off and more - try it out!
+
+Best regards,
+The List Management.
+

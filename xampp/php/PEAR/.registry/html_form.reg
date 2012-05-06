@@ -1,0 +1,170 @@
+a:17:{s:8:"provides";a:0:{}s:8:"filelist";a:2:{s:13:"HTML/Form.php";a:3:{s:4:"role";s:3:"php";s:6:"md5sum";s:32:"f01194b8647fd4446d6d27376ed08aa8";s:12:"installed_as";s:25:"C:\php\pear\HTML\Form.php";}s:15:"tests/form.phpt";a:4:{s:4:"role";s:4:"test";s:6:"md5sum";s:32:"81a60cf096dd1785c10880ea34957e3e";s:12:"replacements";a:1:{i:0;a:3:{s:4:"from";s:14:"@include_path@";s:2:"to";s:7:"php_dir";s:4:"type";s:11:"pear-config";}}s:12:"installed_as";s:44:"C:\php5\pear\tests\HTML_Form\tests\form.phpt";}}s:10:"xsdversion";s:3:"1.0";s:7:"package";s:9:"HTML_Form";s:7:"summary";s:24:"Simple HTML form package";s:11:"description";s:274:"This is a simple HTML form generator.  It supports all the
+HTML form element types including file uploads, may return
+or print the form, just individual form elements or the full
+form in "table mode" with a fixed layout.
+
+This package has been superceded by HTML_QuickForm.
+";s:11:"maintainers";a:2:{i:0;a:4:{s:6:"handle";s:3:"ssb";s:4:"name";s:11:"Stig Bakken";s:5:"email";s:12:"stig@php.net";s:4:"role";s:4:"lead";}i:1;a:4:{s:6:"handle";s:7:"danielc";s:4:"name";s:16:"Daniel Convissor";s:5:"email";s:15:"danielc@php.net";s:4:"role";s:4:"lead";}}s:7:"version";s:5:"1.3.0";s:12:"release_date";s:10:"2005-10-16";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:321:"MAJOR SECURITY FIXES
+
+Prior versions of this package had major
+vulnerabilities when using the add*() methods to
+build your forms.
+
+This release resolves all of the security issues
+and fixes some unreported bugs.  In addition, the
+documentation block comment for the display()
+method now accurately reflects how it works.
+";s:12:"release_deps";a:1:{i:1;a:3:{s:4:"type";s:3:"php";s:3:"rel";s:2:"ge";s:7:"version";s:5:"4.0.0";}}s:9:"changelog";a:11:{i:0;a:4:{s:7:"version";s:5:"1.2.0";s:12:"release_date";s:10:"2005-03-18";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:196:"* Add methods for password rows without
+  confirmation fields.  Request 3867.
+* Have docblocks for Select methods indicate
+  defaults must match data type of entries.
+  Bug 3870.
+        
+      
+
+";}i:1;a:4:{s:7:"version";s:5:"1.1.3";s:12:"release_date";s:10:"2005-03-07";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:100:"* returnResetRow() and returnSubmitRow() were
+  mistakenly closed <th> with </td>.
+        
+      
+
+";}i:2;a:4:{s:7:"version";s:5:"1.1.2";s:12:"release_date";s:10:"2005-02-25";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:111:"* Remove foreign characters from package.xml so
+  the package can be installed by PEAR 1.4.0.
+        
+      
+
+";}i:3;a:4:{s:7:"version";s:5:"1.1.1";s:12:"release_date";s:10:"2005-01-11";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:139:"* Change default value of $default parameters to NULL.
+* Allow 0 or '' be default values in *Select() methods.  Bug 2645.
+        
+      
+
+";}i:4;a:4:{s:7:"version";s:5:"1.1.0";s:12:"release_date";s:10:"2004-10-23";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:30:"* Go stable.
+        
+      
+
+";}i:5;a:4:{s:7:"version";s:8:"1.1.0RC4";s:12:"release_date";s:10:"2004-10-05";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:177:"* Add valign="top" to default value of HTML_FORM_TH_ATTR.
+
+* Use HTML_FORM_TH_ATTR as default for $thattr parameter
+in returnPlaintextRow() and addPlaintext().
+        
+      
+
+";}i:6;a:4:{s:7:"version";s:8:"1.1.0RC3";s:12:"release_date";s:10:"2004-09-21";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:177:"* Added HTML_FORM_TH_ATTR and HTML_FORM_TD_ATTR constants.
+Used as default values for the $thattr and $tdattr
+parameters to most methods.
+
+* Enhance docblocks.
+        
+      
+
+";}i:7;a:4:{s:7:"version";s:8:"1.1.0RC2";s:12:"release_date";s:10:"2004-06-15";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:301:"* Add $attr, $caption and $capattr parameters to dislpay().
+
+* Remove $attr from *PlaintextRow() methods.
+
+* Remove ":" from all $title cells to improve flexibility.
+
+* returnEnd() no longer populates _fields for
+addPlaintext() items.
+
+* Improve docblocks for *PasswordRow() methods.
+        
+      
+
+";}i:8;a:4:{s:7:"version";s:8:"1.1.0RC1";s:12:"release_date";s:10:"2004-06-14";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:2632:"* Don't pass $this->action through basename() in
+returnStart() or start().  Bug #658.
+
+* Make notes in the docblock comments regarding
+methods with unusual parameter orders.  Bug #659.
+
+* addImage() now works.  Accomplished by adding
+displayImage(), displayImageRow(), returnImageRow()
+and returnImage() methods.  Bug #1126.
+
+* Have returnStart() put $this->target into the
+<form> element's attributes.  PHP Bug #24017.  (nicos)
+
+* Remove reference on $default in
+displayTextareaRow().  PHP Bug #22062.  (mj)
+
+* Add docblock comments.
+
+* Add new methods: returnRadio(), returnRadioRow()
+and returnFileRow().
+
+* $maxlength parameter added to returnText(),
+returnTextRow(), returnPassword(), returnPasswordRow(),
+returnTextarea() and returnTextareaRow() for
+consistency with display*() methods' parameters.
+
+* Add $maxlength to addPassword(), displayPassword(),
+and displayPasswordRow().
+
+* $accept parameter added to returnMultipleFiles()
+and returnFile() for consistency with addFile().
+
+* Add $attr parameter to most methods.
+
+* valign="top" added to <td> in returnPlaintextRow()
+for consistency with displayPlaintextRow().
+
+* displayFile() and displayMultipleFiles() now
+produce a separate hidden input for MAX_FILE_SIZE.
+
+* returnCheckbox() now does a type sensitive
+comparison on $default to determine if checked.
+
+* ":" now appears in each $title.
+
+* Add the $thattr and $tdattr parameters.
+
+* Use <th> instead of <td> for empty cell in returnSubmitRow()
+and returnResetRow(), matching layout of other methods.
+
+* Ease maintenance by having all display*() methods
+just print the results of the return*() methods.
+
+* $default parameter to addCheckbox() now defaults
+to FALSE.
+
+* $default parameter to addTextarea() and
+addPassword() now defaults an empty string.
+
+* Define the constants used by addTextarea():
+HTML_FORM_TEXTAREA_WT and HTML_FORM_TEXTAREA_HT.
+
+* Add "$multipartformdata = false" parameter to
+start() for compatibility with returnStart().
+
+* Have returnStart() put $this->enctype and
+$this->target into the <form> element's attributes.
+
+* register_long_arrays can now be Off.
+
+* Change checked to checked="checked".
+
+* Clean up nesting/indenting of HTML output.
+
+* Change while/list/each to foreach in
+returnSelect() and returnEnd().
+
+* Remove references from $entries parameter to
+returnSelectRow() and displaySelectRow().
+
+* returnEnd() no longer populates _fields
+for addBlank() items.
+
+* Fix $defined variable values in display():
+reset:  0 should have been 1
+submit: 0 should have been 2
+blank:  0 should have been 1
+radio:  3 should have been 1
+select: 4 should have been 5
+
+* Added tests.
+        
+      
+
+";}i:9;a:4:{s:7:"version";s:5:"1.0.1";s:12:"release_date";s:10:"2003-04-09";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:15:"Packaging fix
+
+";}i:10;a:4:{s:7:"version";s:3:"1.0";s:12:"release_date";s:10:"2003-01-10";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:29:"Initial independent release
+
+";}}s:12:"_lastversion";N;s:7:"dirtree";a:3:{s:16:"C:\php\pear\HTML";b:1;s:34:"C:\php5\pear\tests\HTML_Form\tests";b:1;s:28:"C:\php5\pear\tests\HTML_Form";b:1;}s:13:"_lastmodified";i:1229942548;}

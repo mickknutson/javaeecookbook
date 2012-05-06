@@ -1,0 +1,40 @@
+;
+; Sample MERCURYD.DAT file
+; Mercury Mail Transport System,
+; Copyright (c) 1993-99, David Harris, All Rights Reserved.
+;
+; MERCURYD.DAT is parsed by the MercuryD Distributing POP3 client to
+; determine the sources from which it should obtain mail using the
+; POP3 client protocol for distribution to local users.
+;
+; Each non-comment line in this file represents a single host/account
+; combination MercuryD should contact to retrieve mail, using the
+; following format:
+;
+;   host<,>username<,>password<,>local_user<,>default
+;
+;      "host"       - the domain name of the machine running the POP3
+;                     server MercuryD should contact.
+;      "username"   - the name MercuryD should use to login to the server
+;      "password"   - the password matching "username" in plain text
+;      "local_user" - The local user to whom mail downloaded from the
+;                     specified account should be delivered.
+;      "default"    - The user to whom mail should be delivered if no
+;                     local recipients are found in a message.
+;
+;   Empty or blank parameters must be set to a single dash character, '-'.
+;   Spaces are significant - only the ',' character is a valid delimiter.
+;
+;   If "local_user" is set to a single dash, MercuryD will attempt to
+;   distribute the mail based on the "to:", "cc:" and "bcc:" fields in
+;   each message. This is useful for sites running so-called "domain
+;   mailboxes" - the first example entry below demonstrates this option.
+;
+;   "default" is only meaningful for domain mailbox entries, and is
+;   intended to deal with problems like mailing list subscriptions,
+;   where the local addressee often will not appear anywhere in the
+;   message headers.
+;
+; Example entry
+; styx.pmail.gen.nz,username,password,-,david
+

@@ -1,0 +1,10 @@
+\xampp\perl\bin\ppm.bat
+\xampp\perl\bin\ppm.pl
+\xampp\perl\site\lib\PPM.pm
+\xampp\perl\site\lib\PPM\RelocPerl.pm
+\xampp\perl\site\lib\PPM\XML\Element.pm
+\xampp\perl\site\lib\PPM\XML\PPD.pm
+\xampp\perl\site\lib\PPM\XML\PPMConfig.pm
+\xampp\perl\site\lib\PPM\XML\RepositorySummary.pm
+\xampp\perl\site\lib\PPM\XML\ValidatingElement.pm
+\xampp\perl\site\lib\ppm.xml

@@ -23,17 +23,26 @@ import static org.hamcrest.Matchers.not;
 import static org.hamcrest.Matchers.nullValue;
 
 /**
- * [Class_Name]
- * <p/>
+ * UserResourceTest
+ *
+ * For Selenium Tests:
  * http://localhost:8080/ch03/com.baselogic.javaee6.web/services/customers/mickknutson
  *
+ * http://localhost:8080/ch03/com.baselogic.javaee6.web/services/customers/valued/mickknutson
+ *
+ * For Web Page using Tomcat 7:
+ * http://localhost:8080/ch03/services/customers/mickknutson
+ *
  * @author Mick Knutson
- *         <a href="http://www.baselogic.com>Blog</a>< /br>
- *         <a href="http://linkedin.com/in/mickknutson>LinkedIN</a>< /br>
- *         <a href="http://twitter.com/mickknutson>Twitter</a>< /br>
- *         <a href="http://www.mickknutson.com>Personal</a>< /br>
- * @since 2011
- *        <i>To change this template use File | Settings | File Templates.</i>
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
+ *
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
+ *
+ * @since 2012
  */
 public class UserResourceTest {
 

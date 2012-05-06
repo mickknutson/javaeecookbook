@@ -1,0 +1,16 @@
+This message is being sent to you in response to a password request made
+via the web-based mailing list management services interface on the mail
+server ~h.
+
+Mailing list name:              ~p0@~p1
+Your subscribed address:        ~p2
+Your subscriber password:       ~p3
+
+Your subscriber password gives you access to subscription management
+services on the mail server using your web browser. To login and
+manage your subscription settings, click this link:
+
+   ~p4/mlss
+
+then follow the instructions on the web page.
+

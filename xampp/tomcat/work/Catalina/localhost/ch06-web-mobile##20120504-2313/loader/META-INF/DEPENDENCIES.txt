@@ -1,0 +1,24 @@
+// ------------------------------------------------------------------
+// Transitive dependencies of this project determined from the
+// maven pom organized by organization.
+// ------------------------------------------------------------------
+
+CDI APIs
+
+
+From: 'an unknown organization'
+  - jsr250-api  javax.annotation:jsr250-api:jar:1.0
+
+  - Expression Language API (2.1 Maintenance Release)  javax.el:el-api:jar:2.2
+
+  - javax.inject (http://code.google.com/p/atinject/) javax.inject:javax.inject:jar:1
+    License: The Apache Software License, Version 2.0  (http://www.apache.org/licenses/LICENSE-2.0.txt)
+
+From: 'JBoss, a division of Red Hat, Inc.' (http://www.jboss.org)
+  - EJB 3.1 API (http://jboss-ejb-api_3.1_spec/) org.jboss.spec.javax.ejb:jboss-ejb-api_3.1_spec:jar:1.0.0.CR2
+    License: lgpl  (http://repository.jboss.org/licenses/lgpl-2.1.txt)
+  - Interceptors 1.1 API (http://jboss-interceptors-api_1.1_spec/) org.jboss.spec.javax.interceptor:jboss-interceptors-api_1.1_spec:jar:1.0.0.Beta1
+    License: lgpl  (http://repository.jboss.org/licenses/lgpl-2.1.txt)
+
+
+

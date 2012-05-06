@@ -1,0 +1,10 @@
+#logback.access pattern: %h %l %u [%t] "%r" %s %b
+0:0:0:0:0:0:0:1 - admin [05/05/2012:06:42:52 -0400] "GET /manager/html/list?org.apache.catalina.filters.CSRF_NONCE=97114062AEF9440F8E5F8FF825C9E4A5 HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - admin [05/05/2012:06:43:22 -0400] "POST /manager/html/undeploy?path=/ch06%2Dweb%2Dmobile&version=20120505%2D0018&org.apache.catalina.filters.CSRF_NONCE=CE0B471661ABB56B8F283A613D3A4940 HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - admin [05/05/2012:06:43:26 -0400] "GET /manager/html/list?org.apache.catalina.filters.CSRF_NONCE=C4A6EC13EA5F8D0C9C3DC1E3F5D9DDB7 HTTP/1.1" 200 -
+127.0.0.1 - admin [05/05/2012:06:44:31 -0400] "PUT /manager/html/deploy?path=%2Fch06-web-mobile%23%2320120505-0643&update=true HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - admin [05/05/2012:06:45:18 -0400] "GET /manager/html/list?org.apache.catalina.filters.CSRF_NONCE=6278AAC4B06C10DA563CA80B1E58F01F HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [05/05/2012:06:46:20 -0400] "GET /ch06-web-mobile/ HTTP/1.1" 200 -
+0:0:0:0:0:0:0:1 - - [05/05/2012:06:46:22 -0400] "GET /services/application.wadl HTTP/1.1" 404 -
+0:0:0:0:0:0:0:1 - - [05/05/2012:06:46:27 -0400] "GET /services/application.wadl HTTP/1.1" 404 -
+0:0:0:0:0:0:0:1 - - [05/05/2012:06:46:34 -0400] "GET /ch06-web-mobile/services/application.wadl HTTP/1.1" 500 -

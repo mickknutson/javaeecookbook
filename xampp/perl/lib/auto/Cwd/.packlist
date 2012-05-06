@@ -1,0 +1,15 @@
+\xampp\perl\lib\Cwd.pm
+\xampp\perl\lib\File\Spec.pm
+\xampp\perl\lib\File\Spec\Cygwin.pm
+\xampp\perl\lib\File\Spec\Epoc.pm
+\xampp\perl\lib\File\Spec\Functions.pm
+\xampp\perl\lib\File\Spec\Mac.pm
+\xampp\perl\lib\File\Spec\OS2.pm
+\xampp\perl\lib\File\Spec\Unix.pm
+\xampp\perl\lib\File\Spec\VMS.pm
+\xampp\perl\lib\File\Spec\Win32.pm
+\xampp\perl\lib\auto\Cwd\Cwd.bs
+\xampp\perl\lib\auto\Cwd\Cwd.dll
+\xampp\perl\lib\auto\Cwd\Cwd.exp
+\xampp\perl\lib\auto\Cwd\Cwd.lib
+\xampp\perl\lib\auto\Cwd\Cwd.pdb

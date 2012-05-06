@@ -1,0 +1,20 @@
+This is a delivery status message from the electronic mail server at
+~h. A message appearing to originate from your address
+has been delayed during delivery.
+
+Message details:
+------------------------------------------------------------------
+Originally submitted:      ~p0
+Originator address:        ~p4
+Message's subject:         ~p2
+Message's ID:              ~p3
+
+After ~p1, the following addresses had delivery problems:
+
+~r
+
+The server will continue to attempt to deliver your message to any
+addresses showing temporary errors. You do not need to take any
+further action at this time - this message is for your information
+only.
+

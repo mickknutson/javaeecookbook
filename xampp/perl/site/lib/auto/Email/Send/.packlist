@@ -1,0 +1,6 @@
+\xampp\perl\site\lib\Email\Send.pm
+\xampp\perl\site\lib\Email\Send\NNTP.pm
+\xampp\perl\site\lib\Email\Send\Qmail.pm
+\xampp\perl\site\lib\Email\Send\SMTP.pm
+\xampp\perl\site\lib\Email\Send\Sendmail.pm
+\xampp\perl\site\lib\Email\Send\Test.pm

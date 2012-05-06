@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: pmuir
+Build-Jdk: 1.6.0_22
+Implementation-Title: CDI APIs
+Implementation-URL: http://www.seamframework.org/Weld
+Implementation-Vendor: Seam Framework
+Implementation-Version: 20101216-1914
+Specification-Title: CDI APIs
+Specification-Vendor: Seam Framework
+Specification-Version: 1.0.0.SP4
+
+Name: Build-Information
+Build-Time: 20101216-1914
+Java-Vendor: Apple Inc.
+Java-Version: 1.6.0_22
+Maven-Version: 3.0.1
+Os-Arch: x86_64
+Os-Name: Mac OS X
+Os-Version: 10.6.5
+SCM: r${buildNumber}
+

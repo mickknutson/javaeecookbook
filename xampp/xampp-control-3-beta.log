@@ -1,0 +1,254 @@
+2:12:21 PM  [main] 	Initializing main
+2:12:21 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+2:12:21 PM  [main] 	Xampp version: 1.7.7
+2:12:21 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+2:12:21 PM  [main] 	Running as admin - good!
+2:12:21 PM  [main] 	Working with basedir: "f:\xampp\"
+2:12:22 PM  [main] 	Initializing moduls
+2:12:22 PM  [apache] 	Possible problem detected: Port 80 in use by "c:\program files (x86)\skype\phone\skype.exe"!
+2:12:22 PM  [apache] 	Possible problem detected: Port 443 in use by "c:\program files (x86)\skype\phone\skype.exe"!
+2:12:22 PM  [main] 	Starting check-timer
+2:14:08 PM  [main] 	Deinitializing moduls
+2:14:08 PM  [main] 	Deinitializing main
+
+6:09:10 PM  [main] 	Initializing main
+6:09:10 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+6:09:10 PM  [main] 	Xampp version: 1.7.7
+6:09:10 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+6:09:10 PM  [main] 	Running as admin - good!
+6:09:10 PM  [main] 	Working with basedir: "f:\xampp\"
+6:09:10 PM  [main] 	Initializing moduls
+6:09:10 PM  [tomcat] 	Possible problem detected: file "f:\xampp\tomcat\bin\tomcat6.exe/f:\xampp\tomcat\bin\tomcat7.exe" not found - run this program from your XAMPP root directory!
+6:09:10 PM  [main] 	Enabling autostart for module "apache"
+6:09:10 PM  [main] 	Enabling autostart for module "tomcat"
+6:09:10 PM  [main] 	Starting check-timer
+6:09:11 PM  [apache] 	Autostart active: starting...
+6:09:11 PM  [apache] 	Starting apache app...
+6:09:11 PM  [tomcat] 	Autostart active: starting...
+6:09:11 PM  [tomcat] 	Starting tomcat app...
+6:09:11 PM  [apache] 	Status change detected: running
+6:09:18 PM  [tomcat] 	Status change detected: running
+6:12:11 PM  [tomcat] 	Stopping
+6:12:12 PM  [apache] 	Stopping apache (PID: 3340)
+6:12:12 PM  [apache] 	Stopping apache (PID: 5036)
+6:12:13 PM  [apache] 	Status change detected: stopped
+6:12:13 PM  [tomcat] 	Status change detected: stopped
+6:12:15 PM  [main] 	Deinitializing moduls
+6:12:15 PM  [main] 	Deinitializing main
+
+6:18:32 PM  [main] 	Initializing main
+6:18:32 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+6:18:32 PM  [main] 	Xampp version: 1.7.7
+6:18:32 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+6:18:32 PM  [main] 	Running as admin - good!
+6:18:32 PM  [main] 	Working with basedir: "f:\xampp\"
+6:18:32 PM  [main] 	Initializing moduls
+6:18:32 PM  [tomcat] 	Possible problem detected: file "f:\xampp\tomcat\bin\tomcat6.exe/f:\xampp\tomcat\bin\tomcat7.exe" not found - run this program from your XAMPP root directory!
+6:18:32 PM  [main] 	Enabling autostart for module "apache"
+6:18:32 PM  [main] 	Enabling autostart for module "tomcat"
+6:18:32 PM  [main] 	Starting check-timer
+6:18:33 PM  [apache] 	Autostart active: starting...
+6:18:33 PM  [apache] 	Starting apache app...
+6:18:33 PM  [tomcat] 	Autostart active: starting...
+6:18:33 PM  [tomcat] 	Starting tomcat app...
+6:18:33 PM  [apache] 	Status change detected: running
+6:18:48 PM  [tomcat] 	Starting tomcat app...
+6:20:18 PM  [apache] 	Stopping apache (PID: 848)
+6:20:18 PM  [apache] 	Stopping apache (PID: 4900)
+6:20:18 PM  [apache] 	Status change detected: stopped
+6:20:19 PM  [main] 	Deinitializing moduls
+6:20:19 PM  [main] 	Deinitializing main
+
+6:25:21 PM  [main] 	Initializing main
+6:25:21 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+6:25:21 PM  [main] 	Xampp version: 1.7.7
+6:25:21 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+6:25:21 PM  [main] 	Running as admin - good!
+6:25:21 PM  [main] 	Working with basedir: "f:\xampp\"
+6:25:21 PM  [main] 	Initializing moduls
+6:25:21 PM  [main] 	Enabling autostart for module "apache"
+6:25:21 PM  [main] 	Enabling autostart for module "tomcat"
+6:25:21 PM  [main] 	Starting check-timer
+6:25:22 PM  [apache] 	Autostart active: starting...
+6:25:22 PM  [apache] 	Starting apache app...
+6:25:22 PM  [tomcat] 	Autostart active: starting...
+6:25:22 PM  [tomcat] 	Starting tomcat app...
+6:25:22 PM  [apache] 	Status change detected: running
+6:26:17 PM  [main] 	Executing "f:\xampp\tomcat\logs"
+6:27:58 PM  [tomcat] 	Stopping
+6:28:13 PM  [tomcat] 	Starting tomcat app...
+6:28:29 PM  [main] 	Executing "f:\xampp\tomcat\logs"
+6:29:10 PM  [apache] 	Stopping apache (PID: 3800)
+6:29:11 PM  [apache] 	Stopping apache (PID: 6484)
+6:29:11 PM  [apache] 	Status change detected: stopped
+6:29:38 PM  [tomcat] 	Starting tomcat app...
+6:37:40 PM  [tomcat] 	Status change detected: running
+6:37:41 PM  [tomcat] 	Status change detected: stopped
+6:41:15 PM  [tomcat] 	Status change detected: running
+6:41:15 PM  [tomcat] 	Status change detected: stopped
+6:42:46 PM  [apache] 	Starting apache app...
+6:42:46 PM  [apache] 	Status change detected: running
+6:42:51 PM  [tomcat] 	Starting tomcat app...
+6:45:13 PM  [tomcat] 	Status change detected: running
+6:55:18 PM  [tomcat] 	Status change detected: stopped
+6:57:46 PM  [tomcat] 	Status change detected: running
+7:09:08 PM  [tomcat] 	Stopping
+7:09:14 PM  [tomcat] 	Status change detected: stopped
+7:09:56 PM  [tomcat] 	Starting tomcat app...
+7:11:21 PM  [tomcat] 	Status change detected: running
+7:12:30 PM  [tomcat] 	Stopping
+7:12:34 PM  [tomcat] 	Status change detected: stopped
+7:13:28 PM  [tomcat] 	Starting tomcat app...
+7:14:55 PM  [tomcat] 	Status change detected: running
+7:18:43 PM  [tomcat] 	Stopping
+7:18:48 PM  [tomcat] 	Status change detected: stopped
+7:27:38 PM  [tomcat] 	Starting tomcat app...
+7:29:03 PM  [tomcat] 	Status change detected: running
+7:35:22 PM  [tomcat] 	Stopping
+7:35:27 PM  [tomcat] 	Status change detected: stopped
+7:35:43 PM  [tomcat] 	Starting tomcat app...
+7:37:11 PM  [tomcat] 	Status change detected: running
+8:05:04 PM  [tomcat] 	Status change detected: stopped
+8:06:52 PM  [tomcat] 	Status change detected: running
+8:47:08 PM  [tomcat] 	Status change detected: stopped
+8:48:53 PM  [tomcat] 	Status change detected: running
+10:08:43 PM  [tomcat] 	Status change detected: stopped
+10:10:37 PM  [tomcat] 	Status change detected: running
+10:17:38 PM  [tomcat] 	Status change detected: stopped
+10:19:27 PM  [tomcat] 	Status change detected: running
+10:28:22 PM  [tomcat] 	Status change detected: stopped
+10:30:19 PM  [tomcat] 	Status change detected: running
+11:05:33 PM  [tomcat] 	Stopping
+11:05:35 PM  [tomcat] 	Status change detected: stopped
+11:10:26 PM  [tomcat] 	Starting tomcat app...
+11:13:38 PM  [tomcat] 	Status change detected: running
+11:14:02 PM  [tomcat] 	Status change detected: stopped
+11:16:03 PM  [tomcat] 	Status change detected: running
+11:22:14 PM  [tomcat] 	Status change detected: stopped
+11:24:01 PM  [tomcat] 	Status change detected: running
+11:31:06 PM  [tomcat] 	Status change detected: stopped
+11:32:53 PM  [apache] 	Stopping apache (PID: 7104)
+11:32:53 PM  [apache] 	Stopping apache (PID: 2432)
+11:32:54 PM  [apache] 	Status change detected: stopped
+11:32:57 PM  [tomcat] 	Starting tomcat app...
+11:38:43 PM  [tomcat] 	Starting tomcat app...
+11:43:06 PM  [tomcat] 	Status change detected: running
+11:43:08 PM  [tomcat] 	Status change detected: stopped
+11:44:14 PM  [apache] 	Starting apache app...
+11:44:15 PM  [apache] 	Status change detected: running
+11:45:24 PM  [tomcat] 	Status change detected: running
+11:45:39 PM  [tomcat] 	Status change detected: stopped
+11:45:58 PM  [tomcat] 	Starting tomcat app...
+11:46:02 PM  [main] 	Deinitializing moduls
+11:46:02 PM  [main] 	Deinitializing main
+
+11:46:37 PM  [main] 	Initializing main
+11:46:37 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+11:46:37 PM  [main] 	Xampp version: 1.7.7
+11:46:37 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+11:46:37 PM  [main] 	Running as admin - good!
+11:46:37 PM  [main] 	Working with basedir: "f:\xampp\"
+11:46:37 PM  [main] 	Initializing moduls
+11:46:37 PM  [apache] 	"f:\xampp\apache\bin\httpd.exe" seems to be running on port 80?
+11:46:37 PM  [apache] 	"f:\xampp\apache\bin\httpd.exe" seems to be running on port 443?
+11:46:37 PM  [main] 	Enabling autostart for module "apache"
+11:46:37 PM  [main] 	Enabling autostart for module "tomcat"
+11:46:37 PM  [main] 	Starting check-timer
+11:46:38 PM  [apache] 	Autostart active: modul is already running - aborted
+11:46:38 PM  [tomcat] 	Autostart active: starting...
+11:46:38 PM  [tomcat] 	Starting tomcat app...
+11:46:45 PM  [tomcat] 	Status change detected: running
+11:47:06 PM  [tomcat] 	Status change detected: stopped
+11:49:17 PM  [tomcat] 	Status change detected: running
+12:18:42 AM  [tomcat] 	Status change detected: stopped
+12:20:48 AM  [tomcat] 	Status change detected: running
+6:24:33 AM  [tomcat] 	Status change detected: stopped
+6:24:38 AM  [main] 	Deinitializing moduls
+6:24:38 AM  [main] 	Deinitializing main
+
+6:48:44 AM  [main] 	Initializing main
+6:48:44 AM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+6:48:44 AM  [main] 	Xampp version: 1.7.7
+6:48:44 AM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+6:48:44 AM  [main] 	Running as admin - good!
+6:48:44 AM  [main] 	Working with basedir: "f:\xampp\"
+6:48:44 AM  [main] 	Initializing moduls
+6:48:44 AM  [main] 	Enabling autostart for module "apache"
+6:48:44 AM  [main] 	Enabling autostart for module "tomcat"
+6:48:44 AM  [main] 	Starting check-timer
+6:48:45 AM  [apache] 	Autostart active: starting...
+6:48:45 AM  [apache] 	Starting apache app...
+6:48:45 AM  [tomcat] 	Autostart active: modul is already running - aborted
+6:48:45 AM  [apache] 	Status change detected: running
+6:48:49 AM  [tomcat] 	Stopping
+6:48:51 AM  [apache] 	Stopping apache (PID: 6496)
+6:48:51 AM  [apache] 	Status change detected: stopped
+6:48:51 AM  [tomcat] 	Status change detected: stopped
+6:48:55 AM  [main] 	Deinitializing moduls
+6:48:55 AM  [main] 	Deinitializing main
+
+12:21:53 PM  [main] 	Initializing main
+12:21:53 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+12:21:53 PM  [main] 	Xampp version: 1.7.7
+12:21:53 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+12:21:53 PM  [main] 	Running as admin - good!
+12:21:53 PM  [main] 	Working with basedir: "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\"
+12:21:53 PM  [main] 	Initializing moduls
+12:21:53 PM  [main] 	Enabling autostart for module "apache"
+12:21:53 PM  [main] 	Enabling autostart for module "tomcat"
+12:21:53 PM  [main] 	Starting check-timer
+12:21:54 PM  [apache] 	Autostart active: starting...
+12:21:54 PM  [apache] 	Starting apache app...
+12:21:54 PM  [tomcat] 	Autostart active: starting...
+12:21:54 PM  [tomcat] 	Starting tomcat app...
+12:21:54 PM  [apache] 	Status change detected: running
+12:21:58 PM  [tomcat] 	Status change detected: running
+12:22:25 PM  [tomcat] 	Status change detected: stopped
+12:22:36 PM  [tomcat] 	Status change detected: running
+12:28:02 PM  [tomcat] 	Status change detected: stopped
+12:28:46 PM  [tomcat] 	Status change detected: running
+12:31:53 PM  [tomcat] 	Status change detected: stopped
+12:32:14 PM  [tomcat] 	Status change detected: running
+12:39:05 PM  [apache] 	Stopping apache (PID: 8492)
+12:39:05 PM  [apache] 	Stopping apache (PID: 8448)
+12:39:05 PM  [apache] 	Status change detected: stopped
+12:40:40 PM  [apache] 	Starting apache app...
+12:40:40 PM  [apache] 	Status change detected: running
+12:42:02 PM  [tomcat] 	Status change detected: stopped
+12:43:27 PM  [apache] 	Stopping apache (PID: 7812)
+12:43:27 PM  [apache] 	Stopping apache (PID: 7620)
+12:43:28 PM  [apache] 	Status change detected: stopped
+12:43:28 PM  [tomcat] 	Status change detected: running
+12:43:58 PM  [apache] 	Starting apache app...
+12:43:58 PM  [apache] 	Status change detected: running
+12:49:37 PM  [apache] 	Stopping apache (PID: 6024)
+12:49:37 PM  [apache] 	Stopping apache (PID: 8392)
+12:49:37 PM  [apache] 	Status change detected: stopped
+12:49:40 PM  [apache] 	Starting apache app...
+12:49:40 PM  [apache] 	Status change detected: running
+12:49:47 PM  [main] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache"
+12:50:24 PM  [tomcat] 	Status change detected: stopped
+12:50:56 PM  [apache] 	Stopping apache (PID: 1056)
+12:50:56 PM  [apache] 	Stopping apache (PID: 7676)
+12:50:56 PM  [apache] 	Status change detected: stopped
+12:50:56 PM  [tomcat] 	Status change detected: running
+12:50:58 PM  [apache] 	Starting apache app...
+12:50:59 PM  [apache] 	Status change detected: running
+12:54:31 PM  [main] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\"
+12:55:33 PM  [apache] 	Stopping apache (PID: 8212)
+12:55:33 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\pv.exe -f -k -q -i 8212"
+12:55:33 PM  [apache] 	Stopping apache (PID: 7176)
+12:55:33 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\pv.exe -f -k -q -i 7176"
+12:55:34 PM  [apache] 	Status change detected: stopped
+12:55:42 PM  [apache] 	Starting apache app...
+12:55:42 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\httpd.exe"
+12:55:42 PM  [apache] 	Status change detected: running
+12:55:56 PM  [tomcat] 	Status change detected: stopped
+1:53:49 PM  [apache] 	Stopping apache (PID: 7356)
+1:53:49 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\pv.exe -f -k -q -i 7356"
+1:53:49 PM  [apache] 	Stopping apache (PID: 8340)
+1:53:49 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\pv.exe -f -k -q -i 8340"
+1:53:50 PM  [apache] 	Status change detected: stopped
+1:53:53 PM  [main] 	Deinitializing moduls
+1:53:53 PM  [main] 	Deinitializing main
+

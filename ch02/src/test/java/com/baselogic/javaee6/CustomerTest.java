@@ -4,7 +4,10 @@ import com.baselogic.TestUtils;
 import com.baselogic.javaee6.domain.Customer;
 import com.baselogic.test.CustomerFixture;
 import org.junit.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityTransaction;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -18,17 +21,20 @@ import static org.hamcrest.CoreMatchers.is;
 
 /**
  * BASE Entity Class
- * <p/>
- * <h2>Java EE6 Cookbook for Securing, Tuning and Extending Enterprise applications.</h2>
- * <p>Packt Publishing (http://www.packtpub.com)</p>
+ * @author Mick Knutson
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
  *
- * @author Mick Knutson (<a href="http://www.baselogic.com">http://www.baselogic.com</a>)
- *         <a href="http://www.mickknutson.com">http://www.mickknutson.com</a>
- * @since 2011
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
  *
- * @see @PersistenceUnit
+ * @since 2012
  */
 public class CustomerTest {
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomerTest.class);
 
     //-----------------------------------------------------------------------//
     // Attributes
@@ -46,6 +52,7 @@ public class CustomerTest {
     //-----------------------------------------------------------------------//
     @BeforeClass
     public static void initEntityManager() throws Exception {
+        logger.warn("*****************************************************************************");
         emf = Persistence.createEntityManagerFactory(Constants.PERSISTENCEUNIT);
         em = emf.createEntityManager();
     }
@@ -62,6 +69,8 @@ public class CustomerTest {
 
     @Before
     public void initTransaction() throws Exception {
+        logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+        logger.warn(">>> SEED >>>");
         TestUtils.seedData(em,
                 dataSetFile,
                 nullPrimaryKeyFilters);
@@ -80,31 +89,37 @@ public class CustomerTest {
 
     @Test
     public void test_Create_and_Read_All_Customers() throws Exception {
-        em.getTransaction().begin();
+        logger.warn("tttttttttttttttttttttttttttttttttttttttttttttttt");
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
         // Creates an instance of Customer
         Customer customer = CustomerFixture.createSingleCustomer();
 
         // Persists the Customer to the database
         em.persist(customer);
-        em.getTransaction().commit();
+        tx.commit();
 
         assertNotNull("ID should not be null", customer.getId());
         assertThat(customer.getHobbies().size(), is(3));
 
         em.getTransaction().begin();
+
         // Retrieves all Customers from the database
         TypedQuery<Customer> q = em.createNamedQuery(
                 Constants.FINDALLFINDERNAME, Customer.class);
         List<Customer> customers = q.getResultList();
 
         assertThat(customers.size(), is(4));
-        em.getTransaction().commit();
+        tx.commit();
     }
 
     @Test
     public void test__DeleteCustomer() throws Exception {
-        em.getTransaction().begin();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
         // Uses Sting Based Criteria
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -121,7 +136,7 @@ public class CustomerTest {
                 Constants.FINDALLFINDERNAME, Customer.class);
         List<Customer> customers = q.getResultList();
 
-        em.getTransaction().commit();
+        tx.commit();
 
         assertThat(customers.size(), is(2));
     }
@@ -131,19 +146,20 @@ public class CustomerTest {
         // Creates an instance of Customer
         Customer customer = CustomerFixture.createSingleCustomer();
 
-        // Persists the Customer to the database
-        em.getTransaction().begin();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
         em.persist(customer);
-        em.getTransaction().commit();
+        tx.commit();
 
         assertNotNull("ID should not be null", customer.getId());
 
-        em.getTransaction().begin();
+        tx.begin();
         // Retrieves a single Customer from the database
         TypedQuery<Customer> q = em.createNamedQuery(
                 Constants.FINDALLFINDERNAME, Customer.class);
         List<Customer> customers = q.getResultList();
-        em.getTransaction().commit();
+        tx.commit();
 
         assertThat(customers.size(), is(4));
 
@@ -158,20 +174,21 @@ public class CustomerTest {
         // Creates an instance of Customer
         Customer customer = CustomerFixture.createSingleCustomer();
 
-        // Persists the Customer to the database
-        em.getTransaction().begin();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
         em.persist(customer);
-        em.getTransaction().commit();
+        tx.commit();
 
         assertNotNull("ID should not be null", customer.getId());
 
-        em.getTransaction().begin();
+        tx.begin();
         // Retrieves a single Customer from the database
         TypedQuery<Customer> q = em.createNamedQuery(
                 Constants.FINDALLFINDERNAME, Customer.class);
         List<Customer> customers = q.getResultList();
 
-        em.getTransaction().commit();
+        tx.commit();
 
         assertThat(customers.size(), is(4));
     }
@@ -179,7 +196,8 @@ public class CustomerTest {
     @Test
     public void test__Read_and_Update__PESSIMISTIC_LOCK() throws Exception {
         // Persists the Customer to the database
-        em.getTransaction().begin();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
         Customer customer = em.find(Customer.class, 100200L);
 
@@ -191,7 +209,7 @@ public class CustomerTest {
 
         em.merge(customer);
 
-        em.getTransaction().commit();
+        tx.commit();
 
         assertThat(customer.getUsername(), is("newUsername1"));
 
@@ -210,19 +228,24 @@ public class CustomerTest {
     }
 
     private Customer createCustomer() throws Exception {
-        em.getTransaction().begin();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
         Customer customer = CustomerFixture.createSingleCustomer();
 
         // Persists the Customer to the database
         em.persist(customer);
-        em.getTransaction().commit();
+
+        tx.commit();
 
         return customer;
     }
 
     private void deleteCustomer(Customer customer) throws Exception {
-        em.getTransaction().begin();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
 
         // Uses Sting Based Criteria
         CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -239,6 +262,6 @@ public class CustomerTest {
                 Constants.FINDALLFINDERNAME, Customer.class);
         List<Customer> customers = q.getResultList();
 
-        em.getTransaction().commit();
+        tx.commit();
     }
 }

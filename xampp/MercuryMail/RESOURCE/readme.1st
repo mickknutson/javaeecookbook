@@ -1,0 +1,20 @@
+The RESOURCE subdirectory
+-------------------------------------------------------------------------
+
+This directory, RESOURCE, contains unmodified, original versions of
+various files from the most recent Mercury/32 installation: the files in
+this directory are original versions of files found in the base Mercury
+directory that are typically modified on a site-by-site basis.
+
+You SHOULD NOT modify any files in this directory, primarily because any
+changes you make will be overwritten without warning the next time you
+install a Mercury update.
+
+If you want to modify any of the files in this directory, you should copy
+them somewhere else before working on them.
+
+------
+Mercury Mail Transport System,
+Copyright (c) 1993-2008, David Harris, All rights reserved.
+http://www.pmail.com
+

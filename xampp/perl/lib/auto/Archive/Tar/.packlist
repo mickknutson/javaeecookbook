@@ -1,0 +1,7 @@
+\xampp\perl\bin\ptar
+\xampp\perl\bin\ptar.bat
+\xampp\perl\bin\ptardiff
+\xampp\perl\bin\ptardiff.bat
+\xampp\perl\lib\Archive\Tar.pm
+\xampp\perl\lib\Archive\Tar\Constant.pm
+\xampp\perl\lib\Archive\Tar\File.pm

@@ -1,0 +1,18 @@
+Regarding RASDIAL.ZIP:
+----------------------
+
+RASDIAL.ZIP contains a program called RASDIAL95, written by
+Claudio Fahey, and included with his permission.
+
+RASDIAL95 is a neat utility that can use the RAS subsystem of
+Windows 95/98 and Windows NT to automate dialling and hanging
+up of connections. It can be used in conjunction with the
+MercuryX process scheduler in Mercury to control dialup
+Internet connections.
+
+RASDIAL95 is easy to use - RASDIAL.ZIP contains complete
+documentation on its usage. If you have questions regarding
+the use of RASDIAL95 within Mercury, please refer them to the
+Pegasus Mail/Mercury technical support channels rather than
+to Claudio himself.
+

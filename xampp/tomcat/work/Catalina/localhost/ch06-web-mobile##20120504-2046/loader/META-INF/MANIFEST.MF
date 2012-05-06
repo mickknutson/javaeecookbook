@@ -1,0 +1,80 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: 1.6.0_27 (Sun Microsystems Inc.)
+Built-By: hudson
+Build-Jdk: 1.6.0_27
+Export-Package: javax.faces.render;uses:="javax.faces,javax.faces.comp
+ onent,javax.faces.application,javax.faces.context,javax.faces.convert
+ ,javax.faces.component.behavior";version="2.1",javax.faces.context;us
+ es:="javax.faces,javax.el,javax.faces.render,javax.faces.component,ja
+ vax.faces.application,javax.faces.lifecycle,javax.faces.event";versio
+ n="2.1",javax.faces.model;uses:="javax.faces,javax.servlet.jsp.jstl.s
+ ql";version="2.1",javax.faces.view.facelets;uses:="javax.faces,javax.
+ el,javax.faces.component,javax.faces.context,javax.faces.view";versio
+ n="2.1",javax.faces.event;uses:="javax.el,javax.faces.context,javax.f
+ aces,javax.faces.component,javax.faces.application,javax.faces.compon
+ ent.behavior,javax.faces.lifecycle";version="2.1",javax.faces.validat
+ or;uses:="javax.validation.groups,javax.el,javax.faces.context,javax.
+ faces,javax.faces.component,javax.faces.application,javax.validation,
+ javax.faces.el,javax.faces.convert";version="2.1",javax.faces;uses:="
+ javax.faces.render,javax.faces.context,javax.faces.view.facelets,java
+ x.faces.application,javax.faces.component.visit,javax.faces.view,java
+ x.faces.lifecycle";version="2.1",javax.faces.component;uses:="javax.f
+ aces.context,javax.faces.validator,javax.faces,javax.faces.applicatio
+ n,javax.faces.el,javax.faces.component.visit,javax.faces.convert,java
+ x.el,javax.faces.render,javax.faces.model,javax.faces.event,javax.fac
+ es.component.behavior,javax.faces.view,javax.servlet.jsp.jstl.sql,jav
+ ax.faces.lifecycle";version="2.1",javax.faces.application;uses:="java
+ x.el,javax.faces.render,javax.faces.context,javax.faces.event,javax.f
+ aces.validator,javax.faces,javax.faces.component,javax.faces.el,javax
+ .faces.convert,javax.faces.view,javax.faces.component.behavior";versi
+ on="2.1",javax.faces.bean;version="2.1",javax.faces.webapp;uses:="jav
+ ax.el,javax.faces.context,javax.faces.validator,javax.faces.event,jav
+ ax.servlet.jsp,javax.faces,javax.servlet,javax.faces.component,javax.
+ faces.application,javax.faces.el,javax.faces.convert,javax.servlet.js
+ p.tagext,javax.faces.lifecycle,javax.servlet.http";version="2.1",java
+ x.faces.component.html;uses:="javax.el,javax.faces.component,javax.fa
+ ces.component.behavior";version="2.1",javax.faces.el;uses:="javax.fac
+ es,javax.el,javax.faces.context";version="2.1",javax.faces.component.
+ visit;uses:="javax.faces,javax.faces.component,javax.faces.context";v
+ ersion="2.1",javax.faces.convert;uses:="javax.el,javax.faces.context,
+ javax.faces,javax.faces.component,javax.faces.application,javax.faces
+ .el";version="2.1",javax.faces.view;uses:="javax.faces,javax.faces.co
+ mponent,javax.faces.application,javax.faces.context";version="2.1",ja
+ vax.faces.component.behavior;uses:="javax.faces,javax.el,javax.faces.
+ render,javax.faces.component,javax.faces.context,javax.faces.event";v
+ ersion="2.1",javax.faces.lifecycle;uses:="javax.faces,javax.faces.con
+ text,javax.faces.event";version="2.1"
+Implementation-Title: Mojarra
+Probe-Provider-Xml-File-Names: META-INF/mojarra-jsf-api-probe-provider
+ .xml
+Tool: Bnd-0.0.249
+DSTAMP: 20120206
+TODAY: February 6 2012
+TSTAMP: 0816
+DocName: JavaServer Faces API
+Implementation-Vendor: Oracle America, Inc.
+Implementation-Vendor-Id: com.sun
+Specification-Title: JavaServer Faces
+Bundle-License: http://glassfish.java.net/nonav/public/CDDL+GPL.html
+LICENSEFILE: /files/hudson/workspace/MOJARRA_2_1X_ROLLING_DEPLOY/MOJAR
+ RA_2_1X_ROLLING/legal/jsf-cddl/LICENSE.txt
+Bundle-SymbolicName: org.glassfish.javax.faces
+Extension-Name: javax.faces
+Implementation-Version: 2.1.7-SNAPSHOT
+Bundle-Name: JavaServer Faces API 2.1.7 (20120206-SNAPSHOT)
+DynamicImport-Package: org.glassfish.flashlight.provider
+Bundle-Version: 2.1.7.SNAPSHOT
+Bnd-LastModified: 1328545062655
+Bundle-ManifestVersion: 2
+Bundle-Description: Mojarra JSF API (javax.faces/2.1) 2.1.7 (20120206-
+ SNAPSHOT)
+Specification-Version: 2.1
+Include-Resource: META-INF=build/classes/META-INF,build/classes
+Import-Package: javax.el;version="2.2.1",javax.servlet;version="3.0",j
+ avax.servlet.http;version="3.0",javax.servlet.jsp;version="2.1",javax
+ .servlet.jsp.jstl.sql;version="1.2",javax.servlet.jsp.tagext;version=
+ "2.1",javax.validation;resolution:=optional,javax.validation.groups;r
+ esolution:=optional
+Bundle-DocURL: http://download.oracle.com/javaee/6/api/
+

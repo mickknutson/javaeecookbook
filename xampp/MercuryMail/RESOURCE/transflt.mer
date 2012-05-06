@@ -1,0 +1,93 @@
+# Transaction-level filtering expressions for MercuryS
+# Mercury Mail Transport System, Copyright (c) 1993-2007, David Harris.
+# This version of the file was prepared for Mercury/32 v4.5
+#
+# Each line in this file defines a test that MercuryS should apply at various
+# stages of the SMTP transaction processing phase of mail delivery. Each line
+# has the following general format:
+#
+#   <Operation>, <"Expression">, <Action>[Action]>, ["Response"]
+#
+# "operation" can be:
+#
+#    'H' for an expression applied to the client's "HELO" greeting
+#    'D' for deferred HELO processing; these filters will only be
+#        applied if the client does not issue a successful AUTH after
+#        issuing HELO but before issuing any other command. Otherwise,
+#        these filters are the same as 'H' filters. They allow a user
+#        on a system that might otherwise be rejected to redeem the
+#        connection by authenticating his identity.
+#    'S' for an expression applied to the subject line of the message
+#    'R' for an expression applied to each SMTP RCPT command
+#    'M' for an expression applied to the SMTP MAIL FROM: command
+#
+# "Expression" is a Mercury regular expression - see the Mercury help on
+# mail filtering rules or content control for the format of a Mercury
+# extended regular expression. The expression must be quoted, and is
+# applied to the entire HELO command.
+#
+# Action is one or more characters indicating the action MercuryS should
+# take when the expression is matched: the first character in the action
+# can be one of the following:
+#
+#    'R' to refuse the transaction and block all subsequent commands
+#    'F' to fail the current command only (allow further attempts)
+#    'D' to drop the connection immediately with no error response
+#    'B' to issue an error response then drop the connection immediately.
+#    'L' to log a system message
+#    'X' to stop this phase of transaction filtering for this message
+#    'S' to suppress all transaction filtering stages for this message.      
+#
+# The difference between 'R' and 'F' is that 'R' will cause all subsequent
+# delivery commands in the session to be refused, while 'F' will only fail
+# the current command - other commands may still be permitted.
+#
+# The 'D' and 'B' commands essentially do the same thing, but the 'B'
+# command does it more politely. Use 'B' if there's any possibility that
+# the connected machine is actually legitimate, because it gives at least
+# some level of feedback to the sender or administrator.
+#
+# To understand the difference between 'X' and 'S', you need to be aware
+# that transaction filtering is done in several "passes", each pass testing
+# a different state of the SMTP transaction. The 'X' action only exits from
+# the current pass, meaning that future passes will still take place. The
+# 'S' action, however, exits from the current pass and suppresses all
+# further transaction filtering on the message altogether.
+#
+# The second character in the action string is optional and can have
+# one of the following values:
+#
+#    'S' to blacklist the host for the next half hour
+#
+# The third character in the action string is optional and can have
+# one of the following values:
+#
+#    'N' if the rule should apply only if the expression does NOT match
+#
+# Note that optional characters can have the value '-' if they are not
+# used... So, if you want to refuse a connection if an expression does not
+# match, but do not want to use short term blacklisting, you would use the
+# action string "R-N".
+#
+# "Response" is an optional response code that MercuryS should return to
+# the client (for the 'R' action) or the string to log as the system
+# message (for the 'L' action). It must be quoted, and if it is returned
+# as an error response to the client, then it must start with a 3-digit
+# RFC2821 error response code (we recommend 554 for this).
+
+
+# ------------- Sample Rules --------------------------------------------
+# The rules below are examples you can use to get a feel for writing your
+# own. They are harmless, and will cause no problems if you leave them in
+# place, but it's probably better to remove them when you add your own
+# rules.
+
+H, "*192.156.225.44*", R, "554 Get out of here, you worthless scumbag."
+R, "*honeypot@aphrodite.pmail.gen.nz*", RS, "554 Fraudulent RCPT rejected."
+S, "*viagra*", D, "'Viagra' encountered in subject line - connection dropped."
+S, "*vicodin*", R, "554 'Vicodin' encountered in subject line - message refused."
+H, "[EHeh][EHeh]LO +[0-9]+.[0-9]+.[0-9]+.[0-9]*", R, "554 Invalid HELO format"
+
+S, "/c*CONGRATULATIONS*WON*", BS, "554 Possibly Nigerian 419 Variant - please change and re-send."
+S, "*for job*", BS, "554 Possibly employment spam - please change and re-send."
+

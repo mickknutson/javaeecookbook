@@ -3,6 +3,8 @@ package com.baselogic.integration;
 import com.baselogic.javaee6.dao.UserDao;
 import com.baselogic.javaee6.domain.Customer;
 import com.baselogic.javaee6.service.UserService;
+import com.baselogic.javaee6.service.UserServiceDecorator;
+import com.baselogic.javaee6.service.UserServiceImpl;
 import com.baselogic.test.CustomerFixture;
 import org.junit.After;
 import org.junit.Before;
@@ -15,22 +17,25 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 /**
- * [Class_Name]
+ * UserServiceTest
  *
  * @author Mick Knutson
- *         <a href="http://www.baselogic.com>Blog</a>< /br>
- *         <a href="http://linkedin.com/in/mickknutson>LinkedIN</a>< /br>
- *         <a href="http://twitter.com/mickknutson>Twitter</a>< /br>
- *         <a href="http://www.mickknutson.com>Personal</a>< /br>
- * @since 2011
- *        <i>To change this template use File | Settings | File Templates.</i>
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
+ *
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
+ *
+ * @since 2012
  */
 public class UserServiceTest {
 
     //-----------------------------------------------------------------------//
     // Attributes
     //-----------------------------------------------------------------------//
-    public UserService userService;
+    public UserServiceImpl userService;
 
     public UserDao userDaoMock;
 
@@ -39,7 +44,7 @@ public class UserServiceTest {
     //-----------------------------------------------------------------------//
     @Before
     public void before() throws Exception {
-        userService = new UserService();
+        userService = new UserServiceImpl();
 
         // Create Mock UserDao
         userDaoMock = mock(UserDao.class);

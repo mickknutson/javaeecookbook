@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverBackedSelenium;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +18,6 @@ public class SeleniumTestHelper {
 
     public static DefaultSelenium init() {
         logger.info("*** Starting selenium client driver ...");
-
-        BasicConfigurator.configure();
 
         DefaultSelenium defaultSelenium = new DefaultSelenium(SeleniumConfig.getSeleniumServerHostName(),
                 SeleniumConfig.getSeleniumServerPort(),
@@ -41,7 +38,6 @@ public class SeleniumTestHelper {
     public static Selenium initWebDriver() {
         logger.info("*** Starting selenium WebDriver ...");
 
-        BasicConfigurator.configure();
         WebDriver driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         Selenium selenium = new WebDriverBackedSelenium(driver,

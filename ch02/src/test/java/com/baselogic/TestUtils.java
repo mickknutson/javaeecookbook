@@ -9,7 +9,11 @@ import org.dbunit.dataset.xml.FlatXmlDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.ext.h2.H2DataTypeFactory;
 import org.dbunit.operation.DatabaseOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.persistence.EntityTransaction;
+import javax.transaction.Transaction;
 import javax.persistence.EntityManager;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -17,15 +21,20 @@ import java.sql.Connection;
 
 /**
  * Test Utils
- * <p/>
- * <h2>Java EE6 Cookbook for Securing, Tuning and Extending Enterprise applications.</h2>
- * <p>Packt Publishing (http://www.packtpub.com)</p>
+ * @author Mick Knutson
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
  *
- * @author Mick Knutson (<a href="http://www.baselogic.com">http://www.baselogic.com</a>)
- *         <a href="http://www.mickknutson.com">http://www.mickknutson.com</a>
- * @since 2011
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
+ *
+ * @since 2012
  */
 public class TestUtils {
+
+    private static final Logger logger = LoggerFactory.getLogger(TestUtils.class);
 
     //-----------------------------------------------------------------------//
     // DBUnit Helper Methods
@@ -43,8 +52,13 @@ public class TestUtils {
                                 String dataSetFile,
                                 String... nullPrimaryKeyFilters)
             throws Exception {
-        em.getTransaction().begin();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
         Connection connection = em.unwrap(java.sql.Connection.class);
+
+        logger.warn(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         try {
             IDatabaseConnection dbUnitCon = new DatabaseConnection(connection);
@@ -65,7 +79,7 @@ public class TestUtils {
         } catch (Exception exc) {
             exc.printStackTrace();
         } finally {
-            em.getTransaction().commit();
+            tx.commit();
             connection.close();
         }
     }
@@ -86,7 +100,10 @@ public class TestUtils {
                                 String dataSetOutputFile,
                                 String... nullPrimaryKeyFilters)
             throws Exception {
-        em.getTransaction().begin();
+
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+
         Connection connection = em.unwrap(java.sql.Connection.class);
 
         try {
@@ -114,7 +131,7 @@ public class TestUtils {
         } catch (Exception exc) {
             exc.printStackTrace();
         } finally {
-            em.getTransaction().commit();
+            tx.commit();
             connection.close();
         }
     }

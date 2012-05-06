@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://java.sun.com/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
+
+    <interceptors>
+        <class>com.baselogic.javaee6.service.UserServiceInterceptor</class>
+        <class>com.baselogic.javaee6.service.TimingInterceptor</class>
+        <class>com.baselogic.javaee6.service.DebugInterceptor</class>
+    </interceptors>
+
+    <decorators>
+        <class>com.baselogic.javaee6.service.UserServiceDecorator</class>
+    </decorators>
+
+</beans>

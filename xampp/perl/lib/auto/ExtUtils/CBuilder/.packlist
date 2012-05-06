@@ -1,0 +1,13 @@
+\xampp\perl\lib\ExtUtils\CBuilder.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Base.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\Unix.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\VMS.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\Windows.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\Windows\BCC.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\Windows\GCC.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\Windows\MSVC.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\aix.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\cygwin.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\darwin.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\dec_osf.pm
+\xampp\perl\lib\ExtUtils\CBuilder\Platform\os2.pm

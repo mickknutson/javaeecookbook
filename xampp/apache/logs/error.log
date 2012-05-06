@@ -1,0 +1,144 @@
+[Fri May 04 14:15:13 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 14:15:13 2012] [notice] Digest: done
+[Fri May 04 14:15:20 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 14:15:20 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 14:15:20 2012] [notice] Parent: Created child process 5952
+[Fri May 04 14:15:31 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 14:15:31 2012] [notice] Digest: done
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Child process is running
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Acquired the start mutex.
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Starting 150 worker threads.
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Starting thread to listen on port 443.
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Starting thread to listen on port 80.
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Starting thread to listen on port 443.
+[Fri May 04 14:15:36 2012] [notice] Child 5952: Starting thread to listen on port 80.
+[Fri May 04 15:39:19 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 15:39:19 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 15:39:19 2012] [notice] Digest: done
+[Fri May 04 15:39:22 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 15:39:22 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 15:39:22 2012] [notice] Parent: Created child process 8804
+[Fri May 04 15:39:28 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 15:39:28 2012] [notice] Digest: done
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Child process is running
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Acquired the start mutex.
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Starting 150 worker threads.
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Starting thread to listen on port 443.
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Starting thread to listen on port 443.
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Starting thread to listen on port 80.
+[Fri May 04 15:39:31 2012] [notice] Child 8804: Starting thread to listen on port 80.
+[Fri May 04 18:01:09 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 18:01:09 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:01:09 2012] [notice] Digest: done
+[Fri May 04 18:01:17 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 18:01:17 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 18:01:17 2012] [notice] Parent: Created child process 6832
+[Fri May 04 18:01:24 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:01:24 2012] [notice] Digest: done
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Child process is running
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Acquired the start mutex.
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Starting 150 worker threads.
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Starting thread to listen on port 443.
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Starting thread to listen on port 443.
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Starting thread to listen on port 80.
+[Fri May 04 18:01:27 2012] [notice] Child 6832: Starting thread to listen on port 80.
+[Fri May 04 18:01:45 2012] [error] (OS 10061)No connection could be made because the target machine actively refused it.  : proxy: AJP: attempt to connect to 127.0.0.1:8009 (127.0.0.1) failed
+[Fri May 04 18:01:45 2012] [error] ap_proxy_connect_backend disabling worker for (127.0.0.1)
+[Fri May 04 18:01:45 2012] [error] proxy: AJP: failed to make connection to backend: 127.0.0.1
+[Fri May 04 18:09:15 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 18:09:15 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:09:15 2012] [notice] Digest: done
+[Fri May 04 18:09:21 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 18:09:21 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 18:09:21 2012] [notice] Parent: Created child process 5036
+[Fri May 04 18:09:29 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:09:29 2012] [notice] Digest: done
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Child process is running
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Acquired the start mutex.
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Starting 150 worker threads.
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Starting thread to listen on port 443.
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Starting thread to listen on port 443.
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Starting thread to listen on port 80.
+[Fri May 04 18:09:35 2012] [notice] Child 5036: Starting thread to listen on port 80.
+[Fri May 04 18:18:41 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 18:18:41 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:18:41 2012] [notice] Digest: done
+[Fri May 04 18:18:48 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 18:18:48 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 18:18:48 2012] [notice] Parent: Created child process 4900
+[Fri May 04 18:18:58 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:18:58 2012] [notice] Digest: done
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Child process is running
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Acquired the start mutex.
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Starting 150 worker threads.
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Starting thread to listen on port 443.
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Starting thread to listen on port 443.
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Starting thread to listen on port 80.
+[Fri May 04 18:19:03 2012] [notice] Child 4900: Starting thread to listen on port 80.
+[Fri May 04 18:25:28 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 18:25:28 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:25:28 2012] [notice] Digest: done
+[Fri May 04 18:25:35 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 18:25:35 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 18:25:35 2012] [notice] Parent: Created child process 6484
+[Fri May 04 18:25:41 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:25:41 2012] [notice] Digest: done
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Child process is running
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Acquired the start mutex.
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Starting 150 worker threads.
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Starting thread to listen on port 443.
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Starting thread to listen on port 80.
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Starting thread to listen on port 80.
+[Fri May 04 18:25:46 2012] [notice] Child 6484: Starting thread to listen on port 443.
+[Fri May 04 18:42:49 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 18:42:49 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:42:49 2012] [notice] Digest: done
+[Fri May 04 18:42:58 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 18:42:58 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 18:42:58 2012] [notice] Parent: Created child process 2432
+[Fri May 04 18:43:05 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 18:43:05 2012] [notice] Digest: done
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Child process is running
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Acquired the start mutex.
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Starting 150 worker threads.
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Starting thread to listen on port 443.
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Starting thread to listen on port 443.
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Starting thread to listen on port 80.
+[Fri May 04 18:43:10 2012] [notice] Child 2432: Starting thread to listen on port 80.
+[Fri May 04 23:44:18 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri May 04 23:44:18 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 23:44:18 2012] [notice] Digest: done
+[Fri May 04 23:44:23 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Fri May 04 23:44:23 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Fri May 04 23:44:23 2012] [notice] Parent: Created child process 7048
+[Fri May 04 23:44:28 2012] [notice] Digest: generating secret for digest authentication ...
+[Fri May 04 23:44:28 2012] [notice] Digest: done
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Child process is running
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Acquired the start mutex.
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Starting 150 worker threads.
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Starting thread to listen on port 443.
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Starting thread to listen on port 80.
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Starting thread to listen on port 443.
+[Fri May 04 23:44:30 2012] [notice] Child 7048: Starting thread to listen on port 80.
+[Sat May 05 06:48:50 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sat May 05 06:48:50 2012] [notice] Digest: generating secret for digest authentication ...
+[Sat May 05 06:48:50 2012] [notice] Digest: done
+[Sat May 05 16:09:32 2012] [warn] pid file F:/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sat May 05 16:09:32 2012] [notice] Digest: generating secret for digest authentication ...
+[Sat May 05 16:09:32 2012] [notice] Digest: done
+[Sat May 05 16:09:39 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Sat May 05 16:09:39 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Sat May 05 16:09:39 2012] [notice] Parent: Created child process 6168
+[Sat May 05 16:09:47 2012] [notice] Digest: generating secret for digest authentication ...
+[Sat May 05 16:09:47 2012] [notice] Digest: done
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Child process is running
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Acquired the start mutex.
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Starting 150 worker threads.
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Starting thread to listen on port 443.
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Starting thread to listen on port 443.
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Starting thread to listen on port 80.
+[Sat May 05 16:09:52 2012] [notice] Child 6168: Starting thread to listen on port 80.
+[Sat May 05 16:19:18 2012] [warn] (OS 996)Overlapped I/O event is not in a signaled state.  : winnt_accept: Asynchronous AcceptEx failed.
+[Sat May 05 16:24:55 2012] [error] [client ::1] File does not exist: F:/xampp/htdocs/abv/resources/images, referer: http://localhost/abv/abv.html
+[Sat May 05 16:30:38 2012] [error] [client ::1] File does not exist: F:/xampp/htdocs/abv/resources/images, referer: https://localhost/abv/abv.html
+[Sat May 05 16:30:39 2012] [error] [client ::1] File does not exist: F:/xampp/htdocs/abv/resources/images, referer: https://localhost/abv/abv.html

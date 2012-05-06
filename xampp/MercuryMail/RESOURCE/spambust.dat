@@ -1,0 +1,619 @@
+#
+# Mercury/32 Basic Content Control rule file.
+# Copyright (c) 2002-2003, David Harris; portions copyright (c) 2002 David Kocmoud.
+# For information on the syntax and format of this file, please consult
+# the "Content control" section of the Mercury/32 Help file.
+#
+# This set of rules is intended to catch a wide range of unwanted mail
+# messages where the content is commercial or sexual in nature. It works
+# quite well (at the time of writing anyway) but you will almost certainly
+# want or need to adjust it over time to deal with the specific types of
+# content you want to filter. This rule set is designed to be used with a
+# definition where the trigger weight is set to 50.
+#
+# Note that many of the rules in this file have negative weights: this is
+# a useful way of "promoting" a message that might otherwise be detected
+# as having unacceptable content.
+#
+
+# Check for "Lazy HTML", almost always a sure sign of spam
+if Test "LazyHTML strict" weight 51 tag "Message contains Lazy HTML"
+
+# Check for iFrame tags
+if Test "HasIFrame" weight 51 tag "Probable iFrame virus attack"
+
+# Check for excessive numbers of HTML comments
+if Test "HTMLComments 10" weight 51 tag "Too many HTML comments"
+
+# Check for an unreasonable number of spaces in the subject
+if Subject matches "*            +*" weight 51
+
+# Check for unreasonable numbers of high-bit characters - a fairly
+# reliable sign of unreadable Asian spam.
+if Test "Garbage 25" weight 51
+
+# Give a small weight to messages containing URLs in the .BIZ TLD
+if body matches "*http:*.biz*" weight 15
+
+# Check for all variations of "viagra" and similar products in subject and body
+# Note that the "obfuscated" keyword, which is used to trap doctored versions of
+# trigger words like "vi@gra", can be abbreviated to "ob".
+
+if subject contains "viagra" obfuscated weight 51
+if subject contains "viapro" ob weight 51
+if subject has "cialis" ob weight 51
+if subject has "cialagen" ob weight 51
+if subject has "climagel" ob weight 51
+if subject has "VPRX" ob weight 51
+
+if body contains "viagra" ob weight 40
+if body contains "viapro" ob weight 40
+if body has "cialis" ob weight 40
+if body has "cialagen" ob weight 40
+if body has "climagel" ob weight 40
+if body has "VPRX" ob weight 40
+
+# Check for other pharmacy and drug-related stuff
+if subject contains "xanax" ob weight 51
+if body contains "xanax" ob weight 40
+if subject contains "vicodin" ob weight 51
+if body contains "vicodin" ob weight 40
+if subject contains "valium" ob weight 51
+if body contains "valium" ob weight 30
+
+if content contains "phentermine" ob weight 30
+if content contains "finasteride" ob weight 40
+if content has "ambien" ob weight 30
+
+if Subject matches "*/spharmacy/s*" weight 40
+if Subject hasall "online, pharmacy" weight 51
+if Subject hasall "on-line, pharmacy" weight 51
+if content has "prescription" ob weight 15
+if content has "meds" weight 30
+if content has "pharmacy" weight 20
+if content hasall "diet, patch" ob weight 30
+if content contains "medication" ob weight 15
+
+# Check for penile enlargement
+if Subject has "penis" ob weight 51 tag "Penis enlargement ad"
+if Subject contains "enlargement"
+   and Subject has "Penis, Penile" ob weight 51 tag "Penis enlargement ad"
+if Body has "penis" ob weight 35 tag "Penis enlargement ad"
+if Body hasall "penis, enlargement" ob weight 21 tag "Penis enlargement ad"
+if Content hasall "premature, ejaculation" ob weight 40 tag "Sex pills ad"
+if Content contains "increasethelength" ob weight 25 tag "Penis enlargement ad"
+if Body contains "penissize" ob weight 40
+if Body hasall "penissize, largerpenis" ob weight 51
+if Body hasall "penis, gain, inches" ob weight 51
+if Body hasall "increase, size, penis" ob weight 51 tag "Penis enlargement ad"
+if content contains "breastenlargement" ob weight 51 tag "Breast enlargement ad"
+
+# Adjust for filtering of listserv messages
+if Subject matches "Rejected posting to*" weight -9999
+
+# Check for subject lines starting with "ADV:"
+if Subject matches "/sADV/s:*" weight 51
+
+# Check for subject lines ending with a date/time stamp.  e.g. "3/10/02 8:14:07 PM"
+if Subject matches "*[0-9]+/[0-9]+/[0-9]+ +[0-9]+:[0-9]+:[0-9]+ +[AP]M" weight 77
+
+# Check for a "Comments: Authenticated sender..." header with no
+# matching X-Mailer header (a common, although older spam signature).
+if header "comments" contains "authenticated sender"
+  andnot exists "X-Mailer" weight 30
+
+# Check for special headers that reek of spam
+if exists "X-PMG-Recipient" weight 51
+
+# Check for messages with no "Date" field - this is illegal under
+# RFC2822 anyway, and is usually a pretty good indicator of spam
+ifnot exists "Date" weight 51
+
+# Check for content suggesting unwanted "commercial services"
+if Content matches  "*Access*IRA funds taxfree*penalty[- ]free*" weight 51
+if Content matches  "*Access*IRA*no*tax*penalty*" weight 51
+if Subject contains "get out of debt" weight 50
+if Subject contains "debt reduction" weight 50
+if Subject contains "credit card debt" weight 50
+if Subject matches  "*accept credit car[td]s*" weight 51
+if Content contains "no credit card required" weight 40
+if Subject contains "get paid for " weight 50
+if Subject contains "get paid while " weight 50
+if Subject matches  "*guaranteed*return*investment*" weight 50
+if Subject contains "low interest loan" weight 50
+if Subject contains "lowest mortgage rates" weight 50
+if Subject contains "bad credit" weight 50
+if Content contains "online casino" weight 50
+if Content contains "on-line casino" weight 50
+if Content contains "multilevel market" weight 30
+if Subject contains "increase your net worth" weight 30
+if Subject contains " pay you " weight 30
+if Subject matches  "*paycheck*paycheck*" weight 30
+if Subject contains "take surveys" weight 30
+if Subject contains "fire your boss" weight 50
+if Subject contains " work from home" weight 40
+if Subject contains " work at home" weight 40
+if Subject matches  "*mak* money at home*" weight 50
+if Subject contains "make money on" weight 50
+if Subject contains "make more money" weight 50
+if Subject contains "want more money" weight 50
+if Subject contains "pile of cash" weight 50
+if Subject contains "save $" weight 50
+if Subject contains "save money" weight 50
+if Subject contains "stock pick" weight 40
+if Subject contains "stock play" weight 40
+if Subject contains "stockwatch" weight 40
+if Subject contains "OTCBB:" weight 40
+if Subject contains "watch this stock" weight 40
+if Subject contains "win cash" weight 50
+if Subject contains "win money" weight 50
+if Subject contains "win $" weight 50
+if Subject contains "venture"
+  and Subject contains "capital" weight 50
+if Sender contains "investor insights" weight 50
+if subject matches "*create*paycheck*home*" weight 51
+
+# Check for content suggesting unwanted sexual "services"
+if Subject contains "adult entertainment" weight 50
+if Subject contains "adult web" weight 50
+if Subject contains "adult site" weight 50
+if Subject contains "adult video" weight 50
+if Subject contains "barely legal" weight 50
+if Subject contains "bondage" weight 40
+if Subject contains "erotica" weight 40
+if Subject contains "fetish" weight 40
+if Subject contains "fisting" weight 40
+if Subject contains "fuck" weight 40
+if Subject contains "hardcore" weight 10
+if Subject contains "horny" weight 20
+if Subject contains "naughty" weight 10
+if Subject contains "naked" weight 20
+if Subject contains "porn " weight 40
+if Subject contains "pussy" weight 25
+if subject contains "pussies" weight 25
+if Subject contains "nude celeb" weight 50
+if Subject contains "sex" weight 10
+if Subject contains "slut" weight 40
+if Subject contains "sleaze" weight 20
+if Subject contains "whore" weight 50
+if Subject matches  "*/cXXX*" weight 30
+if subject has "f12ee" or subject has "fl2ee" weight 51
+if subject has "seks" or subject has "secks" weight 51
+if subject has "toon, toons" weight 30
+
+# Bogus diet/health/vanity stuff
+if Subject contains "fat blocker" weight 30
+if Subject contains "Liposuction" weight 30
+if Subject contains "Obesity" weight 30
+if Subject contains "Weight Loss" weight 50
+if Subject hasall "coral, calcium" weight 51
+if Content contains "medically proven" weight 40
+
+# Bulk e-mail Spam stuff
+if Subject matches "*million*addresses*" weight 50
+if Subject matches  "*bulk*email*" weight 50
+
+# Other sales stuff
+if Subject contains "below wholesale price" weight 30
+if Subject contains "buy wholesale" weight 30
+if Subject matches  "*cell*phone*" weight 30
+if Subject contains "descrambler" weight 30
+if Subject contains "dream vacation" weight 30
+if Subject matches "*earn*bonus*points*" weight 60
+if Subject contains "free gift" weight 30
+if Subject contains "get more hits" weight 50
+if Subject contains "increase sales" weight 30
+if Subject contains "INCREDIBLE SOFTWARE BARGAIN" weight 30
+if Subject contains "Internet Detective" weight 50
+if Subject contains "Internet Spy" weight 50
+if Subject contains "Life Insurance Quotes" weight 30
+if Subject contains "limited time offer" weight 50
+if Subject contains "mortgage rates" weight 30
+if Subject contains "need Life Insurance" weight 50
+if Subject contains "psychic reading" weight 50
+if Subject contains "site need more traffic" weight 50
+if Subject contains "stop smoking" weight 50
+if Subject matches  "*web*promotion service*" weight 50
+if Subject matches  "*save* on *" weight 30
+if Subject contains "No Fee!" weight 40
+if Subject contains "Paying Too Much" weight 40
+if Subject contains "Or Your Money Back" weight 40
+if Subject matches  "*/cFREE[E!*, ]*" weight 50
+if sender contains "vividnews" weight 50
+if sender contains "vividinsid" weight 50
+if sender contains "Bulkmail" weight 45
+if subject hasall "cable, descrambler" ob weight 51
+
+# Chinese Spam: note that users in China will almost certainly
+# have to disable these tests - they are intended solely for
+# Westerners who are inundated with rubbish originating from
+# within Mainland China and Taiwan.
+if header "Content-Type" contains "Big5" weight 45
+if header "Content-Type" contains "GB2312" weight 45
+
+# Check for URL using dotted-IP-address
+if body matches "*tp:??[0-9]+.[0-9]+.[0-9]+.*" weight 20
+
+# Match spam that claims not to be spam because it "adheres" to the
+# ridiculous 105C 1618 section 301 legislation.
+if body matches "*1618*section 301*" weight 51
+if body matches "*section 301*1618*" weight 51
+
+# Viral stuff - not intended to replace competent virus scanning,
+# but easy to do for a few of the most common cases
+if subject matches "*Snow*Seven*Dwar*REAL*story*" weight 51
+
+# Body matches - all the rules below this point test the message
+# body. This has more of an impact on the time it takes to process
+# the rule set than header processing does.
+
+# Check for body content suggesting unwanted "commercial services"
+if body contains "credit card debt" weight 50
+if body contains "credit card bills" weight 40
+if body contains "credit rating" weight 20
+if body contains "Accept Credit Car" weight 50
+if body contains "Accept Major Credit Car" weight 50
+if body contains "bad credit" weight 30
+if body contains "damaged credit" weight 30
+if body contains "your credit rating" weight 50
+if body contains "consolidate your debt" weight 50
+if body contains "entrepreneurial" weight 30
+if body contains "earn good money" weight 30
+if body contains "IRA Liberation Process" weight 70
+if body contains "financial freedom" weight 50
+if body contains "financial security" weight 40
+if body contains "stockwatch" weight 40
+if body contains "OTCBB:" weight 40
+if body contains "(Stock Symbol: " weight 40
+if body contains "refinance your home" weight 40
+if body matches  "*take control*your*financial future*" weight 40
+if body contains "venture capital" weight 40
+if body contains "investor insights" weight 50
+if body contains "forward looking statements" weight 50
+if body matches  "*section 27a*securities act of 1933*" weight 50
+if body matches  "*section 21b*securities exchange act of 1934*" weight 50
+if body contains "investment advice" weight 50
+if body contains "future marketing messages" weight 50
+if body contains "get out of debt" weight 50
+if body contains "outstanding debt" weight 40
+if body contains "low interest loan" weight 10
+if body contains "high interest rates" weight 10
+if body matches  "*income*from home*" weight 10
+if body matches  "*need*additional income*" weight 10
+if body contains "multilevel market" weight 10
+if body contains " lottery " weight 20
+if body contains " lotto " weight 20
+if body contains " jackpot " weight 20
+if body contains "pay you" weight 10
+if body contains "reduce your debt" weight 50
+if body contains "stop throwing your money away" weight 50
+if body contains "fire your boss" weight 50
+if body contains "work from home" weight 40
+if body contains "work at home" weight 20
+if body contains "you have nothing to lose" weight 30
+if body contains "you have nothing to loose" weight 30
+if body contains "should not be construed as an offer or solicitation to buy or sell any security" weight 88
+if body contains "not a solicitation or recommendation to buy" weight 88
+if body contains "not an offer to buy or sell securities" weight 88
+if body matches  "*highly speculative* risk*" weight 88
+if body hasall "Stephan, Ducharme" weight 51
+if body hasall "earning money, eBay" weight 51
+if body hasall "earn, extra, income" weight 51
+if body hasall "limited, time, only" weight 40
+if body contains "independent marketing" weight 25
+if body hasall "need, more, money, apply, grant"
+   weight 51 tag "Spurious Federal Grants guide"
+if body contains "to learn more about" weight 30
+if body matches "*must be*years*to*" weight 30
+if body contains "clickhere" ob weight 30
+if body matches "*/cGUARANTEED*" weight 20
+if body hasall "offer, lowest, rates" weight 20
+if body hasall "copy, dvd, movie" ob weight 40
+if body contains "is banned from" or body contains "is banned in" weight 15
+if body hasall "mortgage, dollars, loan" weight 25
+if body contains "private chat room" weight 25
+if body contains "video poker" weight 25
+if body contains "chance to win" weight 15
+if body matches "*/sbuy real estate*" weight 25
+if body contains "money machine" weight 25
+if body contains "government secur" weight 15
+if body hasall "copy, DVD, download" weight 30
+if body hasall "buy, sell, performing, debt" weight 30
+if body contains "make a fortune" weight 30
+if body contains "future mailings" weight 30
+if body contains "100 percent" weight 15
+if body contains "fuelsaverpro" ob weight 51 tag "Fuel saver spam"
+if body matches "*boost*gas*mileage*" weight 40 tag "Fuel saver spam"
+if body contains "youmustrespondby" ob
+   and body hasall "staff, students, computers" weight 51
+if body hasall "fortune, ebay" ob weight 40
+if body hasall "cable, descrambler" ob weight 51
+if content hasall "digital, cable" weight 25
+if content contains "digitalcablefilter" ob weight 30
+if body hasall "mini, radiocontrolled" ob weight 40
+if body hasall "refinance, mortgage" weight 40
+
+# Check for body content suggesting unwanted sexual "services"
+if body contains "adult entertainment" weight 20
+if body contains "adult web" weight 20
+if body contains "adult site" weight 20
+if body contains "barely legal*teens" weight 50
+if body contains " hardcore " weight 20
+if body contains "prefer girls" weight 40
+if body contains " naked " weight 10
+if body contains " unclothed " weight 10
+if body contains " nude " weight 20
+if body contains " ass " weight 10
+if body contains "improve sex" weight 30
+if body contains "pussy" weight 15
+if body contains "hugecock" ob weight 25
+if body contains "sexual experience" weight 40
+if body contains " erections" weight 10
+if body contains " sexlover" weight 50
+if body contains "sexual preferences" weight 20
+if body contains "* sexx+ *" weight 50
+if body contains " sexshows" weight 50
+if body contains " sex shows" weight 40
+if body contains " sleaze" weight 20
+if body contains "gangbang" or body contains "gang-bang" weight 40
+if body contains " titties" weight 20
+if body contains "adult video" weight 30
+if body hasall "adult, action, female" weight 40
+if body has "anal" weight 20
+if body contains "anal sex" weight 20
+if body has "bondage" weight 20
+if body has "horny" weight 20
+if body contains " fetish" weight 20
+if body has "fuck, fucked, fucking" weight 40 tag "The F word"
+if body has "cunt, cunts" weight 40 tag "The C word"
+if body contains " fisting" weight 40
+if body contains " cock " weight 20
+if body has "cum" weight 20
+if body has "cumm" weight 20
+if body contains " cummshot" weight 50
+if body contains " cumshot" weight 50
+if body has "rape, raped" weight 20
+if body contains "hot puss" weight 25
+if body contains "pussies" weight 25
+if body has "bitch" weight 15
+if body has "slut" weight 40
+if body has "whore" weight 40
+if body matches  "*/smust be*18*old/s*" weight 40
+if body contains "no minors allowed" weight 40
+if body matches  "*Hardcore/wPorno*" weight 111
+if body has "Porno" weight 40
+if body contains " sex software" weight 111
+if body contains " sexsoftware" weight 50
+if body contains "$$$$$$$$$$$$$" weight 51
+if body hasall "probably don't remember me, website" weight 51
+if body hasall "teen, cock, suck" weight 51
+if body hasall "free, day, trial" weight 30
+if body hasall "young, teen, video" weight 30
+if body hasall "young, teenage, video" weight 30
+if body hasall "porn, chick, pictures" weight 51
+if body has "toon, toons" weight 30
+if body hasall "XXX, free" weight 40
+if body contains "adult movie" weight 40
+if body matches "*found*your*profile*web*" weight 30
+if body matches "*seen your profile on*picture*" weight 51
+if body hasall "Paris, Hilton" ob and body contains "http:" weight 51
+
+# Check for deliberate misspellings of common "trigger" words - the
+# misspelling is a dead giveaway that the message is spam.
+if content contains "p0rn" weight 51
+if content contains "p@rn" weight 51
+if content contains "penís" weight 51
+if content contains "tenage" weight 30
+if content has "medic@tion, medic@l" weight 51
+if content matches "*/sph@rmacist*" weight 51
+if content matches "*/spharm@cist*" weight 51
+if content contains "rem0ve" weight 51
+if content contains "6uarantee" weight 51
+
+# Check for body content suggesting spurious diet/health stuff
+if body contains "Liposuction" weight 20
+if body has "Obesity" weight 10
+if body contains "stop smoking" weight 20
+if body contains "WeightLoss" ob weight 30
+if body contains "loseweight" ob weight 30
+if body contains "loose weight" weight 30
+if body contains "burning fat" weight 30
+if body contains "no hunger pains" weight 30
+if body contains "lose weight while you sleep" weight 30
+if body contains "health insurance" weight 25
+if body contains "medical premium" weight 25
+if body has "penile, ejaculation, sildenafil" weight 30
+if body contains "no doctor visit" or body contains "no doctor's visit" weight 30
+if body matches "/c*HGH*" weight 40
+if body hasall "sexual, enhancer" weight 40
+if body hasall "dietary, supplement" weight 15
+if body contains "online" and body has "prescription, pharmacies, pharmacy" weight 40
+if body contains "on-line" and body has "prescription, pharmacies, pharmacy" weight 40
+if subject matches "/c*HGH*"
+   and body hasall "human, growth, hormone" weight 51
+if body hasall "human, growth, hormone" weight 40
+if body hasall "coral, calcium" weight 51
+if body has "H?G?H" weight 51
+if body contains "H G H" weight 51
+if body contains "fat loss" weight 25
+if body contains "wrinkle reduction" weight 25
+if body contains "reverses aging" weight 25
+if body matches "*/senhance your sex*" weight 30
+if body has "colon" weight 20
+if body hasall "colon, cleanser" ob weight 31
+if body contains "productsworkbesttogether" ob weight 40
+if body contains "herbalsupplements" ob weight 40
+if body contains "enhancingoil" ob weight 40
+
+# Check the body for evidence of scams - in particular the ludicrous
+# "Nigerian funds transfer" scam.
+
+if body hasall "Nigeria, million, dollars, transfer"
+   weight 51 tag "Nigerian 419 Scam"
+if body hasall "Nigeria, million, dollars, invest"
+   weight 51 tag "Nigerian 419 Scam 2"
+if body hasall "Liberia, million, dollars, transfer"
+   weight 51 tag "Liberian 419 Scam"
+if body hasall "Angola, million, dollars, transfer"
+   weight 51 tag "Angolan 419 Scam"
+if body hasall "Africa, million, dollars, transfer"
+   weight 51 tag "Generic 419 Scam"
+if body hasall "Sese, Seko, million"
+   weight 51 tag "Sese Seko 419 Scam"
+if body hasall "Sese-Seko, million"
+   or body hasall "Sese-Seko, billion"
+   or body hasall "Sese-Seko, billions"
+   weight 51 tag "Sese Seko 419 Scam"
+if body hasall "Abacha, million"
+   weight 51 tag "Maryam Abacha 419 Scam"
+if body hasall "Sierra Leone, Coleman, million"
+   weight 51 tag "Sierra Leone 419 Scam"
+if body matches "*surprise*receive*know*personally*"
+   and body hasall "million, transfer"
+   weight 51 tag "Generic 419 Scam"
+if body hasall "confidence, confidential, 000, US$, contract"
+  weight 51 tag "Generic 419 Scam"
+if body hasall "million, US, confidential" ob
+  weight 40 tag "Possible 419 scam?"
+if body hasall "feelsorryfor, everyone, diesomeday, million" ob
+  weight 51 tag "Silly 419 sympathy scam"
+if body contains "endeavourtouseditfor" ob
+  weight 51 tag "Silly 419 sympathy scam #2"
+
+if body contains "Nigeria" weight 30
+if body contains "Federal Government of Nigeria" weight 999
+if body contains "Nigeria National Petroleum Corporation" weight 999
+if body contains "Bank of Nigeria" weight 40
+if body contains "Bank in Africa" weight 40
+if body contains "transfer to overseas" weight 40
+if body contains "time machine" and body contains "vortex generator" weight 999
+if body contains "promises for fear of facing a multimillion dollar class action suit" weight 999
+if body contains "Intel and AOL are now discussing a merger" weight 999
+if body contains "Microsoft will pay you" weight 999
+if body matches  "*(*Million United States Dollars)*" weight 999
+if body contains "South Africa Foreign Exchange" weight 999
+if body contains "arrangement and come to Johannesburg South Africa" weight 999
+
+# Check the body for suggestions that the message might be peddling
+# spam creation or distribution tools.
+if body contains "bulk e-mail" weight 30
+if body contains "bulk email" weight 30
+if body contains " bulkmail" weight 30
+if body contains "mass mailing service" weight 30
+if body contains "mass marketing" weight 30
+if body contains "mass messages" weight 30
+if body matches "*million*addresses*" weight 30
+if content contains "bulker" weight 51
+if body hasall "Email, marketing, inexpensive, promote, targeted" weight 40
+
+# Look in the body for a few addresses intimately associated with
+# spam or other unwanted marketing activities.
+if body contains "www.try-it-free.net" weight 50
+if body contains "www.lendlink.net" weight 50
+if body contains "www.safelockrecords.com" weight 50
+if body contains "www.overnightrx.com" weight 50
+if body contains "usavemore.k666.com" weight 50
+if body contains "chicago20s.com" weight 50
+if body contains "hudsonleickfan.com" weight 50
+if body contains "good-insurance-rates.com" weight 50
+if body contains "0mbra.com" weight 50
+if body contains "www.geheime-seite.da.ru" weight 90
+if body contains "dirtcheapdomain.com" weight 50
+if body contains "kiss.com" weight 50
+if body contains "edirectnetwork.net" weight 50
+if body contains "37500hits4u.com" weight 50
+if body contains "emailhello.com" weight 50
+if body contains "bestcheapstuff.com" weight 50
+if body contains "classmates.com" weight 50
+if body contains "elucky-casino.com" weight 50
+if body contains "israeliconnections.com" weight 50
+if body contains "asiawholesalers.com" weight 50
+if body contains "naturaldepot.com" weight 50
+if body contains "swapselltrade.com" weight 50
+
+# Other Sales stuff
+if body contains "money-back guarantee" weight 40
+if body contains "money back guarantee" weight 40
+if body contains "no credit check" weight 50
+if body matches  "*make more money*web*" weight 40
+if body matches  "*f +r +e +e*" weight 50
+if body contains "absolutely free" weight 20
+if body contains "descrambler" weight 30
+if body contains "free DVD trial" weight 50
+if body contains "eValueMarketing" weight 66
+if body contains "get more hits" weight 20
+if body contains "limited time offer" weight 30
+if body contains "increase sales" weight 10
+if body contains "INCREDIBLE SOFTWARE BARGAIN" weight 20
+if body contains "Internet Detective" weight 50
+if body contains "Internet marketing" weight 50
+if body contains "Internet Spy" weight 50
+if body contains "No Credit Check" weight 30
+if body contains "no obligation" weight 30
+if body contains "no obligation quote" weight 30
+if body contains "free quote" weight 30
+if body contains "pay-per-view" weight 30
+if body contains "new home loan" weight 30
+if body matches  "*refinance*home loan*" weight 30
+if body contains "paying more than" and body contains "mortgage" weight 40
+if body contains "save up to" weight 10
+if body contains "site need more traffic" weight 50
+if body contains "term life insurance" weight 40
+if body contains "free online quote" weight 40
+if body contains "buy term life insurance" weight 40
+if body matches  "*web*promotion service*" weight 50
+if body contains "satisfaction guarantee" weight 10
+if body contains "your money back" weight 20
+if body hasall "click/Where, protect your computer" weight 40
+if body matches "*receive*mail*only*once*" weight 40
+if body contains "paying too much" or body contains "pay too much" weight 30
+if body contains "100% Free" weight 40
+if body contains "1oo% Free" weight 51
+if body hasall "casino, sportsbook" weight 51
+if body contains "100% legal" weight 51
+if body has "lender, lenders" and body hasall "compete, loan" weight 30
+if body hasall "mortgage, lender, compete, business" weight 51
+if body hasall "discovered, website, mortgage" weight 51
+if body matches "*/cJOIN/WFOR/WFREE*" weight 51
+if body contains "diploma"
+   and body has "non-accredited, university" weight 51
+if body contains "make money on the web" weight 40
+if body contains "make money on" weight 20
+if body contains "want to make money" weight 20
+if body has "/cFREE" weight 20
+
+# Check for certain key words and phrases commonly found in promotional spam
+if body matches "*you*been chosen to receive*" weight 51
+if body contains "the previous was an advertisement" weight 51
+if body matches  "*not wish to receive*e-mail*promotion*" weight 51
+if body contains "this is not a solicitation" weight 30
+if body contains "to be removed from" weight 21
+if body contains "to remove yourself from" weight 21
+if body contains " opt-in" weight 21
+if body contains " opt-out" weight 21
+if body contains "opt out" weight 21
+if body contains " optout" weight 21
+if body has "opted/Win" weight 40
+if body has "opted/Win" and body contains "affiliate" weight 51
+if body matches "*This*may*recurring mailing*" weight 51
+if body matches  "*is a one*time*mail*" weight 40
+if body contains "No request for removal is necessary" weight 99
+if body hasall "cannot be considered spam, removal" weight 51
+if body matches  "*1618*Title III*105th US Congress*" weight 51
+if body matches  "*This is not*spam*was sent to you because*" weight 99
+if body hasall "click here, unsubscribe" weight 30
+if body matches "*was sent*because*not*wish*receive*" weight 40
+if body hasall "opportunity, change, life, forever, earn, free" weight 30
+if body matches "*no longer*receive*offer*mail*" weight 40
+if body has "partner/Wsite" or body has "partner/Wsites" weight 30
+if body matches "*your*privacy*important to us*" weight 40
+if body matches "*This is not*!*is a friendly*" weight 40
+if body has "clickheretoenter" ob weight 40
+if body contains "enter here" weight 30
+
+# Viral stuff - not intended to replace competent virus scanning,
+# but easy to do for a few of the most common cases
+if body matches "*You*I send this to you*advice*" weight 51
+if body matches "*This*mail*never sent unsolicited*" weight 51
+if body matches "*attached*product*part*official*campaign*popularity*" weight 51
+

@@ -1,0 +1,15 @@
+\xampp\perl\site\lib\OLE.pm
+\xampp\perl\site\lib\Win32\OLE.pm
+\xampp\perl\site\lib\Win32\OLE\Const.pm
+\xampp\perl\site\lib\Win32\OLE\Enum.pm
+\xampp\perl\site\lib\Win32\OLE\Lite.pm
+\xampp\perl\site\lib\Win32\OLE\NEWS.pod
+\xampp\perl\site\lib\Win32\OLE\NLS.pm
+\xampp\perl\site\lib\Win32\OLE\TPJ.pod
+\xampp\perl\site\lib\Win32\OLE\TypeInfo.pm
+\xampp\perl\site\lib\Win32\OLE\Variant.pm
+\xampp\perl\site\lib\auto\Win32\OLE\OLE.bs
+\xampp\perl\site\lib\auto\Win32\OLE\OLE.dll
+\xampp\perl\site\lib\auto\Win32\OLE\OLE.exp
+\xampp\perl\site\lib\auto\Win32\OLE\OLE.lib
+\xampp\perl\site\lib\auto\Win32\OLE\OLE.pdb

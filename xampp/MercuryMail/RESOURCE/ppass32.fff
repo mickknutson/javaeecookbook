@@ -1,0 +1,66 @@
+;
+; Form Fact File for the sample Pegasus Mail 32-bit PopPass extension
+; Pegasus Mail System, Copyright 1990-99 David Harris, all rights reserved.
+;
+; FFFs are examined by Pegasus Mail at startup and are used to determine
+; what forms resources are available to users. WinPMail scans the following
+; locations when looking for FFFs -
+;
+;    * The user's home mailbox
+;    * The base directory (ie, where WINPMAIL.EXE resides)
+;    * If present, the directory indicated by an FFF environment variable.
+;
+; An FFF may contain definitions for as many forms as you wish - in general
+; terms, system-wide FFFs are best defined in a single file since this will
+; speed the startup of the program, but the ability to have multiple FFFs
+; can make for much simpler installation of new forms.
+;
+; -------------------------------------------------------------------------
+; WARNING -- WARNING -- WARNING -- WARNING -- WARNING -- WARNING -- WARNING
+; -------------------------------------------------------------------------
+; WinPMail forms are executable code! You should never load forms onto your
+; system unless you are absolutely certain of their pedigree, because they
+; are a perfect vehicle for trojan horses.
+; -------------------------------------------------------------------------
+;
+; The following keywords are recognized in this file:
+;
+; "Form name"      - The name which should appear in the form selector list
+; "Form DLL"       - Full path to the DLL containing the form's code
+; "Form type"      - Either COMPOSER or READER
+; "Form flags"     - A bitmap value - see below
+; "Form tagname"   - Form's registered tagname written into outgoing mail
+; "Form data"      - Any custom data required by the form
+; "End"            - End of definition - add the form to the form list.
+;
+; "Form triggers"  - only valid for READERS - what should activate the form
+;
+; "Form flags" is a bitmap composed of the following bits:
+;
+;  Mnemonic     Value   Meaning
+;  ----------------------------------------------------------------
+;  WPM_STARTUP    1     Load the extension when WinPMail starts up
+;  WPM_NOLIST     2     Do not show in the "Extensions" window list
+;  WPM_HIDDEN     4     Hide the parent MDI window on loading
+;  WPM_LOGGING    8     Extension wants to receive logging events
+;  WPM_ONEONLY   16     Only allow one running instance at any time
+;  WPM_USES_TCP  64     Extension requires TCP/IP services to run
+;
+;  Various flags can be combined by adding (or ORing) the values
+;  together - so to have a hidden extension which loads at startup,
+;  is interested in logging events, and does not appear in the
+;  "Extensions" window, you would use 1 + 2 + 4 + 8 = 15
+;
+
+Form name = "Change POP3 password"
+32-bit model = 1
+Form DLL = ~a\PPASS32.DLL
+Form type = COMPOSER
+Form flags = 80
+Form tagname = "PM-POPPASS"
+
+; You can enter a default server port in the "Form Data" field
+
+Form data = "106"
+End
+

@@ -1,0 +1,52 @@
+Changing the SMTP greeting issued by MercuryS
+---------------------------------------------
+
+When an incoming connection is received by the MercuryS SMTP server,
+the first thing MercuryS does is issue a "greeting". This greeting
+typically looks like this:
+
+--------- cut here --------------
+220 somehost.somedomain.com Mercury/32 v3.21 ESMTP server ready.
+--------- cut here --------------
+
+The server then waits for the client to introduce itself and start
+a mail transaction.
+
+Recent suggested law changes in the U.S.A. and other countries may
+make it desirable to be able to change the "greeting" issued by
+MercuryS on connection, typically to indicate that certain types of
+mail may not be welcome.
+
+To change the MercuryS greeting, create a text file called
+GREETING.MER in the directory where MERCURY.EXE is installed. This
+file should contain the text you want MercuryS to display, and must
+be no longer than 512 characters.
+
+We recommend the following text as a starting point:
+
+--------- cut here --------------
+Use of this server for unauthorised relaying of mail is forbidden.
+Unsolicited Commercial E-mail ("spam") is NOT WELCOME HERE.
+--------- cut here --------------
+
+If you were to use this text in your GREETING.MER file, then the
+opening message displayed by MercuryS would look like this:
+
+--------- cut here --------------
+220-somehost.somedomain.com Mercury/32 v3.21 ESMTP server ready.
+220-Use of this server for unauthorised relaying of mail is forbidden.
+220 Unsolicited Commercial E-mail ("spam") is NOT WELCOME HERE.
+--------- cut here --------------
+
+MercuryS automatically adds the SMTP response codes and continuation
+characters correctly.
+
+Using an "extended greeting" in this way *may* on rare occasions
+create problems with some older mail clients that cannot handle
+multi-line greetings. We recommend that you experiment with the
+feature for a while to make sure no mail interruption is occurring
+before you fix it in place.
+
+Remember, you cannot have more than 512 characters of data in your
+GREETING.MER file.
+

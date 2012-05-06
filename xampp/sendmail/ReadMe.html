@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>fake sendmail for windows</title>
+<style>
+  body {
+    background-color: #ffffff;
+  }
+  pre {
+    font-size: 11px;
+    line-height: 14px;
+    font-family: Andale Mono, monospace;
+  }
+  .head {
+    color: #cc6666;
+    font-weight: bold;
+  }
+  .sub {
+    color: #cc6666;
+  }
+  a {
+    text-decoration: none;
+  }
+</style>
+</head>
+
+<body bgcolor="#ffffff" link="#1084d0" text="#555555" vlink="#1084d0">
+
+<pre><span class="head">fake sendmail for bugzilla/windows</span>
+
+  glob.com.au/sendmail
+  sendmail@glob.com.au
+
+<span class="sub">about</span>
+
+  sendmail.exe is a simple windows console application that emulates sendmail's
+  "-t" option to deliver emails piped via stdin.
+
+  it is intended to ease running unix code that has /usr/lib/sendmail hardcoded
+  as an email delivery means.
+
+  it doesn't support deferred delivery, and requires an smtp server to perform
+  the actual delivery of the messages.
+
+<span class="sub">install</span>
+
+  (1) <a href="http://www.glob.com.au/sendmail/sendmail.zip">download sendmail.zip</a> 
+
+  (2) copy sendmail.exe and sendmail.ini to \usr\lib on the drive where the
+      unix application is installed.
+
+      eg.  if your application is installed in c:\bugzilla, sendmail.exe and
+      sendmail.ini need to be copied to c:\usr\lib\sendmail.exe and
+      c:\usr\lib\sendmail.ini
+
+  (3) configure smtp server and default domain in sendmail.ini
+
+<span class="sub">license and source</span>
+
+  this program is released under the <a href="license.txt">bsd license</a>.
+
+  the license details and full source (delphi 2007) are included in the zip.
+
+<span class="sub">version history</span>
+
+  version 24
+    - fixes for ssl
+
+  version 23
+    - fix timezone in date header
+
+  version 22
+    - fixes to error handling
+
+  version 21
+    - added TLS support
+
+  version 20
+    - fixed race condition in IIS's pickup delivery
+
+  version 19
+    - added support for delivery via IIS's pickup directory
+    - optionally reads settings from the registry (in absense of the ini file)
+
+  version 18
+    - fix for indy 10 "range check error"
+
+  version 17
+    - only process message header
+    - optionally use madexcept for detailed crash dumps
+
+  version 16
+    - send hostname and domain with HELO/EHLO
+    - configurable HELO/EHLO hostname
+    - upgraded to indy 10
+
+  version 15
+    - fixes error messages when debug_logfile is not specified
+
+  version 14
+    - errors output to STDERR
+    - fixes for delphi 7 compilation
+    - added 'connecting to..' debug logging
+    - reworked error and debug log format
+
+  version 13
+    - added fix to work around invalid multiple header instances
+
+  version 12
+    - added cc and bcc support
+
+  version 11
+    - added pop3 support (for pop before smtp authentication)
+
+  version 10
+    - added support for specifying a different smtp port
+
+  version 9
+    - added force_sender
+
+  version 8
+    - *really* fixes broken smtp auth
+
+  version 7
+    - fixes broken smtp auth
+
+  version 6
+    - correctly quotes MAIL FROM and RCPT TO addresses in &lt;&gt;
+
+  version 5
+    - now sends the message unchanged (rather than getting indy
+      to regenerate it)
+
+  version 4
+    - added debug_logfile parameter
+    - improved error messages
+
+  version 3
+    - smtp authentication support
+    - clearer error message when missing from or to address
+    - optional error logging
+    - adds date: if missing
+
+  version 2
+    - reads default domain from registry (.ini setting overrides)
+
+  version 1
+    - initial release
+
+</pre>
+
+</body>
+</html>

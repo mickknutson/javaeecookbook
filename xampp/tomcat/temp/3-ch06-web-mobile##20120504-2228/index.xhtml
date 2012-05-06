@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+
+    <ui:define name="title">Java EE6 Cookbook: Web Mobile (jQuery)</ui:define>
+
+    <ui:define name="content">
+
+        <form id="form1">
+
+            <div id="volumeDiv" data-role="fieldcontain">
+                <label for="volume">Drink Size (volume in oz)*</label>
+                <input id="volume" name="volume_r" type="text"/>
+            </div>
+
+            <div id="abvDiv" data-role="fieldcontain">
+                <label for="abv" id="abvLabel">Alcohol Content (%)*</label>
+                <input id="abv" name="abv_r" type="text"/>
+            </div>
+
+            <div id="priceDiv" data-role="fieldcontain">
+                <label for="price">Price ($)*</label>
+                <input id="price" name="price_r" type="text"/>
+            </div>
+
+            <div id="submitDiv" data-role="fieldcontain">
+                <input type="submit" value="Find Price per alcolhol by volume" data-inline="true"/>
+            </div>
+        </form>
+    </ui:define>
+
+</ui:composition>
+</html>

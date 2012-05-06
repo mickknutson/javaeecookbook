@@ -1,0 +1,49 @@
+<html>
+<body>
+<pre>
+<h1>Erstellungsprotokoll</h1>
+<h3>
+--------------------Konfiguration: xampp_control - Win32 Release--------------------
+</h3>
+<h3>Befehlszeilen</h3>
+Creating command line "rc.exe /l 0xc09 /fo"Release/XAMPP.res" /d "NDEBUG" "G:\xampp-dev\xampp-usb-lite\src\xampp-control-panel\XAMPP.RC"" 
+Erstellen der temporären Datei  "c:\temp\RSP5E.tmp" mit Inhalten
+[
+/nologo /ML /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Release/xampp_control.pch" /YX /Fo"Release/" /Fd"Release/" /FD /c 
+"G:\xampp-dev\xampp-usb-lite\src\xampp-control-panel\XAMPP.C"
+]
+Creating command line "cl.exe @c:\temp\RSP5E.tmp" 
+Erstellen der temporären Datei  "c:\temp\RSP5F.tmp" mit Inhalten
+[
+kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib comctl32.lib /nologo /subsystem:windows /incremental:no /pdb:"Release/xampp_control.pdb" /machine:I386 /out:"Release/xampp_control.exe" 
+".\Release\XAMPP.OBJ"
+".\Release\XAMPP.res"
+]
+Erstellen der Befehlzeile "link.exe @c:\temp\RSP5F.tmp"
+<h3>Ausgabefenster</h3>
+Ressourcen werden kompiliert...
+Kompilierung läuft...
+XAMPP.C
+Linker-Vorgang läuft...
+Erstellen der temporären Datei  "c:\temp\RSP61.bat" mit Inhalten
+[
+@echo off
+copy release\xampp_control.exe C:\xampp1\xampp\xampp.exe
+copy release\xampp_control.exe C:\xampp2\xampp\xampp.exe
+copy release\xampp_control.exe xampp.exe
+]
+Erstellen der Befehlzeile "c:\temp\RSP61.bat"
+
+Das System kann den angegebenen Pfad nicht finden.
+        0 Datei(en) kopiert.
+Das System kann den angegebenen Pfad nicht finden.
+        0 Datei(en) kopiert.
+        1 Datei(en) kopiert.
+
+
+
+<h3>Ergebnisse</h3>
+xampp_control.exe - 0 Fehler, 0 Warnung(en)
+</pre>
+</body>
+</html>

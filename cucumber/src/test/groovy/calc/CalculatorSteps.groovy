@@ -1,6 +1,7 @@
 package calc
 
 import calc.Calculator
+import java.util.logging.Logger
 
 this.metaClass.mixin(cucumber.runtime.groovy.Hooks)
 this.metaClass.mixin(cucumber.runtime.groovy.EN)
@@ -12,11 +13,16 @@ class CustomWorld {
 }
 
 World {
+
+    def log
+    World() {
+        log=Logger.getLogger(this.class.name)
+    }
     new CustomWorld()
 }
 
 Before() {
-    assert "foo" == customMethod()
+    //assert "foo" == customMethod()
     calc = new Calculator()
 }
 
@@ -37,6 +43,8 @@ Given(~"(\\d+) into the") {->
 }
 
 When(~"I press (\\w+)") { String opname ->
+    System.out.println("----->CalculatorSteps System.out.println");
+    println("----->CalculatorSteps println");
     result = calc."$opname"()
 }
 

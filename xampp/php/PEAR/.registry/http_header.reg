@@ -1,0 +1,57 @@
+a:18:{s:8:"provides";a:25:{s:17:"class;HTTP_Header";a:4:{s:4:"type";s:5:"class";s:4:"name";s:11:"HTTP_Header";s:7:"extends";s:4:"HTTP";s:8:"explicit";b:1;}s:36:"function;HTTP_Header::setHttpVersion";a:3:{s:4:"type";s:8:"function";s:4:"name";s:27:"HTTP_Header::setHttpVersion";s:8:"explicit";b:1;}s:36:"function;HTTP_Header::getHttpVersion";a:3:{s:4:"type";s:8:"function";s:4:"name";s:27:"HTTP_Header::getHttpVersion";s:8:"explicit";b:1;}s:31:"function;HTTP_Header::setHeader";a:3:{s:4:"type";s:8:"function";s:4:"name";s:22:"HTTP_Header::setHeader";s:8:"explicit";b:1;}s:31:"function;HTTP_Header::getHeader";a:3:{s:4:"type";s:8:"function";s:4:"name";s:22:"HTTP_Header::getHeader";s:8:"explicit";b:1;}s:33:"function;HTTP_Header::sendHeaders";a:3:{s:4:"type";s:8:"function";s:4:"name";s:24:"HTTP_Header::sendHeaders";s:8:"explicit";b:1;}s:36:"function;HTTP_Header::sendStatusCode";a:3:{s:4:"type";s:8:"function";s:4:"name";s:27:"HTTP_Header::sendStatusCode";s:8:"explicit";b:1;}s:37:"function;HTTP_Header::dateToTimestamp";a:3:{s:4:"type";s:8:"function";s:4:"name";s:28:"HTTP_Header::dateToTimestamp";s:8:"explicit";b:1;}s:30:"function;HTTP_Header::redirect";a:3:{s:4:"type";s:8:"function";s:4:"name";s:21:"HTTP_Header::redirect";s:8:"explicit";b:1;}s:35:"function;HTTP_Header::getStatusType";a:3:{s:4:"type";s:8:"function";s:4:"name";s:26:"HTTP_Header::getStatusType";s:8:"explicit";b:1;}s:35:"function;HTTP_Header::getStatusText";a:3:{s:4:"type";s:8:"function";s:4:"name";s:26:"HTTP_Header::getStatusText";s:8:"explicit";b:1;}s:37:"function;HTTP_Header::isInformational";a:3:{s:4:"type";s:8:"function";s:4:"name";s:28:"HTTP_Header::isInformational";s:8:"explicit";b:1;}s:34:"function;HTTP_Header::isSuccessful";a:3:{s:4:"type";s:8:"function";s:4:"name";s:25:"HTTP_Header::isSuccessful";s:8:"explicit";b:1;}s:32:"function;HTTP_Header::isRedirect";a:3:{s:4:"type";s:8:"function";s:4:"name";s:23:"HTTP_Header::isRedirect";s:8:"explicit";b:1;}s:35:"function;HTTP_Header::isClientError";a:3:{s:4:"type";s:8:"function";s:4:"name";s:26:"HTTP_Header::isClientError";s:8:"explicit";b:1;}s:35:"function;HTTP_Header::isServerError";a:3:{s:4:"type";s:8:"function";s:4:"name";s:26:"HTTP_Header::isServerError";s:8:"explicit";b:1;}s:29:"function;HTTP_Header::isError";a:3:{s:4:"type";s:8:"function";s:4:"name";s:20:"HTTP_Header::isError";s:8:"explicit";b:1;}s:23:"class;HTTP_Header_Cache";a:4:{s:4:"type";s:5:"class";s:4:"name";s:17:"HTTP_Header_Cache";s:7:"extends";s:11:"HTTP_Header";s:8:"explicit";b:1;}s:41:"function;HTTP_Header_Cache::getCacheStart";a:3:{s:4:"type";s:8:"function";s:4:"name";s:32:"HTTP_Header_Cache::getCacheStart";s:8:"explicit";b:1;}s:39:"function;HTTP_Header_Cache::isOlderThan";a:3:{s:4:"type";s:8:"function";s:4:"name";s:30:"HTTP_Header_Cache::isOlderThan";s:8:"explicit";b:1;}s:36:"function;HTTP_Header_Cache::isCached";a:3:{s:4:"type";s:8:"function";s:4:"name";s:27:"HTTP_Header_Cache::isCached";s:8:"explicit";b:1;}s:34:"function;HTTP_Header_Cache::isPost";a:3:{s:4:"type";s:8:"function";s:4:"name";s:25:"HTTP_Header_Cache::isPost";s:8:"explicit";b:1;}s:40:"function;HTTP_Header_Cache::exitIfCached";a:3:{s:4:"type";s:8:"function";s:4:"name";s:31:"HTTP_Header_Cache::exitIfCached";s:8:"explicit";b:1;}s:38:"function;HTTP_Header_Cache::exitCached";a:3:{s:4:"type";s:8:"function";s:4:"name";s:29:"HTTP_Header_Cache::exitCached";s:8:"explicit";b:1;}s:43:"function;HTTP_Header_Cache::setLastModified";a:3:{s:4:"type";s:8:"function";s:4:"name";s:34:"HTTP_Header_Cache::setLastModified";s:8:"explicit";b:1;}}s:8:"filelist";a:8:{s:10:"Header.php";a:4:{s:4:"role";s:3:"php";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"e6e473949179eb92de42b2dd4f625b83";s:12:"installed_as";s:27:"C:\php\pear\HTTP\Header.php";}s:16:"Header/Cache.php";a:4:{s:4:"role";s:3:"php";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"7079f794416b1b8d5fdb740740c4e762";s:12:"installed_as";s:33:"C:\php\pear\HTTP\Header\Cache.php";}s:7:"LICENSE";a:4:{s:4:"role";s:3:"doc";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"df0dcbc9c5b63da81d6d36a269b3c5d2";s:12:"installed_as";s:37:"C:\php5\pear\docs\HTTP_Header\LICENSE";}s:18:"tests/response.php";a:5:{s:4:"role";s:4:"test";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"1e9be453ad96394789355d497e530653";s:10:"install-as";s:12:"response.php";s:12:"installed_as";s:43:"C:\php5\pear\tests\HTTP_Header\response.php";}s:23:"tests/cacheresponse.php";a:5:{s:4:"role";s:4:"test";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"294999a5c46136b0e7a4e2bf0f43779b";s:10:"install-as";s:17:"cacheresponse.php";s:12:"installed_as";s:48:"C:\php5\pear\tests\HTTP_Header\cacheresponse.php";}s:16:"tests/header.php";a:5:{s:4:"role";s:4:"test";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"dd2d7baa7bf79463f7b6d071ae600de3";s:10:"install-as";s:10:"header.php";s:12:"installed_as";s:41:"C:\php5\pear\tests\HTTP_Header\header.php";}s:22:"tests/header_cache.php";a:5:{s:4:"role";s:4:"test";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"387d18c59247c881cb96ec3da21c12db";s:10:"install-as";s:16:"header_cache.php";s:12:"installed_as";s:47:"C:\php5\pear\tests\HTTP_Header\header_cache.php";}s:16:"tests/README.txt";a:5:{s:4:"role";s:4:"test";s:14:"baseinstalldir";s:4:"HTTP";s:6:"md5sum";s:32:"57674de284cab179a509e6e8b67433ab";s:10:"install-as";s:10:"README.txt";s:12:"installed_as";s:41:"C:\php5\pear\tests\HTTP_Header\README.txt";}}s:10:"xsdversion";s:3:"1.0";s:15:"packagerversion";s:5:"1.4.3";s:7:"package";s:11:"HTTP_Header";s:7:"summary";s:64:"OO interface to modify and handle HTTP headers and status codes.";s:11:"description";s:163:"This class provides methods to set/modify HTTP headers 
+and status codes including an HTTP caching facility.
+It also provides methods for checking Status types.
+ 
+";s:11:"maintainers";a:3:{i:0;a:4:{s:6:"handle";s:4:"cain";s:4:"name";s:16:"Wolfram Kriesing";s:5:"email";s:19:"wolfram@kriesing.de";s:4:"role";s:4:"lead";}i:1;a:4:{s:6:"handle";s:5:"davey";s:4:"name";s:12:"Davey Shafik";s:5:"email";s:13:"davey@php.net";s:4:"role";s:4:"lead";}i:2;a:4:{s:6:"handle";s:4:"mike";s:4:"name";s:15:"Michael Wallner";s:5:"email";s:12:"mike@php.net";s:4:"role";s:4:"lead";}}s:7:"version";s:5:"1.2.0";s:12:"release_date";s:10:"2005-11-14";s:15:"release_license";s:12:"BSD, revised";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:90:"* Fixed Bug #5830 - only variables can be passed by reference
+* Changed license to BSD
+  
+";s:12:"release_deps";a:3:{i:1;a:4:{s:4:"type";s:3:"pkg";s:3:"rel";s:2:"ge";s:7:"version";s:5:"1.3.1";s:4:"name";s:4:"HTTP";}i:2;a:3:{s:4:"type";s:3:"pkg";s:3:"rel";s:3:"has";s:4:"name";s:4:"PEAR";}i:3;a:3:{s:4:"type";s:3:"php";s:3:"rel";s:2:"ge";s:7:"version";s:5:"4.2.0";}}s:9:"changelog";a:16:{i:0;a:5:{s:7:"version";s:5:"1.1.2";s:12:"release_date";s:10:"2005-07-18";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:55:"* Fixed Bug #4338 - Typos in HTTP status messages
+    
+";}i:1;a:5:{s:7:"version";s:5:"1.1.1";s:12:"release_date";s:10:"2004-11-10";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:44:"* POST requests should *NOT* be cached
+    
+";}i:2;a:5:{s:7:"version";s:5:"1.1.0";s:12:"release_date";s:10:"2004-08-05";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:37:"+ Support for Internet Explorer
+    
+";}i:3;a:5:{s:7:"version";s:5:"1.0.2";s:12:"release_date";s:10:"2004-08-05";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:23:"* Fixed Bug #2063
+    
+";}i:4;a:5:{s:7:"version";s:5:"1.0.1";s:12:"release_date";s:10:"2004-08-04";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:158:"* Don't append a question mark to redirection urls which have no query string
+* Fixed Header_Cache::isOlderThan() and Header_Cache::isCached() (finally)
+    
+";}i:5;a:5:{s:7:"version";s:5:"1.0.0";s:12:"release_date";s:10:"2004-07-21";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:192:"* Call parent constructor in HTTP_Header_Cache
+* Fixed Bug in HTTP_Header_Cache::isCached()
+* Fixed Bug #1908 (added optional parameter $session to redirect())
++ Added PHPUnit test cases
+    
+";}i:6;a:5:{s:7:"version";s:8:"1.0.0RC1";s:12:"release_date";s:10:"2004-07-02";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:51:"* First Release Candidate for stable release.
+    
+";}i:7;a:5:{s:7:"version";s:5:"0.3.0";s:12:"release_date";s:10:"2004-06-12";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:84:"* refactored HTTP_Header_Cache
+* fixed typos in HTTP_Header::dateToTimestamp()
+    
+";}i:8;a:5:{s:7:"version";s:5:"0.2.0";s:12:"release_date";s:10:"2004-06-09";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:168:"* honor actual HTTP version
+* added accessors to HTTP version
+* check if headers were alread sent
+* marked dateToTimestamp() as deprecated
+* general code clean up
+    
+";}i:9;a:5:{s:7:"version";s:5:"0.1.6";s:12:"release_date";s:10:"2003-12-28";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:129:"* Fixed Errors in sendStatusCode
+* Fixed all HTTP_Header::isError (and similar) methods
+* Fixed HTTP_Header::sendStatusCode
+    
+";}i:10;a:5:{s:7:"version";s:5:"0.1.5";s:12:"release_date";s:10:"2003-12-09";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:298:"* fix in redirect(), when parameter was added, it was always added with ?para=value, 
+instead of checking if there was already a param
+* added quite some methods by Davey Shafik
+* changed HTTP_HEADER_STATUS_* content by Davey Shafik
+* added getStatusType() and getStatusText() by Davey Shafik
+    
+";}i:11;a:5:{s:7:"version";s:5:"0.1.4";s:12:"release_date";s:10:"2003-09-19";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:85:"* redirect sends session id by default when trans_sid=1, behaviour has changed!
+    
+";}i:12;a:5:{s:7:"version";s:5:"0.1.3";s:12:"release_date";s:10:"2003-03-31";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:61:"* fixed dateToTimestamp() to retrieve proper cache date
+    
+";}i:13;a:5:{s:7:"version";s:5:"0.1.2";s:12:"release_date";s:10:"2003-03-10";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:4:"beta";s:13:"release_notes";s:122:"* if redirect has no params given, redirect to PHP_SELF
+* Cache::exitIfCached() returns false if isCached() is false
+    
+";}i:14;a:5:{s:7:"version";s:5:"0.1.1";s:12:"release_date";s:10:"2003-01-27";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:5:"alpha";s:13:"release_notes";s:119:"- added redirect, which takes care of additional GET vars too
+- added all HTTP1.1 code (thanks to Patrick O'Lone)
+    
+";}i:15;a:5:{s:7:"version";s:3:"0.1";s:12:"release_date";s:10:"2003-01-17";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:5:"alpha";s:13:"release_notes";s:31:"- initial release in PEAR
+    
+";}}s:12:"_lastversion";N;s:7:"dirtree";a:4:{s:16:"C:\php\pear\HTTP";b:1;s:23:"C:\php\pear\HTTP\Header";b:1;s:29:"C:\php5\pear\docs\HTTP_Header";b:1;s:30:"C:\php5\pear\tests\HTTP_Header";b:1;}s:13:"_lastmodified";i:1229943987;}

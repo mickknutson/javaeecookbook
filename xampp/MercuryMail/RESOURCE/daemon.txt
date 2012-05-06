@@ -1,0 +1,2478 @@
+-----------------------------------------------------------------------
+ Mercury Daemon Interface for Mercury/32 v2.21 and later
+-----------------------------------------------------------------------
+ Mercury Mail Transport System,
+ Copyright (c) 1993-99, David Harris, All Rights Reserved.
+-----------------------------------------------------------------------
+
+
+Contents
+
+1: Introduction
+   1.1 - What is a Daemon?
+   1.2 - What uses could I have for a Daemon?
+
+2: Technical overview
+   2.1 - Basic structure of a Daemon
+   2.2 - What do I need to write a Daemon?
+   2.3 - Installing and invoking a Daemon
+
+3: Using the Mercury interface
+   3.1 - Including header files
+   3.2 - The M_INTERFACE structure
+   3.3 - Calling functions
+
+4: Advanced topics
+   4.1 - DAEMON.INI
+   4.2 - "Resident" Daemons
+   4.3 - "Global" Daemons
+   4.4 - Daemon configuration
+   4.5 - Daemon Domains
+
+5: Function reference
+   5.1 - General-purpose functions
+     get_variable
+     is_local_address
+     is_group
+     parse_address
+     extract_one_address
+     extract_cqtext
+     dlist_info
+     send_notification
+     get_delivery_path
+     get_date_and_time
+     write_profile
+     module_state
+
+   5.2 - Job-control and management functions
+     ji_scan_first_job
+     ji_scan_next_job
+     ji_end_scan
+     ji_open_job
+     ji_close_job
+     ji_rewind_job
+     ji_dispose_job
+     ji_process_job
+     ji_delete_job
+     ji_abort_job
+     ji_get_job_info
+     ji_create_job
+     ji_add_element
+     ji_add_data
+     ji_get_data
+     ji_get_next_element
+     ji_set_element_status
+     ji_set_element_resolvinfo
+     ji_set_diagnostics
+     ji_get_diagnostics
+     ji_increment_time
+     ji_get_job_by_id
+     ji_get_job_times
+
+   5.3 - Network and user database query functions
+     get_first_group_member
+     get_next_group_member
+     end_group_scan
+     is_valid_local_user
+     is_group_member
+     get_first_user_details
+     get_next_user_details
+     get_user_details
+     end_user_scan
+     read_pmprop
+     change_ownership
+     begin_single_delivery
+     end_single_delivery
+     create_object
+     verify_password
+     set_password
+
+   5.4 - Miscellaneous functions
+     mercury_command
+     get_date_string
+     rfc822_time
+     rfc821_time
+     select_printer
+     print_file
+
+   5.5 - File I/O and parsing routines
+     fm_open_file
+     fm_open_message
+     fm_close_message
+     fm_gets
+     fm_getc
+     fm_ungetc
+     fm_read
+     fm_getpos
+     fm_setpos
+     fm_get_folded_line
+     fm_find_header
+     fm_extract_message
+     parse_header
+     mime_prep_message
+     parse_mime
+     free_mime
+     fake_imessage
+     decode_mime_header
+     encode_mime_header
+     encode_base64_str
+     decode_base64_str
+
+   5.6 - Message composition routines
+     om_create_message
+     om_dispose_message
+     om_add_field
+     om_add_attachment
+     om_write_message
+     om_send_message
+     Notes on composing messages
+
+   5.7 - Statistics and logging interface
+     st_register_module
+     st_unregister_module
+     st_create_category
+     st_remove_category
+     st_set_hcategory
+     st_set_category
+     st_get_next_module
+     st_get_next_category
+     st_get_category_data
+     st_export_stats
+     logstring
+     logdata
+
+
+Appendix A: Technical issues
+
+
+
+-----------------------------------------------------------------------
+ 1: Introduction
+-----------------------------------------------------------------------
+
+1.1 - What is a Daemon?
+
+A Mercury/32 "Daemon" (a term inherited from the unix world) is a program
+that provides extended services within the Mercury/32 Mail Transport
+System. Daemons are associated with a particular e-mail address, and
+when a message is sent to that address, Mercury invokes the Daemon to
+process it.
+
+A Daemon has access to extensive internal Mercury services, and can
+easily perform complex operations such as address parsing and message
+creation using simple function calls.
+
+Daemons are implemented as Windows DLLs that (in their simplest form)
+export a single function. There are no restrictions on what they can do,
+and they have access to the full range of Windows programming services.
+
+
+1.2 - What uses could I have for a Daemon?
+
+The most obvious use for a Daemon is to perform custom processing on mail
+messages; for instance, you might create a Daemon that accepts orders by
+e-mail, checks their validity, verifies a credit card number, then
+submits the order to a central database for processing. Another example:
+you might create a Daemon that sends faxes: when a message arrives, the
+Daemon looks for a fax number on the first line, then calls some other
+service on the workstation and asks it to send the remainder of the mail
+message as a fax to that number.
+
+The only real limit on the uses a Daemon might have is your imagination
+and the extent to which you are prepared to do some Windows programming
+to realise what you have imagined.
+
+
+-----------------------------------------------------------------------
+ 2: Technical Overview
+-----------------------------------------------------------------------
+
+2.1 - Basic structure of a Daemon
+
+In its simplest form, a Daemon is a simple 32-bit Windows DLL that
+exports a single function, called "daemon". To invoke the Daemon, Mercury
+loads the DLL and calls the "daemon" function with a reference to the
+mail message (or "job"), a parameter block, and the delivery address that
+triggered the call (so the same Daemon can be attached to multiple e-mail
+addresses and can distinguish between them as required).
+
+The prototype for the "daemon" function is as follows:
+
+   short _export daemon (void *job, M_INTERFACE *m, char *address,
+      char *parameter);
+
+   "job"  is a handle to the mail job that triggered the call to the
+       daemon. Using this handle, you can access the data in the message,
+       by passing it to functions like "ji_get_data" (see below). You
+       must not close or delete this job. Note: on entry to your daemon
+       function, this job will be open - you should not attempt to open
+       it using "ji_open_job", nor should you close it.
+
+   "m" points to an M_INTERFACE structure: this structure contains pointers
+       to various Mercury internal functions that your Daemon can use to
+       parse addresses, query information and send mail.
+
+   "address" points to the address that triggered this invocation of the
+       Daemon. This allows a single Daemon to service multiple addresses,
+       and to adjust its behaviour depending on which address it is
+       servicing at any given time. You must not alter the contents of
+       this string in any way.
+
+    "parameter" points to any optional data specified in the Daemon's
+       alias entry (see below for more information on optional
+       parameters). This parameter will point to an empty string ("") if
+       there are no parameters. The maximum length of parameter data is
+       128 characters.
+
+When the "daemon" function returns control to Mercury, Mercury will
+unload the Daemon's DLL and delete the job - no further attempt will be
+made to deliver it. The return value from the "daemon" function is
+currently ignored and must be set to 0. The return value may be
+meaningful in future.
+
+
+2.2 - What do I need to write a Daemon?
+
+A Daemon is simply a standard Windows DLL that exports a single entry
+point; as such, you can use most standard tools to create one. The
+functions exported to the Daemon via the M_INTERFACE structure all use
+the C calling convention and expect C-type parameters (so, strings are
+NUL-terminated arrays of characters).
+
+The most logical tools for developing Daemons are Borland C++ v4.5 or
+later, Borland C++/Builder, or Microsoft Visual C++. The sample code
+provided with this documentation has been developed and tested using
+Borland C++ v5.02.
+
+
+2.3 - Installing and invoking a Daemon
+
+Installing a Daemon so that Mercury can invoke it requires the creation
+of an alias in a special form. The reason Daemons can only be invoked
+via an alias is to ensure that only approved Daemons are run, for
+security reasons. Aliases can be easily created and maintained from
+within Mercury/32, using the "Aliases" option on the "Configuration"
+menu.
+
+The alias must be of the following form:
+
+   daemon_address@host.domain == daemon:path_to_dll[;parameter]
+
+"daemon_address" should be whatever address will invoke the Daemon, while
+"path_to_dll" should be the fully-qualified path to the Daemon's DLL
+file. If your Daemon needs a parameter passed to it when its "daemon"
+function is invoked, you can specify that parameter by placing a
+semicolon after the filename, followed by the text you want your Daemon
+to receive. The maximum length of the parameter is 128 characters.
+
+Example: you wish to install a Daemon called "cookie"; the DLL file for
+the Daemon is "c:\mercury\daemons\cookie.dll", and your domain is
+"biscuit.com". You would create the following alias:
+
+   cookie@biscuit.com == daemon:c:\mercury\daemons\cookie.dll
+
+If the Daemon's DLL file is found in the same directory as MERCURY.EXE,
+then you can omit the path from the DLL's file specification.
+
+Daemons can add aliases to or remove aliases from the system alias file
+by themselves: an elegantly-written Daemon would provide a configuration
+interface that automates the process of adding the aliases, rather than
+relying on the user to do it.
+
+
+-----------------------------------------------------------------------
+ 3: Using the Mercury interface
+-----------------------------------------------------------------------
+
+3.1 - Including header files
+
+In order to use the Mercury Daemon interface, you will need to add the
+following line near the top of your C or C++ source file:
+
+#include "daemon.h"
+
+Note that you must include this line *after* you have included the
+standard "windows.h" master header file.
+
+
+3.2 - The M_INTERFACE structure
+
+When your Daemon is invoked, Mercury passes it a large structure called
+an M_INTERFACE. This structure contains some static data, and a number of
+pointers to internal Mercury functions that your Daemon can call.
+
+   "dsize"   The "dsize" parameter is the size of the M_INTERFACE
+      structure in bytes. A Daemon can use this as part of a version-
+      checking process.
+
+   "vmajor"  The major version number of the copy of Mercury that is
+      running. For instance, for Mercury v2.15, this value will be "2".
+
+   "vminor"  The minor version number of the copy of Mercury that is
+      running. For instance, for Mercury v2.15, this value will be "15".
+
+
+3.3 - Calling functions
+
+The remaining variables in the M_INTERFACE structure are pointers to
+functions within Mercury that the Daemon can call to access core
+services. To call one of these functions, simply use the pointer as if it
+were a normal function - so, if you want to call the "get_variable"
+function to retrieve the GV_QUEUENAME variable, you would use this line
+of code
+
+   char *str
+   str = (char *) (m->get_variable (GV_QUEUENAME));
+
+Note the C cast to a (char *) - this simply suppresses compiler warnings,
+because the "get_variable" function always returns its results as a DWORD
+value.
+
+
+-----------------------------------------------------------------------
+ 4: Advanced topics
+-----------------------------------------------------------------------
+
+4.1 - DAEMON.INI
+
+For advanced Daemon functions such as Residency and Configuration,
+Mercury scans a file called DAEMON.INI for parameters. DAEMON.INI uses a
+slightly different syntax from MERCURY.INI, in that it uses "=" as a
+separator between keyword and parameter instead of the ":" used in
+MERCURY.INI. This design difference is intended to allow installers and
+Daemons to use the Windows WritePrivateProfileString and
+GetPrivateProfileString API functions to update and access the file.
+
+
+4.2 - "Resident" Daemons
+
+There may be occasions when a Daemon operates better by remaining in
+memory at all times, instead of being loaded and unloaded as required.
+Internally, a "Resident" Daemon is no different from a normal Daemon,
+except that it can optionally export a "startup" function that Mercury
+will call the when the Daemon is loaded.
+
+To install a "Resident" Daemon, add a [Daemons] section to a file called
+DAEMON.INI in the same directory as MERCURY.EXE, and include a name and the
+full path to your Daemon's DLL on a line in that section.
+
+   Example: your Daemon is called "Cookie Daemon" and is located in
+   C:\MERCURY\DAEMONS\COOKIE.DLL
+
+   [Daemons]
+   Cookie Daemon = c:\mercury\daemons\cookie.dll
+
+Mercury will load the Daemon at startup and will not unload it until
+exiting. The Daemon can export a function with the following prototype:
+
+   short _export startup (M_INTERFACE *mi, UINT_32 *flags,
+      char *name, char *param)
+
+If this function is present in the DLL, Mercury will call it with an
+Interface block as soon as the DLL is loaded. Note that the Interface
+block is not persistent - if you need to store it for later use, you must
+allocate your own storage and make a copy of the structure in it.
+
+The "flags" parameter to "startup" is a location where the Daemon can
+return certain indicators about itself. At the time of writing this
+specification, no flag values are defined - you should write 0 into the
+location pointed to by the "flags" pointer.
+
+The "name" parameter is the name string defined for the Daemon in
+DAEMON.INI - you will typically use this if you have to create a message
+box or error dialog.
+
+The "param" parameter to "startup" is an optional string, presumably
+containing configuration or run data for your Daemon. You can specify a
+parameter by placing a semicolon and the parameter after the name of the DLL
+in the entry in the [Daemons] section; so, using our Cookie Daemon above
+as an example, if you wanted to pass the parameter "autocookie" to the
+startup function, you would have an entry like this in DAEMON.INI:
+
+   [Daemons]
+   Cookie Daemon = c:\mercury\daemons\cookie.dll;autocookie
+
+If a Daemon has no parameters, an empty string ("") will be passed in
+"param". The maximum length of parameter data is 128 characters.
+
+The "daemon" function of a Resident Daemon is called in exactly the same
+way as it would be for a normal Daemon - the only difference is that the
+Daemon's DLL is not loaded and unloaded as part of the process. A
+Resident Daemon will commonly create a copy of the job in a file using
+the "fm_extract_message" function, then spin off a thread to process the
+file at its leisure.
+
+Resident Daemons may fire threads at will if they wish to perform routine
+processing (this is usually done from the "startup" function). All the
+functions in the M_INTERFACE parameter block are thread-safe.
+
+Resident Daemons may export a function called "closedown": if they do,
+Mercury will call it as part of its shutdown process prior to unloading
+the resident Daemon. The function should have this protoype:
+
+   short _export closedown (M_INTERFACE *m, DWORD code,
+      char *name, char *param);
+
+The "code" parameter is reserved for future use and should be ignored
+at present. The return from this function is currently unused but must
+be set to 0. Only Resident Daemons (including "Global" Daemons) will
+have this function called.
+
+The "name" parameter is the name string defined for the Daemon in
+DAEMON.INI - you will typically use this if you have to create a message
+box or error dialog.
+
+The "param" parameter is the same as was passed to the "startup" function
+- see above for more details. If a Daemon has no parameters, an empty
+string ("") will be passed in "param".  The maximum length of parameter
+data is 128 characters.
+
+
+4.3 - "Global" Daemons
+
+A "Global" Daemon is a specialized form of Resident Daemon that is
+passed all messages processed by the Mercury core module. Global Daemons
+are called before any other processing is done on the job, and can
+instruct Mercury to process, delete or defer a job through their return
+value. Examples of uses for Global Daemons include a Daemon that scans
+all incoming and outgoing mail for viruses, or a Daemon that makes
+archival copies of all incoming and outgoing mail for auditing purposes.
+
+To install a "Global" Daemon, add a [Global Daemons] section to a file
+called DAEMON.INI in the same directory as MERCURY.EXE, and include a
+name and the full path to your Daemon's DLL on a line in that section.
+
+   Example: your Daemon is called "Spam Killer" and is located in
+   C:\MERCURY\DAEMONS\SPAMKILL.DLL
+
+   [Global Daemons]
+   Spam Killer = c:\mercury\daemons\spamkill.dll
+
+Global Daemons are always Resident Daemons - see the preceding section
+for information on this. When a Global Daemon's "daemon" function is
+called, the "address" parameter is always set to "[Global]".
+
+A Global Daemon may not delete a job directly, but it can return the
+following values to Mercury to control the processing of the job:
+
+   0  - Process the job normally
+   1  - Delete the job without further processing
+   2  - Defer the job for the system defer time
+
+If a Global Daemon instructs Mercury to delete a job, the job is deleted
+at once, without further ado. No error notification is sent, nor is there
+any indication other than a comment on the core module console display
+that the job has been killed.
+
+
+4.4 - Daemon configuration
+
+Daemons may wish to add a configuration option to the Mercury
+"Configuration" menu to allow the user to change settings or otherwise
+control the behaviour of the Daemon. To do this, add a [Daemon_Config]
+section to a file called DAEMON.INI in the same directory as MERCURY.EXE,
+and include a name and the full path to your Daemon's configuration DLL
+on a line in that section. The name is used to create your Daemon's
+configuration menu line.
+
+   Example: your Daemon's configuration module is called "Cookie Daemon"
+   and is located in C:\MERCURY\DAEMONS\COOKIECF.DLL
+
+   [Daemon_Config]
+   Cookie Daemon = c:\mercury\daemons\cookiecf.dll
+
+The configuration DLL can be either your Daemon's main processing DLL, or
+a subsidiary DLL that only performs configuration functions - the choice
+of which method to use will depend on your needs.
+
+Mercury will add your Daemon's name to its Configuration menu, and when
+the option is selected, will load your DLL and look for a function with
+the following prototype:
+
+   short _export configure (M_INTERFACE *mi, char *name,
+      char *param);
+
+"M_INTERFACE" is a regular parameter block. "name" is the name defined
+in the [Daemon_Config] section (this allows the same DLL to service
+multiple functions keyed on the name).
+
+The "param" parameter to "config" is an optional string, presumably
+containing configuration or run data for your Daemon. You can specify a
+parameter by placing a semicolon and the parameter after the name of the
+DLL in the entry in the [Daemons] section; so, using our Cookie Daemon
+above as an example, if you wanted to pass the parameter "autoconfig" to
+the config function, you would have an entry like this in DAEMON.INI:
+
+   [Daemon_Config]
+   Cookie Daemon = c:\mercury\daemons\cookiecf.dll;autoconfig
+
+If a Daemon has no parameters, an empty string ("") will be passed in
+"param". The maximum length of parameter data is 128 characters.
+
+If your DLL refers to a Resident Daemon, Mercury will look for the
+configuration function in the loaded copy and will not load the DLL
+again. If your DLL needs to be loaded to perform configuration, its
+"startup" function will not be called.
+
+Both resident and non-resident Daemons can use configuration services if
+they wish. What the "configure" function does when called is up to the
+individual developer, but it is normal for it to show a dialog allowing
+the user to change its configuration options.
+
+
+4.5 - Daemon Domains
+
+Occasionally, you may wish to have a Daemon that services all mail sent
+to a particular subdomain. As an example, imagine a fax server Daemon
+that treats the address portion as a fax number: for a server of this
+kind, you would want to be able to send any "username" and have it
+processed by the Daemon.
+
+To create a "Daemon Domain" of this kind, select the "Mercury Core Module"
+configuration option on the "Configuration" menu, and locate the group of
+controls near the bottom of the dialog labelled "Domains recognized as
+local by this server". Create a new domain entry where the "Domain name"
+portion is the domain name to be handled by your Daemon, and the
+"Host/server" portion is "daemon:path_to_dll". Once this domain entry has
+been created, all mail sent to any user at the domain you have defined
+will result in the Daemon being invoked.
+
+   Example: you have a fax server Daemon, C:\MERCURY\FAX.DLL; you want
+   all mail addressed to "fax.biscuit.com" to be passed to this Daemon.
+   You would create the following domain definition:
+
+   Host/Server                  Domain name
+   daemon:c:\mercury\fax.dll    fax.biscuit.com
+
+Note that this kind of operation will almost always require special name
+server entries called "MX Entries" to advertise the domain name - contact
+your service provider for more details on creating MX entries.
+
+
+-----------------------------------------------------------------------
+ 5: Function reference
+-----------------------------------------------------------------------
+
+5.1 - General-purpose functions
+
+   -------------------------------
+   DWORD get_variable (int index);
+   -------------------------------
+
+   Returns the value of an internal Mercury variable. The following
+   values can be passed for "index":
+
+      GV_QUEUENAME (1)       (Returns "char *")
+         The name of the directory where Mercury's queue manager is
+         looking for jobs. The return value is a (char *) pointing to
+         a path, which may be in either drive letter or UNC format.
+
+      GV_SMTPQUEUENAME (2)   (Returns "char *")
+         The name of the directory where Mercury's queue manager is
+         looking for outgoing mail jobs. This variable is not meaningful
+         under current versions of Mercury and should not be used.
+
+      GV_MYNAME (3)          (Returns "char *")
+         The Internet name for this copy of Mercury (the domain portion
+         it will use when forming addresses).
+
+      GV_TTYFONT (4)         (Returns "HFONT")
+         A handle to the font Mercury is currently using to draw text
+         in console listings.
+
+      GV_MAISERNAME (5)      (Returns "char *")
+         The name of the Mercury mail server (usually "MAISER")
+
+      GV_FRAMEWINDOW (6)     (Returns "HWND")
+         The handle to the Mercury Frame window: Daemons can use this
+         value to send messages to the Mercury core process.
+
+      GV_SYSFONT (7)         (Returns "HFONT")
+         A handle to the font Mercury is using by default to draw
+         controls and general dialog text.
+
+      GV_BASEDIR (8)         (Returns "char *")
+         Returns the directory from which MERCURY.EXE was run.
+
+      GV_SCRATCHDIR (9)      (Returns "char *")
+         Returns a temporary working directory if one has been defined
+         in Mercury. If no temporary directory has been defined, this
+         value returns the same value as "GV_BASEDIR".
+
+   Daemons must treat all returned values as read-only and must not
+   attempt to modify them.
+
+
+   --------------------------------------------------------------
+   int is_local_address (char *address, char *uic, char *server);
+   --------------------------------------------------------------
+
+   Determine whether or not the address in "address" refers to a local
+   account (i.e, one to which Mercury can complete final delivery).
+
+   "uic"      Receives the local username matching the address when
+              the function is successful. Allocate at least 256
+              characters for this string.
+
+   "server"   Receives network-specific information associated with the
+              local user when the function is successful. This value may
+              have to be passed to other functions. Allocate at least
+              256 characters for this string.
+
+   Returns:   2 if the address is non-local but served by an alias
+              1 if the address is local;
+              0 if the address is not local;
+             -1 on error (local domain but no such user)
+
+   This function resolves aliases and synoyms, and performs any
+   necessary network lookups to validate the address.
+
+
+   ---------------------------------------------------------------
+   int is_group (char *address, char *host, char *gname);
+   ---------------------------------------------------------------
+
+   Determine whether the address contained in "address" refers to a valid
+   group to which Mercury can perform delivery.
+
+   "address"  The simplified form of the address, with no domain portion
+              (so, pass "everyone", not "everyone@host.domain").
+
+   "host"     Receives network-specific host information when the
+              function is successful. You may need to pass this value
+              to other functions.
+
+   "gname"    Receives the name of the group on success.
+
+   Returns    1 if the address refers to a known group
+              0 if the address does not refer to a known group
+
+
+   ----------------------------------------------------------
+   int parse_address (char *target, char *source, int limit);
+   ----------------------------------------------------------
+
+   Reduce an RFC822 address to its simplest form, by discarding any
+   textual components it contains.
+
+   Example
+      "David Harris" (Pegasus Mail Author) <david@pmail.gen.nz>
+   would be reduced by this function to
+      david@pmail.gen.nz
+
+   "source"   points to the address that is to be reduced. This string
+              is not changed as part of the process.
+
+   "target"   points to the location where the reduced address should be
+              written. You may pass the same value as "source" if you
+              want to overwrite the address with the reduced form.
+
+   "limit"    the maximum length of the resulting string. You should
+              pass the allocated size of "target" less one.
+
+   Returns    1 if the reduction was successful
+              0 on error (the address was malformed in some way)
+
+
+   ---------------------------------------------------------------
+   int extract_one_address (char *dest, char *source, int offset);
+   ---------------------------------------------------------------
+
+   Given a string potentially containing multiple addresses separated
+   by commas, extract the next address from the string into "dest".
+   The first time you call this function, pass zero for "offset"; for
+   each subsequent call, pass the value returned by the previous call
+   to the function, until it returns 0.
+
+   "dest"     receives the next address from the string
+
+   "source"   The string containing comma-separated addresses
+
+   "offset"   0 on the first call, the return from the previous call
+              to the function on subsequent calls.
+
+   Returns:   > 0 on success ("dest" contains a valid address)
+              0 when no more addresses exist ("dest" is invalid)
+
+
+   --------------------------------------------------------
+   void extract_cqtext (char *dest, char *source, int len);
+   --------------------------------------------------------
+
+   Given a string containing a single address, strip out the address
+   part and return only the extra textual information.
+
+   Example:
+      "David Harris" <david@pmail.gen.nz>
+   will be reduced by this function to
+      David Harris
+
+   "dest"     receives the reduced textual form
+
+   "source"   points to the address to reduce
+
+   "len"      the maximum number of characters to write into "dest".
+
+   Returns:   Nothing.
+
+
+   ------------------------------------------------------
+   int dlist_info (DLIST *dlist, char *lname, int number,
+      char *address, char *errbuf, LIST *modlist);
+   ------------------------------------------------------
+
+   Returns information about the distribution list named in "lname".
+   For information on the DLIST data structure, see "daemon.h".
+
+   "dlist"    points to a DLIST data structure into which the data
+              for the list should be written.
+
+   "lname"    points to the simple name of the list (no domain part).
+
+   "number"   if "lname" is NULL, then this variable is used to
+              determine which list to retrieve. Calling functions
+              can iterate through all the lists on the server by
+              setting "lname" to NULL then repeatedly incrementing
+              this variable in successive calls.
+
+   "address"  if non-NULL, contains a simplified address form which
+              should be compared with the list of moderators for the
+              list. If the address matches any moderator in the list,
+              the "matched" field of the DLIST structure will be set
+              to 1.
+
+   "errbuf"   receives a textual error message if the function fails.
+              Allocate at least 128 characters for this variable.
+
+   "modlist"  points to a LIST data structure that receives a list
+              of all the moderators defined for the list. This value
+              can be NULL.
+
+   Returns:   0 on success
+             -1 on failure
+
+   Note the non-standard return value convention for this function.
+
+
+   -------------------------------------------------------------------
+   void send_notification (char *username, char *host, char *message);
+   -------------------------------------------------------------------
+
+   Send a short, one-line message directly to the given user.
+
+   "username" a username, as returned by "is_local_user"
+
+   "host"     network-specific host information as returned by
+              "is_local_user".
+
+   "message"  A message of up to 65 characters to send to the user
+
+   Returns    Nothing
+
+   This function only works if a network enabler supporting broadcast
+   messages (such as the NetWare 3.x and 4.x enablers) has been installed
+   and is currently loaded in Mercury/32.
+
+
+   ---------------------------------------------------------------
+   int get_delivery_path (char *path, char *username, char *host);
+   ---------------------------------------------------------------
+
+   Retrieve the delivery path for the specified user/host combination.
+   "user" and "host" should be the values returned by "is_local_address".
+
+   "path"     Receives the directory in which files should be created
+              for final delivery to the specified user. The string will
+              not end in "\" or "/". Allocate at least 256 characters
+              for this string
+
+   Returns:   1 if "path" contains a valid delivery path
+              0 on error ("path" is invalid)
+
+
+   ---------------------------------
+   int get_date_and_time (BYTE *tm);
+   ---------------------------------
+
+   Get the current date and time, querying the file server for the
+   information if possible. The information is written into a seven
+   byte structure laid out as follows:
+
+      Byte 0  - Years since 1900 (i.e, 2000 == 100)
+      Byte 1  - Month (ie, January == 1)
+      Byte 2  - Day (1 .. 31)
+      Byte 3  - Hour (0 - 24)
+      Byte 4  - Minute (0 - 59)
+      Byte 5  - Second (0 - 60)
+      Byte 6  - Day of week (Sunday == 0)
+
+   This function will obtain the date and time from the local workstation
+   if no server connection is available to provide it.
+
+   Returns:   1 if the time and date were correctly retrieved
+              0 on system error.
+
+
+   -----------------------------------------------
+   int write_profile (char *section, char *fname);
+   -----------------------------------------------
+
+   Write a profile section into MERCURY.INI. "section" should contain
+   the name of the section to write, enclosed in square brackets (so,
+   if you want to write a section called "CookieServ", you would pass
+   "[CookieServ]" as the "section" parameter). "fname" should be a full
+   path to a file containing the data to write into the section. The
+   data is written exactly as it appears and may use any syntax you
+   wish, although it is conventional to use "keyword : parameter".
+   The data in the file is expected to be line-oriented, and no single
+   line may exceed 254 characters.
+
+   Returns:   1 on success
+              0 on failure ("fname" is not accessible)
+
+
+   -----------------------------------------------------------
+   int module_state (char *modname, int set_value, int state);
+   -----------------------------------------------------------
+
+   Query or set the state for a protocol module. "modname" should point
+   to a string identifying the module name of the module whose state is
+   to be queried or set. If "set_value" is non-zero, then this function
+   call will attempt to set the module's state to the value contained
+   in "state". If "set_value" is zero, then "state" is ignored, and the
+   module's current state is returned.
+
+   A module's state is a bitmap where the low sixteen bits are reserved
+   and the high sixteen bits can be defined by individual modules for
+   whatever purpose they wish. The reserved bits have the following
+   possible values:
+
+      Bit 0:  Online state, 1 = online, 0 = offline.
+      Bit 1:  ("get" only) 1 = busy, 0 = idle.
+
+   Returns:  -1:  No such module
+             -2:  Module does not support this operation
+         < -255:  Module-specific error return value
+           >= 0:  Previous state (success)
+
+
+
+5.2 - Job control and interface functions
+
+The functions in this section allow you to create, scan and manipulate
+mail jobs in the Mercury queue.
+
+
+   ----------------------------------------------------------
+   void *ji_scan_first_job (int type, int mode, void **data);
+   void * ji_scan_next_job (void **data);
+   void ji_end_scan (void **data);
+   ----------------------------------------------------------
+
+   Routines for enumerating jobs in the queue. First, call
+   "ji_scan_first_job" and if it returns a non-NULL value, call
+   "ji_scan_next_job" until NULL is returned. A non-NULL return value
+   is the job handle for the job that is found - use this handle in
+   calls to other job management functions.
+
+      "type"   Can have any one of the following values:
+               JT_GENERAL    Messages for local delivery
+               JT_OUTGOING   Messages scheduled for off-server delivery
+               JT_ANY        Any type of message
+
+
+      "mode"   Used to select jobs in particular states - choose from:
+               JE_READY      Messages ready for processing
+               JE_COMPLETED  Messages where all processing is finished
+               JE_FAILED     Messages with delivery failures pending
+               JE_ANY        Messages in any state
+
+   The "data" parameter is used by these routines to store state
+   information, and should be passed as part of each call. If
+   "ji_scan_first_job" returns a non-NULL value, then you *must* call
+   "ji_end_scan" when you have finished scanning with jobs, even if you
+   do not completely iterate through all the jobs in the queue.
+
+   None of these routines actually opens the job handle - you must call
+   ji_open_job, passing the job handle, if you need to access the data in
+   the job or modify its settings.
+
+   Returns:    NULL if no further jobs exist
+               non-NULL (the job handle) on success
+
+
+   ----------------------------------
+   int ji_open_job (void *jobhandle);
+   ----------------------------------
+
+   Open a job. You must call this function before calling any function
+   that accesses the job's data or changes the job's settings. The job
+   is opened and locked, which will prevent it from being processed
+   during normal polling operations, and will prevent other processes
+   from opening it.
+
+   The job handle passed to this call should be a value returned by
+   "ji_scan_first_job", "ji_scan_next_job" or "ji_create_job".
+
+   Returns:    1 if the job was opened successfully.
+               0 on failure.
+
+
+   ----------------------------------
+   int ji_close_job (void *jobhandle);
+   ----------------------------------
+
+   Close a job opened with "ji_open_job". The job is unlocked and
+   released for normal processing. Other processes may access the job
+   once this routine has been called.
+
+   Calling this routine forces the job's overall status to be updated
+   (so, a job may change from JE_READY to JE_COMPLETED after this
+   function has been called).
+
+   Returns:    1 on success
+               0 on failure (job invalid).
+
+
+   ------------------------------------------------
+   void ji_rewind_job (void *jobhandle, int flags);
+   ------------------------------------------------
+
+   "Rewind" a job - reposition its file pointer at 0. "flags" can have
+   either of two values, "JR_CONTROL", in which case the control
+   information for the job is reset to the first address element, or
+   "JR_DATA", in which case the data associated with the file is set
+   for reading from the start.
+
+   Example: say you are scanning through the addresses to which a message
+      should be sent using "ji_get_next_element", and you strike a
+      condition that means that you need to start processing from the
+      first address element in the message again, you would call this
+      function with the "JR_CONTROL" parameter.
+
+
+   -------------------------------------
+   int ji_dispose_job (void *jobhandle);
+   -------------------------------------
+
+   Call this function when you have finished working with a job handle
+   returned by ji_scan_first_job, ji_scan_next_job, or ji_create_job.
+   This routine deallocates memory associated with the job - it does not
+   delete or in any other manner change the actual disk structures
+   associated with the job. This function must be called for every
+   non-NULL return value from the functions listed above.
+
+   Returns:    1 on success
+               0 on failure (job invalid).
+
+
+   -------------------------------------
+   int ji_process_job (void *jobhandle);
+   -------------------------------------
+
+   Indicates to the job manager that a formal attempt to process the
+   job has begun. The retry count for the job is incremented and (if
+   applicable) the last retry time is updated. Daemons should seldom
+   if ever have any cause to call this function.
+
+   Returns:    1 on success
+               0 on failure (invalid or closed job handle)
+
+
+   ------------------------------------
+   int ji_delete_job (void *jobhandle);
+   ------------------------------------
+
+   Permanently remove a job from the queue. This routine deletes all
+   files associated with the job (including diagnostic files) and then
+   discards the job handle. It is invalid to access the job handle after
+   it has been passed to this routine.
+
+   You should not call ji_dispose_job for handles passed to this routine.
+
+   Returns:  1 on success
+             0 on failure (invalid job handle)
+
+
+   ----------------------------------------------
+   int ji_abort_job (void *jobhandle, int fatal);
+   ----------------------------------------------
+
+   Abort processing a job. If the job was created using ji_create_job,
+   then it is discarded, otherwise its retry count is incremented by the
+   system default retry increment, the job is closed, and the job handle
+   is invalidated. It is an error to use or access the job handle after
+   calling this routine.
+
+   If "fatal" is non-zero, then the job is unilaterally failed (normally,
+   a job is only marked as failed if any of its addresses cannot be
+   delivered - setting this flag will fail even a job where all the
+   recipients have successfully received the mail).
+
+   You should not call ji_dispose_job for handles passed to this routine.
+
+   Returns:  1 on success
+             0 on failure (job handle was invalid)
+
+
+   ---------------------------------------------------
+   int ji_get_job_info (void *jobhandle, JOBINFO *ji);
+   ---------------------------------------------------
+
+   Get information about the specified job. The fields in the JOBINFO
+   structure are filled out with information from the current element
+   in the message's control stream.
+
+      typedef struct
+         {
+         int structlen;      //  Size of this structure
+         char jobstatus;     //  JS_READY, JS_COMPLETE or JS_FAILED
+         long jobflags;      //  Mercury internal processing flags
+         char status;        //  As jobstatus but for current element only
+         char *from;         //  Envelope address for message (read-only)
+         char *to;           //  Recipient address for current element
+         long dsize;         //  Total RFC822 size of the message
+         long rsize;         //  Number of bytes read since last rewind
+         int total_rcpts;    //  Total recipients for message
+         int total_failures; //  Total failed recipients to date
+         int total_retries;  //  Total recipients marked for retry
+         char ip1 [16];      //  Primary IP address for current element
+         char ip2 [16];      //  Secondary IP address for "   "    "
+         char ip3 [16];      //  Third-choice IP address for  "   "   "
+         char ip4 [16];      //  Fourth-choice IP address for "   "   "
+         char jobid [20];    //  Unique identifier for message
+         } JOBINFO;
+
+   Returns:  1 on success
+             0 on failure
+
+
+   ----------------------------------------------------------------------
+   void *ji_create_job (int type, char *from, unsigned char *start_time);
+   ----------------------------------------------------------------------
+
+   Create a job in the mail queue.
+
+   "type" can be either JT_GENERAL, or JT_OUTGOING. You should usually
+      use "JT_GENERAL" unless you are explicitly creating a job which is
+      to be processed directly by the MercuryC SMTP client.
+
+   "from" is the address Mercury should write in the envelope of the
+      message.
+
+   "start_time" is a date and time in the 7-byte format described under
+      "get_date_and_time", which specifies the earliest time at which the
+      job can be processed. If NULL, the job can be processed as soon as
+      it has been closed.
+
+   The job handle returned by this function can be passed to any other
+   job management function in order to manipulate the queue job.
+
+   Returns:   non-NULL on success (the job handle)
+              NULL on failure.
+
+
+   ----------------------------------------------------
+   int ji_add_element (void *jobhandle, char *address);
+   ----------------------------------------------------
+
+   Add an address to a job created using "ji_create_job". "address"
+   should be the full e-mail address of a single recipient for the
+   message. You should call this function for each address to which the
+   message should be sent.
+
+   Returns:   1 on success
+              0 on failure (invalid job handle)
+
+
+   ----------------------------------------------
+   int ji_add_data (void *jobhandle, char *data);
+   ----------------------------------------------
+
+   Add data for the message body to a job created using "ji_create_job".
+   You should call this function repeatedly for the headers and text of
+   the message until all the data has been written. This function does
+   not modify the data in any way - it is up to you to ensure that line
+   endings are correct (CR/LF pairs) and that the data conforms to the
+   standards for Internet mail. There is a clear expectation that the
+   data for the message will be passed to this function a line at a time.
+
+   Note: When you use this function to build an outgoing mail message,
+   you are effectively building the message exactly as it will be sent -
+   it is up to you to add all the necessary RFC822 headers, the blank
+   line that separates them from the message body, and the message body
+   itself.
+
+   Returns:   1 on success
+              0 on failure (invalid job handle)
+
+
+   --------------------------------------------------------------
+   char *ji_get_data (void *jobhandle, char *buffer, int buflen);
+   --------------------------------------------------------------
+
+   Get the next line of data from the current job. "buffer" should be
+   allocated to be at least 1024 characters in order to comply with
+   RFC821, but any length will be honoured. The line returned will
+   usually end in a CRLF pair, but may not if the buffer was too
+   small to accommodate the entire line.
+
+   Returns:  "buffer" on success
+              NULL on failure (end of data)
+
+
+   -----------------------------------------------------
+   char *ji_get_next_element (void *jobhandle, int type,
+      JOBINFO *jobinfo);
+   -----------------------------------------------------
+
+   Get the next element from the job. Information about the element
+   is returned in "jobinfo". "type" can be JE_ANY for any type of entry,
+   JE_READY for the next entry marked as "ready for processing", or
+   JE_FAILED for the next entry marked as failed.
+
+   Returns:   The e-mail address associated with the entry on success
+              NULL on failure, or no more elements.
+
+
+   -----------------------------------------------------
+   int ji_set_element_status (void *jobhandle, int mode,
+      unsigned char *date);
+   -----------------------------------------------------
+
+   Set the status fields of the current job element. "mode" can be one
+   of the following values:
+
+      JS_COMPLETED   -  "date" is ignored
+      JS_FAILED      -  "date" is ignored
+      JS_RETRY       -  "date" is used for requeuing if non-NULL
+      JS_PENDING     -  "date" is ignored
+
+   "JS_PENDING" status indicates a status that should be reset to
+   "JS_RETRY" if a job is aborted: it is set by the SMTP client
+   module when the remote SMTP server has accepted a RCPT TO: line
+   for the address, and is needed so that the job can be "rolled
+   back" if there's a subsequent network error.
+
+   Returns:  1 on success
+             0 on failure (invalid job handle or element)
+
+
+   ----------------------------------------------------------------------
+   int ji_set_element_resolvinfo (void *jobhandle, char *ip1, char *ip2);
+   ----------------------------------------------------------------------
+
+   Set the resolver information fields of the current job element. "ip1"
+   and "ip2" point to ASCII versions of IP addresses for servers that
+   should be used to deliver the element within the job. Daemons should
+   never need to use this function.
+
+   Returns:  1 on success
+             0 on failure (invalid job handle or element)
+
+
+   ------------------------------------------------------------------
+   int ji_set_diagnostics (void *jobhandle, int forwhat, char *text);
+   ------------------------------------------------------------------
+
+   Set the diagnostic field of the current job element to the text
+   contained in "text". It is legal (and probably even essential)
+   to call this function repeatedly; each time it is called, a line
+   is added to the diagnostic stream for the entry.
+
+     "forwhat" can be JD_ELEMENT to set information specific to
+      the current element, or JD_JOB to set diagnostics pertaining
+      to the job in general.
+
+   Returns:  1 on success
+             0 on failure (bad job handle or element record)
+
+
+   -------------------------------------------------------------------
+   int ji_get_diagnostics (void *jobhandle, int forwhat, char *fname);
+   -------------------------------------------------------------------
+
+   Get the diagnostics for the job or current job element. "fname"
+   should point to a buffer at least 128 characters long where the
+   diagnostic information should be placed: the buffer will be filled
+   in with a filename by this routine. If this routine returns 2,
+   it is the calling routine's responsibility to delete the file in
+   "fname" when it is finished with the data; if this routine returns
+   1, then the calling routine must NOT delete the file in "fname".
+   If 0 is returned, then no diagnostic information is available
+   for the element.
+
+     "forwhat" can be JD_ELEMENT to retrieve information specific to
+      the current element, or JD_JOB to retrieve diagnostics pertaining
+      to the job in general.
+
+   Returns: 2 "fname" is valid - delete it when finished
+            1 "fname" is valid - do NOT delete it when finished
+            0 "fname" is invalid - no diagnostic information available.
+
+
+   ------------------------------------------------------------------
+   void ji_increment_time (unsigned char *tm, unsigned int add_secs);
+   ------------------------------------------------------------------
+
+   Add "add_secs" seconds to the date and time specified in "tm",
+   which should be in the format described under "get_date_and_time".
+   You can subtract seconds from a time by passing a negative value for
+   "add_secs" to this function.
+
+
+   ----------------------------------
+   void *ji_get_job_by_id (char *id);
+   ----------------------------------
+
+   Given the ID number of a job (the "jobid" element of a JOBSTRUCT
+   structure), return a usable handle for that job if it still exists in
+   the queue. This function allows you to re-open a job by reference
+   without holding on to its jobhandle between calls. If this function is
+   successful, the job handle it returns can be used in any other ji_*
+   function expecting a job handle. The job handle is not open on return.
+
+   Returns: Non-NULL on success
+            NULL on failure (job no longer exists, or is locked).
+
+
+   ---------------------------------------------------------------------
+   int ji_get_job_times (void *jobhandle, char *submitted, char *ready);
+   ---------------------------------------------------------------------
+
+   Get the time of original submission for a job and the time it is
+   scheduled for processing. "submitted" and "ready" are the submission
+   and ready times respectively, in the same format as returned by
+   get_date_and_time. You can pass NULL for either of these parameters if
+   you do not require the value. The ready time for a job can be
+   inspected at any time, but the submission time for a job can only be
+   retrieved if the job has been successfully opened using ji_open_job.
+
+   Returns: Non-zero on success
+            0 on failure (invalid job handle)
+
+5.3 - Network and user database query functions
+
+
+   ------------------------------------------------------------------
+   int get_first_group_member (char *group, char *host, char *member,
+      int mlen, void **data);
+   int get_next_group_member (char *member, int mlen, void **data);
+   int end_group_scan (void **data);
+   ------------------------------------------------------------------
+
+   Routines for enumerating the members of a group. First, call
+   "get_first_group_member", passing the name of the group in "group".
+   The host and username information will be returned in "host" and
+   "member" respectively, with "mlen" controlling the maximum nunber of
+   characters written into the member name (allocate at least 128
+   characters for both "host" and "member"). If "get_first_group_member"
+   returns non-zero, call "get_next_group_member" repeatedly to iterate
+   through the group's membership. When you have finished scanning
+   through the membership, call "end_group_scan". You should pass the
+   same address for "data" to all calls - these functions store state
+   information there.
+
+   If "get_first_group_member" returns a non-zero value, then you must
+   call "end_group_scan" when you have finished scanning, whether or
+   not you actually reach the end of the group's membership.
+
+
+
+   --------------------------------------------------------------------
+   int is_valid_local_user (char *address, char *username, char *host);
+   --------------------------------------------------------------------
+
+   Check whether "username" identifies a valid local user. This function
+   differs from "is_local_address" in that it does not resolve aliases
+   or synonyms, and will only return a success result if the address
+   represents a genuine, existing local user. Note that the "address"
+   parameter must have no domain portion - this routine expects a user
+   name portion only.
+
+   As with "is_local_address", this routine may modify the "username"
+   and "host" parameters - allocate at least 256 characters for each
+   of these parameters.
+
+   Returns   1 if the address is a valid local user
+             0 if the address does not represent a known user
+
+
+   ------------------------------------------------------------------
+   int is_group_member (char *host, char *username, char *groupname);
+   ------------------------------------------------------------------
+
+   Determine whether or not a user is a member of a specified group.
+
+   Returns:  1: the group exists and the user is a member
+             0: the group exists and the user is not a member
+            -1: the group does not exist
+
+
+   --------------------------------------------------------------------
+   int get_first_user_details (char *host, char *match, char *username,
+      int ulen, char *address, int alen, char *fullname, int flen,
+      void **data);
+   int get_next_user_details (char *username, int ulen, char *address,
+      int alen, char *fullname, int flen, void **data);
+   int end_user_scan (void **data);
+   --------------------------------------------------------------------
+
+   Enumerate the local users on the current system.
+
+      "match" - currently ignored; pass an empty string.
+      "username" - receives at most "ulen" bytes of the user's
+         login name
+      "address" - receives at most "alen" bytes of the user's
+         e-mail address.
+      "fullname" - receives at most "flen" bytes of the user's
+         full (personal) name.
+
+   If "get_first_user_details" returns a non-NULL value, then you must
+   call "end_user_scan" when you have finished scanning users, whether
+   or not you actually reach the end of the user list.
+
+   Returns:  1 if valid user details were found and returned
+             0 on error, or if no further users exist.
+
+
+   --------------------------------------------------------------------
+   int get_user_details (char *host, char *match, char *username,
+      int ulen, char *address, int alen, char *fullname, int flen);
+   --------------------------------------------------------------------
+
+   Return information about a single specific user, whose username is
+   contained in "match". All other parameters are the same as those in
+   "get_first_user_details".
+
+   Returns:  1 on success
+             0 on failure (no such user)
+
+
+   ---------------------------------------------------------
+   void read_pmprop (char *userid, char *server, PMPROP *p);
+   ---------------------------------------------------------
+
+   Get extended features settings for the specified user. "Extended
+   features" is a Pegasus Mail term and covers things like automatic
+   mail forwarding and address synonyms. Any given user will not
+   necessarily have an extended features record.
+
+   The principal field of the "PMPROP" structure from Mercury's
+   point of view is the "gw_auto_forward", which contains the address
+   to which all mail delivered by Mercury should be forwarded.
+
+
+   ---------------------------------------------------------------
+   int change_ownership (char *fname, char *host, char *newowner);
+   ---------------------------------------------------------------
+
+   Change the network ownership of the specified file. This function
+   is only meaningful when Mercury is using a network interface
+   module that supports the concept of changing the ownership of a
+   file.
+
+   Returns:  1 if the file's ownership was successfully changed
+             0 on error, or if the function is not supported.
+
+
+   -----------------------------------------------------------------
+   int begin_single_delivery (char *uic, char *server, void **data);
+   void end_single_delivery (void **data)
+   -----------------------------------------------------------------
+
+   These functions should not be called by Daemons; they are only
+   meaningful to true Mercury protocol modules.
+
+
+   -----------------------------------------------------------
+   INT_32 create_object (char *objectname, INT_32 objecttype,
+      char *id, INT_32 flags);
+   -----------------------------------------------------------
+
+   Create a new object in the system. "objectname" can be any valid
+   filename for the system in use, but must not contain spaces, and
+   should be 8 characters or less if compatibility with 16-bit systems
+   is required. "id" is the object's default identification (or personal
+   name) string.
+
+      "objecttype" can be OBJ_USER, or OBJ_ADMINISTRATOR
+
+      "flags" is a bitmap containing user creation control flags. The
+         following values are possible:
+         1  Copy any default messages into the new user's mailbox
+
+   This routine will fail if a user already exists with the name "username",
+   or if the user's mail directory cannot be created.
+
+   This routine is only available in Standalone Mercury systems - it is
+   not implemented in Network-level plugins.
+
+   Returns:  1 on success
+             0 on failure
+
+
+   ----------------------------------------------------------------
+   int verify_password (char *username, char *host, char *password,
+      int select);
+   ----------------------------------------------------------------
+
+   Given a username and host as returned by "is_local_user", verify
+   a password for that user.
+
+   "password" The password to verify. This may or may not be case-
+              sensitive, depending on the underlying operating system.
+
+   "select"   indicates the type of password to verify: this variable
+              can have the following values
+
+                 SYSTEM_PASSWORD (1)   The user's login password
+                 APOP_SECRET (2)       The user's APOP shared secret
+
+   Returns:  1 if the password appears to be valid
+             0 if the password is invalid
+
+
+   ----------------------------------------------------------------
+   INT_32 set_password (char *username, char *host, char *password,
+      INT_32 select);
+   ----------------------------------------------------------------
+
+   Set the user's System password or APOP secret. "username" and "host"
+   should be values returned by a previous call to either
+   "is_valid_local_user" or "get_*_user_details". "select" should be
+   either APOP_SECRET or SYSTEM_PASSWORD. This function may not be
+   available on all systems.
+
+   Returns:  1 on success
+             0 on failure
+
+
+
+5.4 - Miscellaneous functions
+
+
+   -----------------------------------------------------------------
+   DWORD mercury_command (DWORD selector, DWORD parm1, DWORD parm2);
+   -----------------------------------------------------------------
+
+   This function provides an extended interface into Mercury's core
+   services. In general, less-frequently-used functions, or functions
+   with simple parameter lists may be exposed via this mechanism.
+
+   The function operates much like the Windows "SendMessage" function:
+   you indicate which function is required in the "selector" parameter,
+   and the meanings of the "parm1" and "parm2" parameters will depend
+   on the selector. The return from this function also depends on the
+   selector value. Mercury does not return from this function until
+   the command has completed.
+
+   At the time of writing, the following selectors and their parameter
+   lists are defined; others will be added over time:
+
+      Selector:  GET_MODULE_INTERFACE
+      Parm1:     (char *) Pointer to name of module to locate
+      Parm2:     Unused, must be 0
+      Returns:   Protocol module command interface function pointer
+      Comments:  This message is only for use by Mercury protocol
+                 modules and should not be used by Daemons.
+
+      Selector:  ADD_ALIAS
+      Parm1:     (char *) Pointer to alias to add
+      Parm2:     (char *) Pointer to address to associate with alias
+      Returns:   Non-zero on success, 0 on failure
+      Comments:  Add an alias to the system alias file. This function
+                 will fail if an alias already exists using the string
+                 supplied. Any type of alias may be added, including
+                 Daemon:, File: and TFile: aliases.
+
+      Selector:  DELETE_ALIAS
+      Parm1:     (char *) Pointer to alias to delete
+      Parm2:     Unused, must be 0
+      Returns:   Non-zero on success, 0 on failure
+      Comments:  Deletes the specified alias from the system alias file.
+                 A Daemon that adds its own aliases for the addresses
+                 it services will typically call this function before
+                 adding its alias.
+
+      Selector:  RESOLVE_ALIAS
+      Parm1:     (char *) Pointer to alias to resolve
+      Parm2:     (char *) Pointer to buffer to place address
+      Returns:   Non-zero on match, 0 on no match or failure
+      Comments:  Attempts to resolve the specified alias to its real-
+                 world address form. You must allocate at least 180
+                 characters to the buffer (parm2) parameter.
+
+      Selector:  RESOLVE_SYNONYM
+      Parm1:     (char *) Pointer to synonym to resolve
+      Parm2:     (char *) Pointer to buffer to place address
+      Returns:   Non-zero on match, 0 on no match or failure
+      Comments:  Attempts to resolve the specified string as a
+                 synonym (two-way alias). For more information on
+                 synonyms, see the Mercury documentation. You must
+                 allocate at least 180 characters for the buffer
+                 (parm2) parameter.
+
+      Selector:  QUEUE_STATE
+      Parm1:     0 to query current state, 1 to set state
+      Parm2:     1 to pause processing, 0 to enable it
+      Returns:   The state of queue processing prior to the call
+      Comments:  Allows you to pause and unpause the core module's
+                 processing of the mail queue.
+
+
+
+   ----------------------------------------------------------------
+   char *get_date_string (int selector, char *buf, BYTE *datetime);
+   ----------------------------------------------------------------
+
+   Return a properly-formatted date string.
+
+     "selector"    - either RFC_821_TIME or RFC_822_TIME
+     "buf"         - where the formatted string should be written
+     "datetime"    - NULL for the current time, or a 7-byte time structure
+
+   RFC821 time format uses a 2-digit year and is only used in timestamp
+   headings in "Received" headers for messages.
+
+   RFC822 time is conventional RFC822/RFC1123 date format, using a
+     4-digit year.
+
+   Both formats include a time zone if one is defined on the system.
+
+   "buf" must be at least 40 characters in length.
+
+   See "get_date_and_time" for a description of the format of "datetime"
+
+   Returns:  buf
+
+
+   ---------------------------------
+   char *rfc822_time (char *buffer);
+   char *rfc821_time (char *buffer);
+   ---------------------------------
+
+   Provided for backwards-compatibility only. Use "get_date_string"
+   instead of these functions.
+
+
+   ------------------------------------------------------
+   INT_32 select_printer (char *device_name, int maxlen);
+   ------------------------------------------------------
+
+   Bring up a dialog that prompts the user to select a printer from
+   those available on the current system. Both local and network
+   printers are listed. The printer name is returned in "device_name"
+   if the user clicks "OK". The name returned is suitable for use in
+   the "print_file" function (see below).
+
+   Returns:         1 if OK was clicked
+                    0 if Cancel was clicked
+
+
+   ---------------------------------------------------------------------
+   INT_32 (* PRINT_FILE) (char *fname, char *printername, UINT_32 flags,
+      INT_32 lrmargin, INT_32 tbmargin, char *title, char *username,
+      char *fontname, INT_32 fontsize);
+   ---------------------------------------------------------------------
+
+   Print a file or mail message. This function provides a simple way of
+   printing textual data, and has useful formatting options designed to
+   handle normal textual mail messages. Only textual data can be printed
+   - this routine will not print HTML, RTF or other formatted data types.
+
+      "fname" is the full pathname of the file to print
+
+      "printername" is the name of the printer on which the file is to be
+         printed; this can be any local or network printer. You can use the
+         "select_printer" function (see above) to allow the user to choose
+         a printer. If you pass NULL for this parameter, Mercury will use
+         the system's default printer.
+
+      "flags" is a bitmap of flags controlling the way the file will be
+         printed; the following values are available:
+
+            PRT_MESSAGE    Print as an RFC822 mail message
+            PRT_REFORMAT   Reformat long lines when printing
+            PRT_TIDY       Print only "important" headers
+            PRT_FOOTER     Print a footer on each page
+            PRT_NOHEADERS  Print no message headers
+            PRT_FIRSTONLY  Print only first line of headers
+            PRT_ITALICS    Print quoted text in italics
+
+      "lrmargin" is the margin in millmetres (mm, 25.4mm == 1 inch) to
+         allow at the left and right sides of the printed page.
+
+      "tbmargin" is the margin in millimetres to allow at the top and
+         bottom of the printed page.
+
+      "title" is an optional string Mercury will use to identify the
+         document in the Windows print manager queue; the title is not
+         itself printed anywhere on the document. This paramter can be
+         NULL if not required.
+
+      "username" is the username Mercury should print in the footer on
+         each page if that option is selected. This parameter can be NULL
+         if it is not required.
+
+      "fontname" is the name of the font to use when printing. If this
+         parameter is NULL or zero-length, the default font and size will
+         be used.
+
+      "fontsize" is the size in points of the printer font. This
+         parameter is ignored if "fontname" is NULL or zero-length.
+   
+   Returns:         1 on successful printing
+                    0 on printing error.
+
+
+
+5.5 - File I/O and parsing routines
+
+The functions in this section allow Daemons to perform message and MIME
+parsing on mail messages. The first group of functions allow the
+manipulation of files in a portable manner (since open file handles
+cannot be passed between DLLs and programs), while the second group of
+functions perform parsing and analysis of complex mail messages.
+
+
+   ------------------------------------------------
+   INT_32 fm_open_file (char *path, UINT_32 flags);
+   ------------------------------------------------
+
+   Open any file. The file is opened in binary mode, so line endings
+   are returned as CRLF, not as simply LFs. The handle returned by this
+   function can be passed to any of the parsing or file manipulation
+   functions that expect an internal file handle.
+
+   "flags" can have any of the following values:
+
+      FF_NO_LINE_ENDINGS - tells "fm_gets" to remove CRLF terminators
+        from each line it reads from the file
+
+   Returns:  > 0 (the file reference) on success
+             0 on failure
+
+
+   -----------------------------------------------------
+   INT_32 fm_open_message (IMESSAGE *im, UINT_32 flags);
+   -----------------------------------------------------
+
+   Provided for backwards compatibility with Pegasus Mail. Daemons should
+   use "fm_open_file" instead of calling this function.
+
+
+   ---------------------------------
+   int fm_close_message (INT_32 id);
+   ---------------------------------
+
+   Close a file opened using "fm_open_file" or "fm_open_message".
+
+   Returns:  1 on success
+             0 on failure
+
+
+   --------------------------------------------------
+   char (*fm_gets (char *buf, INT_32 max, INT_32 id);
+   --------------------------------------------------
+
+   Read the next line from a file opened using "fm_open_file" or
+   "fm_open_message". At most "max - 1" characters are read from the
+   file, and the line is always nul-terminated. CRLF characters will
+   be present unless the file was opened using the "FF_NO_LINE_ENDINGS"
+   flag, or possibly for the last line of the file.
+
+   Returns:  "buf" on success
+             NULL on failure or EOF.
+
+
+   ---------------------------
+   INT_16 fm_getc (INT_32 id);
+   ---------------------------
+
+   Read the next character from the file.
+
+   Returns:   the character on success
+              EOF on failure
+
+
+   -------------------------------------
+   void fm_ungetc (INT_16 c, INT_32 id);
+   -------------------------------------
+
+   "unget" the last character retrieved using "fm_gets" or "fm_getc".
+   Exactly one level of character may be "ungot" using this function.
+
+
+   ---------------------------------------------------------
+   INT_32 fm_read (INT_32 id, char *buffer, INT_32 bufsize);
+   ---------------------------------------------------------
+
+   Read at most "bufsize" bytes from the file. No character conversions
+   are done, and the data may not necessarily end on a line boundary.
+
+   Returns:  > 0 on success (the number of bytes read)
+             = 0 on EOF
+             < 0 on error
+
+
+   ------------------------------
+   INT_32 fm_getpos (INT_32 fil);
+   ------------------------------
+
+   Get the current offset in the open file. The return from this function
+   may be passed to "fm_setpos" to reposition the file at a given point.
+
+   Returns:  Current file offset.
+
+
+   ---------------------------------------------
+   INT_16 fm_setpos (INT_32 fil, INT_32 offset);
+   ---------------------------------------------
+
+   Reposition the file pointer for an open file. "offset" must be a
+   value returned by "fm_getpos", or 0 to rewind the file. You should
+   not assume a linear relationship between "offset" and the data in the
+   file.
+
+   Returns:  > 0 on success
+             0 on error.
+
+
+   --------------------------------------------------------------
+   INT_32 fm_get_folded_line (INT_32 fil, char *line, int limit);
+   --------------------------------------------------------------
+
+   Read a header from a message, "unfolding" continuation lines as
+   required. This function understands RFC822 line folding rules for
+   message headers, and will return a single line containing the full
+   extent of a header. This is an extremely useful function for reading
+   through the headers of a message without worrying about dealing with
+   continuation lines. This routine guarantees that the returned line
+   will be nul-terminated and will not end in CRLF.
+
+   There is usually no reason to use this function to read the body of
+   a mail message, and doing so may lead to unexpected results.
+
+   Example: if the next lines in the message are:
+
+       From: David Harris
+         <david@pmail.gen.nz>
+         (Pegasus Mail Author)
+
+   Then this function will return the following single string:
+
+       From: David Harris <david@pmail.gen.nz> (Pegasus Mail Author)
+
+   Returns:  > 0 on success (number of characters in line)
+             0 if the end of headers has been reached.
+
+
+   -------------------------------------------------------------------
+   char (*fm_find_header (INT_32 fil, char *name, char *buf, int len);
+   -------------------------------------------------------------------
+
+   Locate the header whose keyword is passed in "name" in the specified
+   message file. The entire line without the keyword is returned, with any
+   continuations unfolded into the data.
+
+   Returns:  "buf" on success (points to start of field body)
+             NULL on failure.
+
+
+   -----------------------------------------------------------
+   int fm_extract_message (void *job, char *fname, int flags);
+   -----------------------------------------------------------
+
+   Take an open Mercury mail job and extract its contents to the file
+   specified in "fname".
+
+   "flags" can have combinations of the following values:
+
+      FFX_APPEND       - append to the file if it exists - don't overwrite
+      FFX_NO_HEADERS   - omit the message headers when writing to the file
+      FFX_TIDY_HEADERS - write only "significant" headers to the file
+      FFX_NOT_OPEN     - the job is not currently open
+
+   If the "FFX_NOT_OPEN" flag is specified, then this routine will open
+   and close the job. When passing the "job" parameter supplied to the
+   "daemon" function, you must not specify this flag - the job is already
+   open and must remain open during processing.
+
+
+   -------------------------------------------
+   int parse_header (INT_32 fil, IMESSAGE *m);
+   -------------------------------------------
+
+   Perform comprehensive parsing on the open message file "fil", which
+   should have been opened using "fm_open_file". The information gleaned
+   from the message's headers is stored in the IMESSAGE structure, "m".
+   Applications using this function will be particularly interested in
+   the "flags" field of this structure, since it contains extensive
+   information about attachments and MIME formatting that might be
+   present in the message.
+
+   Returns:  1 on success
+             0 on failure (very rare)
+
+
+   ---------------------------------------------------------------
+   int mime_prep_message (INT_32 fil, char *fname, int headers);
+   ---------------------------------------------------------------
+
+   Given a non-multipart MIME message, create a "sanitized" version of
+   the message data in the file named by "fname". MIME encodings are
+   decoded as required, and any character set conversions that might
+   be needed are performed. If you pass an empty string for "fname",
+   Mercury will create a temporary file for you, returning the name
+   of that file in "fname".
+
+   Note that you must not call this function for a multipart message:
+   to extract a sanitized section from a multipart message, call
+   "parse_mime", traverse the multipart list until you find the section
+   you need, then pass that section to "fake_imessage".
+
+   If "headers" is non-zero, then the message headers from the message
+   will be included in the output file, otherwise they will be omitted.
+
+   Returns:  > 0 on success
+             0 on failure
+
+
+   ----------------------------------------
+   int parse_mime (INT_32 fil, IMIME *m);
+   ----------------------------------------
+
+   Given any valid MIME message, parse its contents and return them in
+   the "IMIME" structure, "m".
+
+   The IMIME structure is a relatively complicated variable record which
+   can represent any MIME format, including arbitrarily nested Multipart
+   MIME messages. The fields in an IMIME structure are as follows:
+
+      primary     - the logical message type, e.g MP_TEXT
+      secondary   - the logical message sub-type, e.g. MPT_PLAIN
+      encoding    - the encoding for this part, e.g ME_BASE_64
+      disposition - either MD_ATTACHMENT or MD_INLINE
+      p_string    - the actual primary type string, e.g "TEXT"
+      s_string    - the actual secondary sub-type string, e.g "PLAIN"
+      description - "Content-description" for this part, if any
+      section     - the number of this section within the message
+      fname       - the filename associated with this part, if any
+
+      d           - a union, one data element from which will contain
+                    part-specific information about this part. You
+                    should select the appropriate record based on the
+                    value of "primary".
+                       primary == MP_TEXT        : use "mpt"
+                       primary == MP_MULTIPART   : use "mpp"
+                       primary == MP_APPLICATION : use "mpa"
+                       primary == MP_MESSAGE     : use "mpm"
+
+   The "mpm" record within the structure contains a list of other parts
+   in the message. It should be traversed by dereferencing the "top"
+   field of the "partlist" entry and casting its data field to "IMIME *".
+
+      Example: code to traverse the parts in a multipart message
+
+      IMIME *m, *m2;
+      LNODE *cur;
+
+      if (m->primary == MP_MULTIPART)
+         {
+         for (cur = m->d.mpp.partlist.top; cur != NULL; cur = cur->next)
+            {
+            m2 = (IMIME *) (cur->data);
+            //  do whatever you need with that section here.
+            }
+         }
+
+   Note that it is valid, or even normal for a sub-part of a multipart
+   message to be itself a Multipart item. When this happens, the parts
+   of the nested item will have been properly parsed into its own "mpp"
+   structure, and can be followed by traversing its partlist using the
+   same technique.
+
+   Returns:  1 on success
+             0 on failure (rare, indicates serious malformatting)
+
+
+   --------------------------
+   void free_mime (IMIME *m);
+   --------------------------
+
+   Call this function when you have finished with an IMIME structure
+   successfully parsed by "parse_mime". This function deallocates any
+   lists or other memory allocation created to store the structure of
+   the MIME message.
+
+
+   -----------------------------------------------------------------
+   int fake_imessage (IMESSAGE *im, char *dest, char *src, IMIME *m,
+      char *boundary);
+   -----------------------------------------------------------------
+
+   "Sanitize" a single section of a multipart message. This function
+   extracts the section of the message contained in "src" and identified
+   by "m" (which is presumed to be a part from the "partlist" list of a
+   multipart message) to the file named in "dest". Any necessary decoding
+   and conversion is done on the section. "Boundary" should point to the
+   boundary string that delimits the section in the file (you should
+   usually pass "d.mpp.boundary" from the enclosing message's IMIME
+   structure for this).
+
+   Parsing information about the extracted section is stored in the
+   IMESSAGE structure "im".
+
+   It is the responsibility of the calling function to delete the file
+   "dest" when it is no longer required.
+
+   Returns:  1 on success
+             0 on failure
+
+
+   -----------------------------------------------
+   int decode_mime_header (char *dest, char *src);
+   -----------------------------------------------
+
+   Search for and decode 8-bit data encapsulated according to RFC-1522
+   rules in a string of data (presumably a header extracted from a message
+   using fm_get_folded_line()). No line breaks are permitted in the input
+   data.
+
+     "dest" should point to a buffer where the decoded header string should
+        be written. The destination buffer should be at least as large as
+        the input buffer.
+
+     "src" should point to the candidate string, which may contain multiple
+        RFC-1522-encoded strings.
+
+   Returns:  1 if encoded data was found (dest is valid)
+             0 if no encoded data was found (dest is invalid)
+            -1 on error (bad format or unrecognized char set)
+
+
+   --------------------------------------------------------
+   int encode_mime_header (char *dest, char *src, int raw);
+   --------------------------------------------------------
+
+   Encode a string using RFC1522 rules; transformation only occurs if the
+   input string contains 8-bit data.
+
+     "dest" should point to a buffer where the encoded string should be
+        written. The destination buffer should be at least twice as large
+        as the input buffer. Note that this routine NEVER generates
+        multiple encoded blocks in the string - either the whole string is
+        encoded, or none of it is. Furthermore, this routine only ever
+        generates the quoted-printable RFC1522 variant, never the BASE64
+        encoding, which seems to me to be a ludicrous thing to place in the
+        headers of a mail message.
+
+     "src"  should point to the source string, which may or may not contain
+        8-bit data. "src" is expected to be in the WinANSI character set.
+
+   Returns:  1 if data was encoded (dest is valid)
+             0 if no data was encoded (dest is invalid)
+
+
+   ----------------------------------------------------------
+   int encode_base64_str (char *dest, char *src, int srclen);
+   ----------------------------------------------------------
+
+   Encode an arbitrary string of data in BASE64 format. Note that this
+   encoding process will produce an output line approximately a third
+   larger again than the input, and that MIME message conventions on
+   line length are ignored - the output will be a single line. This
+   function is useful for protocols like RFC2554 that require string
+   data to be transmitted as a BASE64-encoded quantity.
+
+      "dest" should point to a buffer where the BASE64 encoded data
+         should be written. The destination buffer should be at least twice
+         as large as the input buffer.
+
+      "src" is the source string, which may contain any data (it is not
+         limited to textual or ASCII characters).
+
+      "srclen" is the length in bytes of "src".
+
+   Returns   1 on success
+             0 on failure (very, very rare).
+
+
+   -----------------------------------------------------------
+   int decode_base64_str (char *dest, char *src, char *table);
+   -----------------------------------------------------------
+
+   Decode a string encoded using BASE64.
+
+      "dest" should point to a location where the decoded data is to
+         be written. This buffer should be at least the same size as
+         the input buffer. The decoded data may be binary in nature -
+         there is no guarantee that it will be a nul-terminated C
+         string.
+
+      "src" should point to the string to decode
+
+      "table" can point to a 128-byte character table used to convert
+         high-bit characters in the decoded data to an alternative
+         character set. This value will typically be NULL.
+
+   Returns:  1 on success
+             0 on failure (malformatted BASE64 data)
+
+
+
+5.6 - Message composition routines
+
+Mercury provides an easy way to create relatively complex mail messages
+in MIME formats. You can create simple messages, messages with
+attachments, multipart/alternative messages containing different versions
+of the same data, and MIME digests containing other mail messages.
+
+
+   -------------------------------------------------------
+   void *om_create_message (UINT_32 mtype, UINT_32 flags);
+   -------------------------------------------------------
+
+   Create a message. The message type is set to "mtype" and the message
+   flags are set to "flags". The handle returned by this function must be
+   passed to all subsequent message building functions. Messages created
+   by Mercury are always valid MIME messages - non-MIME message types can
+   not be created (nor is it any longer desirable to do so).
+
+   "mtype" must be one of the following values:
+
+      OM_MT_PLAIN         - A simple, single-part text/plain message
+      OM_MT_MULTIPART     - A multipart/mixed message
+      OM_MT_ALTERNATIVE   - A multipart/alternative message
+      OM_MT_DIGEST        - A multipart/digest message
+
+   "flags" is a bitmap composed of the following possible values:
+
+      OM_M_8BIT           - The message body contains 8-bit data
+
+   The "flags" field can be set later using the "om_add_field" function
+   and the OM_MF_FLAGS selector.
+
+   Returns:    Non-NULL on success (message handle)
+               NULL on failure
+
+
+   ------------------------------------------
+   INT_32 om_dispose_message (void *mhandle);
+   ------------------------------------------
+
+   Release the storage used by a message. It is an error to use the
+   "mhandle" parameter after it has been passed to this routine. This
+   function must be called when the message is no longer needed, to
+   deallocate internal buffers.
+
+   It is the calling routine's responsibility to deal with the body file
+   and any files attached to the message.
+
+   Returns:    > 0 on success
+               = 0 on failure (invalid handle)
+
+
+   ------------------------------------------------------------------
+   INT_32 om_add_field (void *mhandle, UINT_32 selector, char *data);
+   ------------------------------------------------------------------
+
+   Add a field to a message.
+
+   "selector" can be any one of the following values:
+
+      OM_MF_TO       - set the master recipient of the message
+      OM_MF_SUBJECT  - set the subject field for the message
+      OM_MF_CC       - set the secondary recipients of the message
+      OM_MF_FROM     - set the originator of the message.
+      OM_MF_BODY     - set the filename containing the message body
+      OM_MF_RAW      - add a raw header for the message.
+      OM_MF_FLAGS    - set the message's global flags
+
+   If the "OM_MF_FROM" field is not set for a message, it will default
+   to the postmaster address for the system. It is an error to attempt
+   to send a message for which "OM_MF_TO" has not been set; all other
+   fields are optional.
+
+   The "OM_MF_RAW" selector allows the calling process to add any header
+   it wishes to the message. The header should be passed complete,
+   including the header keyword, but without a terminating CRLF pair.
+   Mercury guarantees that headers added to a message will be written to
+   the message in the order in which they are added, so you can add
+   headers with continuations if you wish. You cannot add any of the
+   following headers using "OM_MF_RAW": "To", "Cc", "Subject", "BCC",
+   "Content-type", "Content-transfer-encoding", "MIME-Version", or
+   "Content-disposition". You can reset all custom headers added using
+   OM_MF_RAW by using OM_MF_RAW as a selector and passing NULL for the
+   "data" parameter.
+
+   It is explicitly legal to add a field you have already added to a
+   message. This allows you to create a message then send it to multiple
+   recipients in separate jobs, for example.
+
+   Returns:    > 0 on success
+               = 0 on error
+
+
+   -----------------------------------------------------
+   INT_32 om_add_attachment (void *mhandle, char *fname,
+      char *ftype, char *description, UINT_32 encoding,
+      UINT_32 flags, void *reserved);
+   -----------------------------------------------------
+
+   Add an attachment or part to a message.
+
+      "fname"          - the fully-qualified path to the file to attach
+      "ftype"          - a content-type string - see below
+      "description"    - optional free text description string
+      "encoding"       - encoding method - see below
+      "flags"          - special settings for the attachment - see below
+      "reserved"       - must be 0
+
+   The "ftype" string is a free text atom and can have any value, provided
+   it does not contain spaces, tabs or commas.
+
+   "encoding" can have the following values
+
+      OM_AE_DEFAULT  - default encoding (MIME BASE64 encoding)
+      OM_AE_TEXT     - simple textual data, unencoded
+      OM_AE_UUENCODE - uuencoding
+      OM_AE_BINHEX   - Macintosh Binhex format (data fork only)
+
+   "flags" can have the following values
+
+      OM_AF_INLINE   - write the file as a simple textual section
+      OM_AF_MESSAGE  - write the message as a Message/RFC822 part
+
+   The file need not exist at the time it is attached.
+
+   Mercury/32 guarantees that attachments will appear in the message in
+   the order in which they were attached, so you can create messages
+   that depend on the sequence of attachments with confidence.
+
+   Returns:    > 0 on success
+               = 0 on failure.
+
+
+   -----------------------------------------------------
+   INT_32 om_write_message (void *mhandle, char *fname);
+   -----------------------------------------------------
+
+   Given a message handle that has been populated with fields, body and
+   attachments, create a simple disk file containing the final form of
+   the mail message.
+
+   Note that this function does *not* create a job, nor does it send
+   the message. It simply renders the message structures into their
+   final form.
+
+   This routine is called internally by "om_send_message" to create the
+   final form of the Mercury queue job. It is guaranteed that calling
+   this function then calling "om_send_message" will generate a file
+   and a job that are identical (so, this routine can be used to create
+   archive copies of outgoing messages).
+
+   Returns:        > 0 on success
+                   = 0 on failure
+
+
+   ------------------------------------------------------
+   void *om_send_message (void *mhandle, char *envelope);
+   ------------------------------------------------------
+
+   Given a message handle that has been populated with fields, body
+   and attachments, create a job in the Mercury queue containing the
+   final form of the mail message.
+
+   "envelope" is an optional envelope ("Return-path") address for the
+   created message. If NULL or 0-length, the envelope will default to
+   the From field, or the postmaster address.
+
+   The return from this job is an open Mercury job handle. It is the
+   responsibility of the calling process to make any last-minute job
+   settings, then to close or discard the job.
+
+   Returns:    Open Mercury job handle on success
+               0 on failure
+
+
+Notes on composing messages:
+
+1: To create a MIME digest, you must ensure that all the files you attach
+to your message are validly-formatted RFC822 mail messages, and that each
+has the OM_AF_MESSAGE bit set in its "flags" field. The message body is
+ignored for MIME digests, so you may wish to consider creating a "dummy"
+first message containing a summary, subscription information or other
+information useful to the recipient.
+
+2: The message body file and any attachments must be closed when either
+"om_write_message" or "om_send_message" is called.
+
+3: If the "OM_M_8BIT" flag is set for the message, the body of the
+message will be sent using the MIME "quoted-printable" encoding scheme.
+At present, only the ISO-8859-1 character set (which is the same as the
+default MS-Windows character set) is supported for 8-bit data. It is
+safe to set the OM_M_8BIT flag for a message that contains only 7-bit
+data, but it is an error not to set it for a message that *does* contain
+8-bit character data.
+
+4: Address fields ("To:" and "Cc:") can be up to 32000 bytes in length,
+and may contain multiple addresses separated by commas. Mercury/32 will
+wrap the address fields according to RFC822 line folding rules. Mercury
+will *not* expand partial addresses to fully-qualified domain name forms.
+It is up to your Daemon to ensure that all addresses are legal and
+fully-qualified.
+
+
+
+5.7 - Statistics and logging interface
+
+Mercury incorporates a comprehensive Statistics Manager that can keep
+running statistics and information about the throughput, performance and
+operation of the system. The entire Statistics Manager interface is
+available to Daemons and protocol modules. Mercury also provides a System
+Messages window into which console-type messages can be written at
+various priority levels.
+
+
+   ----------------------------------------------
+   INT_32 st_register_module (char *module_name);
+   ----------------------------------------------
+
+   Register a module with the statistics interface. "Module name" is the
+   name that should be presented in the statistics manager list for this
+   item. This function creates a top-level statistics category in the
+   Statistics Manager's list.
+
+   Returns:    Module handle > 0 on success
+               0 on failure (very rare)
+
+
+   ---------------------------------------------
+   INT_32 st_unregister_module (INT_32 mhandle);
+   ---------------------------------------------
+
+   "Unregister" a module and remove its entries from the statistics list.
+
+   Returns     1 on success
+               0 on failure (not registered)
+
+
+   ----------------------------------------------------------
+   INT_32 st_create_category (INT_32 mhandle, char *cname,
+      INT_32 ctag, INT_32 ctype, INT_32 dlen, UINT_32 flags);
+   ----------------------------------------------------------
+
+   Create a single statistical category within a specified module.
+
+      "mhandle"  module's registered handle
+
+      "cname"    display name for this category
+
+      "ctag"     module's reference handle for this item; this is an
+                 arbitrary value supplied by the module that identifies
+                 this category, and it must be unique within the items
+                 created within a single module.
+
+      "ctype"    type of data represented
+                 - STC_INTEGER for integral data
+                 - STC_STRING  for string data
+                 - STC_DATE    for time/date data
+
+      "dlen"     maximum size of data (for strings)
+
+      "flags"    attributes of this category
+                 - STF_CUMULATIVE   data accumulates
+                 - STF_PEAK         record only the highest value
+                 - STF_UNIQUE       allow only one named instance
+
+   Returns:    > 0 (category handle) on success
+                 0 on failure
+
+
+   ---------------------------------------------------------
+   INT_32 st_remove_category (INT_32 mhandle, UINT_32 ctag);
+   ---------------------------------------------------------
+
+   Remove a statistical category and delete it from any lists currently
+   displayed. "ctag" should be the category tag handle passed when the
+   category was created.
+
+   Returns      1 on success
+                0 on failure (category not found)
+
+
+   -------------------------------------------------------
+   INT_32 st_set_hcategory (INT_32 chandle, UINT_32 data);
+   -------------------------------------------------------
+
+   Set the data for a category given its category handle only. Note that
+   a "category handle" is the return from st_create_category, not the
+   ctag value passed to that function. The system guarantees that
+   category handles will always be globally unique, and may change from
+   session to session.
+
+   "data" must be of a type appropriate for the registered category. If
+   the category has the "STF_CUMULATIVE" attribute set, then the data are
+   accumulated to any data already existing for the category.
+
+   Returns:     > 0 on success
+                  0 on failure
+
+
+   -------------------------------------------------------------------
+   INT_32 st_set_category (INT_32 mhandle, INT_32 ctag, UINT_32 data);
+   -------------------------------------------------------------------
+
+   Set the data for a category given its module handle and the module's
+   internal category handle. "data" must be of a type appropriate for the
+   registered category. If the category has the "STF_CUMULATIVE" attribute
+   set, then the data are accumulated to any data that already exist for
+   the category.
+
+   Returns:     > 0 on success
+                  0 on failure
+
+
+   ----------------------------------------------------------
+   INT_32 st_get_next_module (INT_32 mhandle, char *modname);
+   ----------------------------------------------------------
+
+   Return the next module in the statistics list. To enumerate the modules
+   in the list, set "mhandle" to -1 on the first call, then pass the return
+   value in subsequent calls until -1 is returned.
+
+   The module's name is copied into "modname", which should be at least 128
+   characters in length.
+
+   Returns:     > 0 on success
+                 -1 on no more modules.
+
+
+   -------------------------------------------------------------
+   INT_32 st_get_next_category (INT_32 mhandle, INT_32 chandle,
+      char *cname, INT_32 *ctype, INT_32 *clen, INT_32 *cflags);
+   -------------------------------------------------------------
+
+   Return the next category belonging to the module "mhandle" in the
+   statistics list. To enumerate all the categories in the category list,
+   pass the module handle (returned by "st_get_next_module", set "chandle"
+   to -1 on the first call then pass the return value in subsequent calls.
+   Repeat until the function returns -1.
+
+      "cname" receives the category's descriptive text; allocate
+         at least 128 characters
+
+      "ctype" receives the type of the category's data; possible
+         values are STC_INTEGER, STC_STRING or STC_DATE
+
+      "clen" receives the maximum length of the data type.
+
+      "cflags" receives the flags associated with the data item;
+         possible bit values are STF_CUMULATIVE, STF_PEAK and
+         STF_UNIQUE.
+
+   Returns:     > 0 on success
+                 -1 on no more categories
+
+
+   ---------------------------------------------------------
+   INT_32 st_get_category_data (INT_32 chandle, void *data);
+   ---------------------------------------------------------
+
+   Copy the current data value for the specified category into the
+   location pointed to by "data". It is the calling module's
+   responsibility to ensure that sufficient space is allocated. For
+   STC_INTEGER types, you should allocate 4 bytes; for STC_DATE types,
+   you should allocate 4 bytes (the returned value is a C "time_t"
+   type); for STC_STRING types, you should allocate the "clen" returned
+   by a call to st_get_next_category (which will always be correct for
+   integer and date types as well).
+
+   Returns:       1 on succes
+                  0 on failure
+
+
+   --------------------------------------------------------------------
+   INT_32 st_export_stats (INT_32 mhandle, char *fname, UINT_32 flags);
+   --------------------------------------------------------------------
+
+   Export a single module's statistics, or all modules' stats
+   to the file named in "fname" in plain text format.
+
+      "mhandle"  The module handle for which statistics should
+                 be exported. If 0, export all modules.
+
+      "fname"    Filename to receive data
+
+      "flags"    If (flags & 1), append data to the file
+                 If (flags & 2), omit 0 or undefined categories
+
+   Returns       1 on success
+                 0 on failure
+
+
+
+   ----------------------------------------------------------
+   void logstring (INT_16 ltype, INT_16 priority, char *str);
+   ----------------------------------------------------------
+
+   Log a message in the System Messages window
+
+      "ltype"    An arbitrary integer representing the "type" of
+                 the message. It is a convention that "major" types
+                 should be divisible by 10; other types of data
+                 (minor types) will be indented.
+
+      "priority" The level of importance of the message. The user
+                 can set the level they want displayed, and messages
+                 with a lower priority than that will be discarded.
+                 Possible values for this field are:
+                 - LOG_DEBUG
+                 - LOG_INFO
+                 - LOG_NORMAL
+                 - LOG_SIGNIFICANT
+                 - LOG_URGENT
+                 - LOG_NONE
+
+   Developers are strongly urged to use priority values correctly and
+   responbsibly, for the benefit of users.
+
+
+   -------------------------------------------------------------
+   void logdata (INT_16 ltype, INT_16 priority, char *fmt, ...);
+   -------------------------------------------------------------
+
+   The same as "logstring", but supporting "sprintf"-type formatting.
+   See the documentation for "sprintf" in your compiler manual for
+   information on valid formatting codes.
+
+   Note that because of the way macros are handled in the C language,
+   this function cannot be accessed using the convenience macros in
+   "daemon.h" - you must access the function directly from the protocol
+   block structure.
+
+
+
+Appendix A - Technical issues
+
+A.1 - Function names
+
+When Mercury loads a Daemon, it attempts to locate the functions exported
+by the Daemon using the function names. Different compilers may export
+the names of your functions in different ways - even though your function
+may be called "startup", the compiler may actually export it as
+"_startup", for historical reasons.
+
+Mercury always attempts to locate your functions in two ways: the first
+attempt prepends a "_" to the function name, while the second searches
+for the function name with no leading "_", all in uppercase. The first of
+these methods will reliably detect functions exported by Borland
+compilers, while the second mechanism will usually detect functions
+exported by the Microsoft Visual C++ compiler family.
+
+If you find that your functions do not seem to be getting called by
+Mercury, check on the format of the name exported by your compiler - this
+is the most likely source of the problem.
+

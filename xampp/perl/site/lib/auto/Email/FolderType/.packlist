@@ -1,0 +1,5 @@
+\xampp\perl\site\lib\Email\FolderType.pm
+\xampp\perl\site\lib\Email\FolderType\Ezmlm.pm
+\xampp\perl\site\lib\Email\FolderType\MH.pm
+\xampp\perl\site\lib\Email\FolderType\Maildir.pm
+\xampp\perl\site\lib\Email\FolderType\Mbox.pm

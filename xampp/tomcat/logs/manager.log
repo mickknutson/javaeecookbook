@@ -1,0 +1,4 @@
+12:22:25.477 [/manager] {http-bio-8080-exec-1} INFO : HTMLManager: init: Associated with Deployer 'Catalina:type=Deployer,host=localhost'
+12:22:25.502 [/manager] {http-bio-8080-exec-1} INFO : HTMLManager: init: Global resources are available
+12:22:25.545 [/manager] {http-bio-8080-exec-1} INFO : HTMLManager: deploy: Deploying web application '/ch06-web-mobile'
+12:22:25.545 [/manager] {http-bio-8080-exec-1} INFO : HTMLManager: Uploading WAR file to c:\usr\synch\projects\git-hub\javaeecookbook\xampp\tomcat\webapps\ch06-web-mobile.war

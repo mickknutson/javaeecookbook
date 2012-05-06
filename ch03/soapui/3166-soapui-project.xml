@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="3166" resourceRoot="" soapui-version="3.6.1" xmlns:con="http://eviware.com/soapui/config">
+    <con:settings/>
+    <con:requirements/>
+    <con:properties/>
+    <con:wssContainer/>
+    <con:databaseConnectionContainer/>
+    <con:reporting>
+        <con:xmlTemplates/>
+        <con:parameters/>
+    </con:reporting>
+</con:soapui-project>

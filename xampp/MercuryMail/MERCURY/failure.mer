@@ -1,0 +1,35 @@
+From: Mail Delivery System <postmaster@~n>
+To: ~T
+Date: ~D
+Subject: Delivery failure notification
+MIME-Version: 1.0
+Content-Type: Multipart/Report; boundary=~Y
+
+--~Y
+Content-type: Text/plain; charset=US-ASCII
+Content-description: Mail delivery failure report
+Content-disposition: Inline
+
+With reference to your message with the subject:
+   "~S"
+
+The local mail transport system has reported the following problems
+it encountered while trying to deliver your message:
+
+-------------------------------------------------------------------
+~R
+-------------------------------------------------------------------
+
+Your mail message is being returned to you in the next part of this
+message.
+
+Should you need assistance, please mail postmaster@~n.
+
+--~Y
+Content-type: Message/RFC822
+Content-description: Contents of original mail message
+
+~M
+
+--~Y--
+

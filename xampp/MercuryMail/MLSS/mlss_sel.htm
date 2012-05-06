@@ -1,0 +1,228 @@
+<html>
+<head>
+<title> Mailing List Subscriber Services</title>
+</head>
+<body>
+
+<p><font face="Arial" size="2">&nbsp;</font></p>
+<table align="center" cellpadding="0" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+    <tr>
+        <td width="540">
+            <table cellpadding="0" cellspacing="0" bgcolor="#FFFF99" bordercolordark="white" bordercolorlight="black">
+                <tr>
+                    <td width="540" bgcolor="#6666CC">
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="540" bgcolor="#6666CC">
+                        <p align="center"><font face="Arial" size="3" color="white"><b>Welcome 
+                        to ~h</b></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="540" bgcolor="#6666CC">
+                        <p align="center"><font face="Arial" size="2" color="white">Mailing 
+                        List Subscriber Services</font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="540" bgcolor="#6666CC">
+                        <p>&nbsp;</p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td width="540">
+            <p><font face="Arial" size="2">&nbsp;</font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="540">
+            <form name="SubscribeForm" method="post" action="/mlss/SubscribeToList">
+                <table border="1" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+                    <tr>
+                        <td width="540" colspan="2" bgcolor="#6666CC">
+                            <p><b><font face="Arial" size="2">&nbsp;</font><font face="Arial" size="2" color="white">To subscribe to 
+                            a list...</font></b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="295" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;Select the list here...</font></p>
+                        </td>
+                        <td width="245" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<select name="ListName" size="1">
+                            <!--~Xlistnames(1,50)~-->
+                            </select></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="295" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... then click the 
+                            'Proceed...' button.</font></p>
+                        </td>
+                        <td width="245" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="submit" name="SubProceed" value="Proceed..."></font></p>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    <tr>
+        <td width="540">
+            <form name="ManageSubscriptionForm" method="get" action="/mlss/ManageSubscription">
+                <table border="1" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+                    <tr>
+                        <td width="540" colspan="2" bgcolor="#6666CC">
+                            <p><b><font face="Arial" size="2">&nbsp;</font><font face="Arial" size="2" color="white">To manage an&nbsp;existing 
+                            subscription to a mailing list...</font></b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="294" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;Select the list here...</font></p>
+                        </td>
+                        <td width="246" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<select name="MSubListName" size="1">
+                            <!--~Xlistnames(1,50)~-->
+                            </select></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="294" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... then enter your 
+                            e-mail address here...</font></p>
+                        </td>
+                        <td width="246" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="text" name="MSubEmailAddress" size="32"></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="294" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;...  enter your subscriber password here...</font></p>
+                        </td>
+                        <td width="246" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="password" name="MSubPwd" size="20"></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="294" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... and then click the 
+                            'Subscription' button.</font></p>
+                        </td>
+                        <td width="246" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="submit" name="MSubscription" value="Subscription..."></font></p>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+       
+    <tr>
+        <td width="540">
+            <form name="ForgotPwdForm" method="post" action="/mlss/ForgotPassword">
+                <table border="1" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+                    <tr>
+                        <td width="540" colspan="2" bgcolor="#6666CC">
+                            <p><b><font face="Arial" size="2" color="white">&nbsp;Forgotten 
+                            your password for a list?</font></b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="295" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;Select the list here...</font></p>
+                        </td>
+                        <td width="245" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<select name="ListName" size="1">
+                            <!--~Xlistnames(1,50)~-->
+                            </select></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="294" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... then enter your 
+                            subscribed  address here...</font></p>
+                        </td>
+                        <td width="246" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="text" name="EmailAddress" size="32"></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="295" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... then click the 
+                            'Mail password...' button.</font></p>
+                        </td>
+                        <td width="245" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="submit" name="ForgotPassword" value="Mail password..."></font></p>
+                        </td>
+                    </tr>
+		    <tr>
+		    	<td colspan="2" bgcolor="#CCCCFF"><p><font face="Arial" size="2">&nbsp;Your password will be e-mailed to your subscribed address 
+                            when you click the button.</font></p>
+			</td>
+	 	    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+       
+    <tr>
+        <td width="540">
+            <form name="MassChangeForm" method="post" action="/mlss/MassChange">
+                <table border="1" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+                    <tr>
+                        <td width="540" colspan="2" bgcolor="#6666CC">
+                            <p><b><font face="Arial" size="2" color="white">&nbsp;Change your status for multiple lists</font></b></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="294" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;Enter your subscribed  address here...</font></p>
+                        </td>
+                        <td width="246" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="text" name="EmailAddress" size="32"></font></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="295" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... then select the status you desire</font></p>
+                        </td>
+                        <td width="245" bgcolor="#FFFFCC">
+                            <p>&nbsp;<select name="ListStatus" size="1">
+                            <option value="StatusNormal">Normal (receiving mail)</option>
+                            <option value="StatusNoMail">Not receiving mail</option>
+                            <option value="StatusUnsubscribe">Unsubscribe permanently</option>
+                            </select></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="295" bgcolor="#CCCCFF">
+                            <p><font face="Arial" size="2">&nbsp;... then click the 
+                            'Set status...' button.</font></p>
+                        </td>
+                        <td width="245" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="submit" name="MassChangeStatus" value="Set Status..."></font></p>
+                        </td>
+                    </tr>
+		    <tr>
+		    	<td colspan="2" bgcolor="#CCCCFF"><p><font face="Arial" size="2">&nbsp;A 
+                            confirmation message will be sent to your subscribed 
+                            address asking you to confirm this<br> &nbsp;action 
+                            - once you have clicked the link in that message, 
+                            the action will be completed.</font></p>
+			</td>
+	 	    </tr>
+                </table>
+            </form>
+        </td>
+    </tr>
+    
+</table>
+<p><font face="Arial" size="2">&nbsp;</font></p>
+</body>
+</html>

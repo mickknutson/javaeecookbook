@@ -1,0 +1,41 @@
+;  Mercury/32 template file.
+;  Mercury Mail Transport System, Copyright 1993-2001, David Harris.
+;
+;  This file is used as the default template by Mercury when constructing
+;  Subscription Confirmation messages. You can edit this template using any
+;  text editor. Lines beginning with a ';', like this one, are comments and
+;  are ignored: all other lines are written into the message. You can place
+;  special markers in the body of the template, which Mercury will replace
+;  with information about the list: these markers consist of the two special
+;  characters ~p followed by a single digit identifying the piece of
+;  information you want substituted. The following substitutions are possible
+;  in this template file:
+;
+;     ~p0     The list's basic name (i.e, what appears to the left of the '@')
+;     ~p1     This system's hostname
+;     ~p2     The full title for the mailing list
+;     ~p3     The address of the mailing list's primary moderator
+;     ~p4     The confirmation ID string for this request
+;     ~p5     The subscriber's address
+;     ~p6     The subscriber's "personal name"
+;
+Your request to subscribe to the mailing list '~p0' at
+~p1 has been received by the automated mail server.
+
+This list operates a policy of subscription confirmation - in order to
+activate your subscription you must send a confirmation message back to
+the mail server. This is typically done to reduce the amount of unwanted
+mail reaching the list, and to ensure that all subscribed addresses are
+at least initially reachable.
+
+To confirm your subscription to the list, you must reply to this
+message, and write the two letters "OK" on their own as the first line
+of the reply. The remainder of the reply will be ignored. Please note
+that you must *reply* to this message - the text of the subject line
+must be preserved, although it doesn't matter if your mail program adds
+"Re" or a similar string before the subject text.
+
+You have 48 hours in which to confirm your subscription - after that,
+your request will expire, and you will need to send a new subscription
+request. Your subscription to the list will be activated as soon as
+the mail server receives your confirmation.

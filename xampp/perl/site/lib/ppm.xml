@@ -1,0 +1,9 @@
+<PPMCONFIG>
+    <PPMVER>2,1,9,1</PPMVER>
+    <PLATFORM CPU="x86" OSVALUE="MSWin32" OSVERSION="4,0,0,0" />
+    <OPTIONS BUILDDIR="\xampp\perl\bin\.ppm" CLEAN="1" CONFIRM="1" DOWNLOADSTATUS="16384" FORCEINSTALL="1" IGNORECASE="1" MORE="24" ROOT="" TRACE="0" TRACEFILE="PPM.LOG" VERBOSE="1" />
+    <REPOSITORY LOCATION="http://ppm.activestate.com/PPMPackages/5.10-windows" NAME="ActiveState" SUMMARYFILE="searchsummary.ppm" />
+    <REPOSITORY LOCATION="http://www.bribes.org/perl/ppm" NAME="Bribes" SUMMARYFILE="searchsummary.ppm" />
+    <REPOSITORY LOCATION="http://trouchelle.com/ppm10" NAME="Trouchelle" SUMMARYFILE="package.xml" />
+    <REPOSITORY LOCATION="http://cpan.uwinnipeg.ca/PPMPackages/10xx" NAME="UWinnipeg" SUMMARYFILE="searchsummary.ppm" />
+</PPMCONFIG>

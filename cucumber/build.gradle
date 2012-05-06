@@ -1,3 +1,7 @@
+/**
+ *
+ */
+
 apply plugin: 'java'
 apply plugin: 'groovy'
 apply plugin: 'idea'
@@ -8,12 +12,44 @@ targetCompatibility = 1.6
 
 buildDir = 'target'
 
+versions = [
+        cucumber_jvm: "1.0.2",
+        diffutils: '1.2.1',
+        geb: "0.6.3",
+        groovy: "2.0.0-beta-2",
+        hamcrest: "1.3.RC2",
+        httpclient3: "3.1",
+        httpclient: "4.1.3",
+        junit: "4.10",
+        log4j: '1.2.16',
+        logback: '1.0.1',
+        picocontainer: '2.14.1',
+        selenium: "2.19.0",
+        slf4j: "1.6.4", //"1.5.10",//
+        xstream: "1.4.2",
+]
 
 configurations {
+
     cucumberRuntime {
         extendsFrom testRuntime
     }
+
 }
+
+test {
+    //makes the standard streams (err and out) visible at console when running tests
+    testLogging.showStandardStreams = true
+
+    //listening to test execution events
+    beforeTest { descriptor ->
+        logger.lifecycle(">>> Running test: " + descriptor)
+    }
+    onOutput { descriptor, event ->
+        logger.lifecycle("--->Test: " + descriptor + " produced standard out/err: " + event.message )
+    }
+}
+
 
 task cucumber() {
     dependsOn assemble
@@ -44,11 +80,66 @@ dependencies {
     */
     cucumberRuntime files("${jar.archivePath}")
 
-    testCompile 'junit:junit:4.10'
-    testCompile 'info.cukes:cucumber-junit:1.0.0.RC15'
-    testCompile 'info.cukes:cucumber-groovy:1.0.0.RC15'
+    compile "org.slf4j:slf4j-api:${versions.slf4j}", //
+            "org.slf4j:jcl-over-slf4j:${versions.slf4j}"//
+    //"org.slf4j:jul-to-slf4j:${versions.slf4j}",
+    //"org.slf4j:slf4j-log4j12:${versions.slf4j}"
+
+    compile "ch.qos.logback:logback-classic:${versions.logback}",
+            "ch.qos.logback:logback-core:${versions.logback}"
+
+    /*compile("log4j:log4j:${versions.log4j}") {
+        exclude group: "com.sun.jdmk", module: "jmxtools"
+        exclude group: "com.sun.jmx", module: "jmxri"
+        exclude group: "javax.mail", module: "mail"
+        exclude group: "javax.jms", module: "jms"
+    }*/
+
+    testCompile "junit:junit:${versions.junit}"
+    testCompile "org.hamcrest:hamcrest-core:${versions.hamcrest}"
+    testCompile "org.hamcrest:hamcrest-library:${versions.hamcrest}"
+
+    //testCompile "commons-httpclient:commons-httpclient:${versions.httpclient3}"
+    testCompile "org.apache.httpcomponents:httpclient:${versions.httpclient}"
+
+
+    testCompile "info.cukes:cucumber-junit:${versions.cucumber_jvm}"
+    testCompile "info.cukes:cucumber-groovy:${versions.cucumber_jvm}"
+    testCompile "org.codehaus.geb:geb-junit4:${versions.geb}"
+
+    //@See https://github.com/cucumber/cucumber-jvm/tree/master/picocontainer
+    compile "info.cukes:cucumber-java:${versions.cucumber_jvm}"
+    compile "org.picocontainer:picocontainer:${versions.picocontainer}"
+
+    //These dependencies are required in order to find classes when running in an IDE
+    // they haven't been jar-jarred
+    testCompile "com.thoughtworks.xstream:xstream:${versions.xstream}"
+    testCompile "com.googlecode.java-diff-utils:diffutils:${versions.diffutils}"
+
+    testRuntime "ch.qos.logback:logback-classic:${versions.logback}@jar"
+    testRuntime "ch.qos.logback:logback-core:${versions.logback}@jar"
+    testRuntime "org.slf4j:slf4j-api:${versions.slf4j}@jar"
+
 }
 
 repositories {
     mavenCentral()
+}
+
+/**
+ * Redirect standard output and error to appropriate files
+ */
+public void redirectStandardOutputAndErrorToFiles(className) {
+    def outFile=new   File(System.getProperty("java.io.tmpdir")+File.separator+className+".out.log")
+    if (outFile.exists()) {
+        outFile.delete()
+    }
+    def errFile=new File(System.getProperty("java.io.tmpdir")+File.separator+className+".err.log")
+    if (errFile.exists()) {
+        errFile.delete()
+    }
+    def out=new PrintStream(new FileOutputStream(outFile))
+    def err=new PrintStream(new FileOutputStream(errFile))
+    System.setOut(out)
+    System.setErr(err)
 }

@@ -7,15 +7,18 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * [Class_Name]
+ * Config
  *
  * @author Mick Knutson
- *         <a href="http://www.baselogic.com>Blog</a>< /br>
- *         <a href="http://linkedin.com/in/mickknutson>LinkedIN</a>< /br>
- *         <a href="http://twitter.com/mickknutson>Twitter</a>< /br>
- *         <a href="http://www.mickknutson.com>Personal</a>< /br>
- * @since 2011
- *        <i>To change this template use File | Settings | File Templates.</i>
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
+ *
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
+ *
+ * @since 2012
  */
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)

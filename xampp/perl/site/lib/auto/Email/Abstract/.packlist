@@ -1,0 +1,7 @@
+\xampp\perl\site\lib\Email\Abstract.pm
+\xampp\perl\site\lib\Email\Abstract\EmailMIME.pm
+\xampp\perl\site\lib\Email\Abstract\EmailSimple.pm
+\xampp\perl\site\lib\Email\Abstract\MIMEEntity.pm
+\xampp\perl\site\lib\Email\Abstract\MailInternet.pm
+\xampp\perl\site\lib\Email\Abstract\MailMessage.pm
+\xampp\perl\site\lib\Email\Abstract\Plugin.pm

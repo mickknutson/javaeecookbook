@@ -1,0 +1,14 @@
+
+
+Understanding the JPA 2.0 Specification
+
+TODO:
+
+* @ElementCollection
+* @CollectionTable
+
+* Pessimistic Locking
+
+* Criteria API
+* Additions to JPQL
+

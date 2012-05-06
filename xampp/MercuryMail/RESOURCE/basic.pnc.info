@@ -1,0 +1,31 @@
+This general-purpose definition is designed to catch a
+wide range of spam, with particular emphasis on:
+
+  * Sexual content and penile enlargement ads
+  * Pharmacy and bogus health cures
+  * General unwanted commercial "services"
+  * Spam tools
+  * 419 scams (the "Nigerian funds transfer" scam)
+
+This ruleset aggressively filters messages containing
+Lazy HTML (HTML with references to remote graphics): if
+you receive a lot of legitimate mail containing Lazy
+HTML, you will either need to whitelist the sources of
+that mail, or else remove the test.
+
+This rulest also regards any message containing more
+than 25% non-ASCII characters as spam, so if you receive
+a lot of legitimate mail of this type you will need to
+take steps to deal with that.
+
+We recommend that you do not directly modify this rule
+set, because subsequent versions of Mercury will usually
+attempt to update it. Instead, create a copy of this set
+and work on the copy, disabling this one.
+
+This rule set is a standard part of the Mercury/32
+distribution and is updated from time to time: you can
+find updated rule sets on our web site, at -
+
+   http://www.pmail.com/patches.htm
+

@@ -9,13 +9,17 @@ import java.util.*;
 
 /**
  * Customer Class
- * <p/>
- * <h2>Java EE6 Cookbook for Securing, Tuning and Extending Enterprise applications.</h2>
- * <p>Packt Publishing (http://www.packtpub.com)</p>
  *
- * @author Mick Knutson (<a href="http://www.baselogic.com">http://www.baselogic.com</a>)
- *         <a href="http://www.mickknutson.com">http://www.mickknutson.com</a>
- * @since 2011
+ * @author Mick Knutson
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
+ *
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
+ *
+ * @since 2012
  */
 @XmlRootElement(name = "Customer")
 @Entity
@@ -35,6 +39,7 @@ public class Customer extends AuditableEntity {
     private String username;
     private String firstName;
     private String lastName;
+    private Double discount;
 
     @ElementCollection
     @CollectionTable(name = Constants.HOBBIES, joinColumns = @JoinColumn(name = Constants.CUSTOMER_ID))
@@ -65,12 +70,14 @@ public class Customer extends AuditableEntity {
     //-----------------------------------------------------------------------//
 
     public Customer() {
+        this.discount = 0.0;
     }
 
     public Customer(String username, String firstName, String lastName) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.discount = 0.0;
     }
 
     //-----------------------------------------------------------------------//
@@ -110,6 +117,14 @@ public class Customer extends AuditableEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
     }
 
     public List<Phone> getPhones() {

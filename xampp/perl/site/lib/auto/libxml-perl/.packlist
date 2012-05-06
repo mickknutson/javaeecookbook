@@ -1,0 +1,16 @@
+\xampp\perl\site\lib\Data\Grove.pm
+\xampp\perl\site\lib\Data\Grove\Parent.pm
+\xampp\perl\site\lib\Data\Grove\Visitor.pm
+\xampp\perl\site\lib\XML\ESISParser.pm
+\xampp\perl\site\lib\XML\Handler\CanonXMLWriter.pm
+\xampp\perl\site\lib\XML\Handler\Sample.pm
+\xampp\perl\site\lib\XML\Handler\Subs.pm
+\xampp\perl\site\lib\XML\Handler\XMLWriter.pm
+\xampp\perl\site\lib\XML\Parser\PerlSAX.pm
+\xampp\perl\site\lib\XML\PatAct\ActionTempl.pm
+\xampp\perl\site\lib\XML\PatAct\Amsterdam.pm
+\xampp\perl\site\lib\XML\PatAct\MatchName.pm
+\xampp\perl\site\lib\XML\PatAct\PatternTempl.pm
+\xampp\perl\site\lib\XML\PatAct\ToObjects.pm
+\xampp\perl\site\lib\XML\Perl2SAX.pm
+\xampp\perl\site\lib\XML\SAX2Perl.pm

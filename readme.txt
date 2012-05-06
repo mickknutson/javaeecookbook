@@ -1,0 +1,96 @@
+##---------------------------------------------------------------------------##
+
+##---------------------------------------------------------------------------##
+
+Start Glassfish:
+cd C:\usr\bin\glassfish3\bin
+
+asadmin start-domain domain1
+asadmin stop-domain domain1
+
+
+
+##---------------------------------------------------------------------------##
+
+mvn clean package glassfish:deploy -e
+
+mvn clean package glassfish:redeploy -e
+
+
+##---------------------------------------------------------------------------##
+# EXEC glassfish plugin goals:
+##---------------------------------------------------------------------------##
+mvn glassfish:redeploy
+
+http://theo.vanarem.nl/2010/03/22/using-maven-glassfish-plugin-on-windows/
+
+##---------------------------------------------------------------------------##
+# embedded glassfish plugin goals:
+##---------------------------------------------------------------------------##
+embedded-glassfish:run – starts the embedded server if it is not already running and deploys the specfied application. The goal keeps the server running, so the user can make changes in the application, reploy and test iteratively.
+embedded-glassfish:start – starts the embedded server with the specified parameters
+embedded-glassfish:deploy – deploys the specified application
+embedded-glassfish:undeploy – undeploys the application identified by the “name” parameter. If no name is specifed all applications are undeployed.
+embedded-glassfish:stop – stops the embedded server
+embedded-glassfish:admin
+
+
+
+mvn clean package embedded-glassfish:run -e
+
+
+SSH256
+http://wiki.dovecot.org/Authentication/PasswordSchemes
+
+
+
+
+
+
+
+
+
+To Look at:
+===========
+** Use this for LDAP:
+http://wiki.netbeans.org/SecureJavaEE6App
+
+** USE THIS FOR FIRST SECURITY RECIPE:
+http://vaadin.com/wiki/-/wiki/Main/Creating%20Secure%20Vaadin%20Applications%20using%20JEE6
+
+
+
+
+http://maven-glassfish-plugin.java.net/usage.html
+http://blog.coralic.nl/2010/03/08/how-to-test-ejb3-1-with-embedded-container/
+http://technology.amis.nl/blog/2495/deploying-to-glassfish-using-maven2
+http://blogs.sun.com/sirajg/entry/using_maven_plugin_for_v3
+http://download.oracle.com/javaee/6/tutorial/doc/bnbwk.html
+
+
+http://srikanthtechnologies.com/blog/webejbsecurity.html
+
+http://ctpjava.blogspot.com/2009/10/unit-testing-ejbs-and-jpa-with.html
+
+http://developinjava.com/features/47-enterprise-java/106-securing-a-web-application-on-glassfish-using-jaas-pt-2.html
+
+http://javadude.wordpress.com/2010/04/06/getting-started-with-glassfish-v3-and-ssl/
+
+http://wikis.sun.com/display/OpenSSO/Securing+Web+Services+with+the+OpenSSO+Security+Token+Service+and+Security+Agents
+
+http://theo.vanarem.nl/2010/03/22/using-maven-glassfish-plugin-on-windows/
+
+http://weblogs.java.net/blog/tchangu/archive/2007/01/ldap_security_r.html
+
+Could be a recipe:
+http://www.shareyourwork.org/roller/ralphsjavablog/entry/openid_serverauthmodule_jsr_196_with
+
+http://matejdanter.com/2010/09/apache-2-2-vhosts-glassfish-3-segregated-domain-configuration/
+
+http://kalali.me/learning-glassfish-v3-command-line-administration-interface-cli/
+
+
+
+http://publib.boulder.ibm.com/infocenter/wasinfo/v6r1/index.jsp?topic=%2Fcom.ibm.ws.ast.st.v6.ui.doc%2Ftopics%2Ftadminassist.html
+
+

@@ -1,0 +1,20 @@
+This message is being sent to you in response to a mass list status change
+request made via the web-based mailing list management services interface
+on the mail server ~h.
+
+You have asked to have your status set to "~p2" for all
+lists on this server to which you are currently a subscriber.
+
+To complete this request for all lists click this link:
+
+   ~p3
+
+Alternatively, if you prefer, you can complete the request on a list-by-
+list basis using the links shown below.
+
+~r
+
+You have ~p4 minutes from the time this message was sent to complete any
+or all of these requests, after which you will need to submit your request
+again.
+

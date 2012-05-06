@@ -1,0 +1,281 @@
+<html>
+<head>
+<title> Mailing List Subscription Management</title>
+</head>
+<body>
+
+<table align="center" cellpadding="0" cellspacing="0" width="610" bgcolor="white">
+    <tr>
+        <td width="610" bgcolor="#6666CC">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610" bgcolor="#6666CC">
+            <p align="center"><font face="Arial" size="3" color="white"><b>Mailing list subscription management</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610" bgcolor="#6666CC">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610"><table border="1" cellspacing="0" width="643" bordercolordark="white" bordercolorlight="black">
+    <tr>
+        <td width="189" bgcolor="#CCCCFF">
+            <p align="right"><font face="Arial" size="2">Mailing list name: 
+            &nbsp;</font></p>
+        </td>
+        <td width="444" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">&nbsp;&nbsp;<b>~p1</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="189" bgcolor="#CCCCFF">
+            <p align="right"><font face="Arial" size="2">You are subscribed as: 
+            &nbsp;</font></p>
+        </td>
+        <td width="444" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">&nbsp;&nbsp;<b>~p2</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="189" bgcolor="#CCCCFF">
+            <p align="right"><font face="Arial" size="2">Current subscription 
+            status: &nbsp;</font></p>
+        </td>
+        <td width="444" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">&nbsp;&nbsp;<b>~p3</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="189" bgcolor="#CCCCFF">
+            <p align="right"><font face="Arial" size="2">Date of original subscription: 
+            &nbsp;</font></p>
+        </td>
+        <td width="444" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">&nbsp;&nbsp;<b>~p9</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="189" bgcolor="#CCCCFF">
+            <p align="right"><font face="Arial" size="2">Postings to date: &nbsp;</font></p>
+        </td>
+        <td width="444" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">&nbsp;&nbsp;<b>~p4</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="189" bgcolor="#CCCCFF">
+            <p align="right"><font face="Arial" size="2">Date of last posting: 
+            &nbsp;</font></p>
+        </td>
+        <td width="444" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">&nbsp;&nbsp;<b>~p5</b></font></p>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+    <table border="1" cellspacing="0" width="642" bordercolordark="white" bordercolorlight="black">
+        <form name="ChangeOptionsForm" method="get" action="~p0/ChangeOptions">
+        <tr>
+            <th colspan="2" bgcolor="#9999FF">
+                <p align="left"><font face="Arial" size="2" color="white">&nbsp;Standard subscription 
+                options</font></p>
+            </th>
+        </tr>
+        <tr>
+            <td width="36" bgcolor="#CCCCFF">
+                <p align="center"><font face="Arial" size="2"><input type="checkbox" name=~p6></font></p>
+            </td>
+            <td width="596" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">&nbsp;&nbsp;Receive mail posted 
+                to this list (MAIL mode)</font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="36" bgcolor="#CCCCFF">
+                <p align="center"><font face="Arial" size="2"><input type="checkbox" name=~p7></font></p>
+            </td>
+            <td width="596" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">&nbsp;&nbsp;Receive list mailings 
+                in MIME digest format (DIGEST mode)</font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="36" bgcolor="#CCCCFF">
+                <p align="center"><font face="Arial" size="2"><input type="checkbox" name=~p8></font></p>
+            </td>
+            <td width="596" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">&nbsp;&nbsp;Receive copies of 
+                your own postings to the list (REPRO mode)</font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="636" colspan="2" bgcolor="#CCCCFF">
+                <p align="right"><font face="Arial" size="2"><input type="submit" name="ChangeOptions" value="Change options"> 
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font></p>
+            </td>
+        </tr>
+    </form>
+</table>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+    <table border="1" cellspacing="0" width="642" bordercolordark="white" bordercolorlight="black">
+      <form name="EnableVacationForm" method="get" action="~p0/EnableVacation">
+        <tr>
+            <td width="636" colspan="2" bgcolor="#9999FF">
+                <p><font face="Arial" size="2" color="white">&nbsp;<b>Vacation mode</b></font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="440" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">Disable mail delivery of list 
+                postings for &nbsp;<input type="text" name="vacationdays" size="5"> 
+                &nbsp;days</font></p>
+            </td>
+            <td width="192" bgcolor="#CCCCFF">
+                <p align="center"><font face="Arial" size="2"><input type="submit" name="EnableVacation" value="Enable vacation"></font></p>
+            </td>
+        </tr>
+    </form>
+</table>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+    <table border="1" cellspacing="0" width="643" bordercolordark="white" bordercolorlight="black">
+        <form name="ChangeAddressForm" method="get" action="~p0/ChangeAddress">
+        <tr>
+            <td width="637" colspan="2" bgcolor="#9999FF">
+                <p><font face="Arial" size="2">&nbsp;</font><font face="Arial" size="2" color="white"><b>Change of subscription 
+                address</b></font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="441" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">New address: &nbsp;&nbsp;<input type="text" name="NewAddress" value="~p2" size="47"></font></p>
+            </td>
+            <td width="192" bgcolor="#CCCCFF">
+                <p align="center"><font face="Arial" size="2"><input type="submit" name="ChangeAddress" value="Change address"></font></p>
+            </td>
+        </tr>
+    </form>
+</table>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610"><table border="1" cellspacing="0" width="644" bordercolordark="white" bordercolorlight="black">
+    <tr>
+        <td width="638" colspan="2" bgcolor="#9999FF">
+            <p><font face="Arial" size="2"><b>&nbsp;</b></font><font face="Arial" size="2" color="white"><b>Unsubscribe from this list</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td width="443" bgcolor="#FFFFCC">
+            <p><font face="Arial" size="2">To cancel your subscription to this 
+            list, click the 'Unsubscribe' button: doing this will close this 
+            window.</font></p>
+        </td>
+        <td width="191" bgcolor="#CCCCFF">
+            <form name="UnsubscribeForm" method="get" action="~p0/Unsubscribe">
+                <p align="center"><font face="Arial" size="2"><input type="submit" name="Unsubscribe" value="Unsubscribe"></font></p>
+            </form>
+        </td>
+    </tr>
+</table>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td width="610"><form name="ChangePwdForm" method="get" action="~p0/ChangeListPwd">
+    <table border="1" cellspacing="0" width="642" bordercolordark="white" bordercolorlight="black">
+        <tr>
+            <td width="636" height="25" colspan="2" bgcolor="#9999FF">
+                <p><font face="Arial" size="2"><b>&nbsp;</b></font><font face="Arial" size="2" color="white"><b>Change 
+                            subscriber password</b></font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="441" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">Enter your current password here...</font></p>
+            </td>
+            <td width="191" bgcolor="#CCCCFF">
+                <p><font face="Arial" size="2">&nbsp;<input type="password" name="CurrentPwd" size="24"></font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="441" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">... then type your new password 
+                here</font></p>
+            </td>
+            <td width="191" bgcolor="#CCCCFF">
+                <p><font face="Arial" size="2">&nbsp;<input type="password" name="NewPwd1" size="24"></font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="441" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">... and type your new password 
+                again here</font></p>
+            </td>
+            <td width="191" bgcolor="#CCCCFF">
+                <p><font face="Arial" size="2">&nbsp;<input type="password" name="NewPwd2" size="24"></font></p>
+            </td>
+        </tr>
+        <tr>
+            <td width="441" bgcolor="#FFFFCC">
+                <p><font face="Arial" size="2">... then click the button&nbsp;to 
+                change your password</font></p>
+            </td>
+            <td width="191" bgcolor="#CCCCFF">
+                <p align="center"><font face="Arial" size="2"><input type="submit" name="ChangeListPwd" value="Change password..."></font></p>
+            </td>
+        </tr>
+    </table>
+</form>
+        </td>
+    </tr>
+    <tr>
+        <td width="610">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+</table>
+<p>&nbsp;</p>
+</body>
+</html>

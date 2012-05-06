@@ -1,0 +1,165 @@
+<html>
+<head>
+<title> Subscribing to list</title>
+</head>
+<body>
+
+<p><font size="2" face="Arial">&nbsp;</font></p>
+<form name="SubscribeToForm" method="post" action="/mlss/SubscribeTo">
+<table align="center" cellpadding="0" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+    <tr>
+        <td bgcolor="#6666CC" height="18">
+            <p><font size="2" face="Arial">&nbsp;</font></p>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#6666CC" height="18">
+            <p align="center"><b><font size="3" face="Arial" color="white">Subscribing to 
+            list ~p1</font></b></p>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#6666CC" height="18">
+            <p><font size="2" face="Arial">&nbsp;</font></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><font size="2" face="Arial">&nbsp;</font></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table border="1" cellspacing="0" width="540" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+                <tr>
+                    <td width="534" colspan="2" bgcolor="#CCCCFF">
+                        <p><font size="2" face="Arial">This mailing list requires 
+                        a special password for subscriptions. If you do not 
+                        have the necessary password to subscribe to this list, 
+                        please contact the list administrator or server manager 
+                        and ask for assistance.</font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="205" bgcolor="#CCCCFF">
+                        <p align="right"><font size="2" face="Arial">Subscription 
+                        password &nbsp;</font></p>
+                    </td>
+                    <td width="325" bgcolor="#FFFFCC">
+                        <p><font size="2" face="Arial">&nbsp;<input type="password" name="SubPassword" size="31"></font></p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><font size="2" face="Arial">&nbsp;&nbsp;</font></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table border="1" cellspacing="0" width="539" bgcolor="white" bordercolordark="white" bordercolorlight="black">
+                <tr>
+                    <td width="207" bgcolor="#CCCCFF">
+                            <p align="right"><font face="Arial" size="2">Your 
+                            name &nbsp;</font></p>
+                    </td>
+                    <td width="322" bgcolor="#FFFFCC">
+                            <p><font face="Arial" size="2">&nbsp;<input type="text" name="PersonalName" size="44"></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="207" bgcolor="#CCCCFF">
+                        <p align="right"><font size="2" face="Arial">Your e-mail 
+                        address &nbsp;</font></p>
+                    </td>
+                    <td width="322" bgcolor="#FFFFCC">
+                        <p><font size="2" face="Arial">&nbsp;<input type="text" name="EmailAddress" value="~p2" size="44"></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="207" bgcolor="#CCCCFF">
+                        <p align="right"><font size="2" face="Arial">Choose 
+                        a&nbsp;subscriber  password &nbsp;</font></p>
+                    </td>
+                    <td width="322" bgcolor="#FFFFCC">
+                        <p><font size="2" face="Arial">&nbsp;<input type="password" name="Password1" size="31"><input type="hidden" name="ListName" value="~p1"></font></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="207" bgcolor="#CCCCFF">
+                        <p align="right"><font size="2" face="Arial">... and 
+                        type the password again &nbsp;</font></p>
+                    </td>
+                    <td width="322" bgcolor="#FFFFCC">
+                        <p><font size="2" face="Arial">&nbsp;<input type="password" name="Password2" size="31"></font></p>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#CCCCFF">
+            <p align="right"><font size="2" face="Arial"><input type="submit" name="DoSubscribe" value="Subscribe..."></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p><font size="2" face="Arial">&nbsp;</font></p>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#6666CC">
+            <p><font size="2" face="Arial">&nbsp;&nbsp;</font><font size="2" face="Arial" color="white"><b>Subscription 
+            help:</b></font></p>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#CCCCFF">
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#CCCCFF">
+            <ul>
+                <li style="margin-right:19;"><font face="Arial" size="2"><b>Your 
+                name:</b> type in your name just as you would normally write 
+                it - for example, <i>John Smith</i>, or <i>Dr. J. S. Burrows</i>. 
+                Do&nbsp;not use commas in this field.</font></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#CCCCFF">
+            <ul>
+                <li><b><font face="Arial" size="2">Your e-mail address</font></b><font face="Arial" size="2">: 
+                type in your e-mail address here - for example <i>jsmith@backwash.net</i>, 
+                or <i>jsb@globocomm.com</i>.</font></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td bgcolor="#CCCCFF">
+            <ul>
+                <li style="margin-right:36;"><font face="Arial" size="2"><b>Your 
+                subscriber password</b>: a subscriber password is used to prevent other 
+                people from tampering with your subscription: you will use it 
+                when you login to these web pages to change your details or 
+                subscription settings. Your password should be a short, hard-to-guess 
+                word or phrase, preferably containing a mixture of letters and 
+                numbers. You are required to enter your password twice to ensure 
+                    that there are no typing errors.</font></li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p>&nbsp;</p>
+        </td>
+    </tr>
+</table>
+</form>
+<p><font size="2" face="Arial">&nbsp;</font></p>
+</body>
+</html>

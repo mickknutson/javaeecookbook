@@ -1,0 +1,42 @@
+a:18:{s:8:"provides";a:15:{s:17:"class;Image_Color";a:3:{s:4:"type";s:5:"class";s:4:"name";s:11:"Image_Color";s:8:"explicit";b:1;}s:31:"function;Image_Color::mixColors";a:3:{s:4:"type";s:8:"function";s:4:"name";s:22:"Image_Color::mixColors";s:8:"explicit";b:1;}s:32:"function;Image_Color::setWebSafe";a:3:{s:4:"type";s:8:"function";s:4:"name";s:23:"Image_Color::setWebSafe";s:8:"explicit";b:1;}s:31:"function;Image_Color::setColors";a:3:{s:4:"type";s:8:"function";s:4:"name";s:22:"Image_Color::setColors";s:8:"explicit";b:1;}s:30:"function;Image_Color::getRange";a:3:{s:4:"type";s:8:"function";s:4:"name";s:21:"Image_Color::getRange";s:8:"explicit";b:1;}s:37:"function;Image_Color::changeLightness";a:3:{s:4:"type";s:8:"function";s:4:"name";s:28:"Image_Color::changeLightness";s:8:"explicit";b:1;}s:34:"function;Image_Color::getTextColor";a:3:{s:4:"type";s:8:"function";s:4:"name";s:25:"Image_Color::getTextColor";s:8:"explicit";b:1;}s:29:"function;Image_Color::rgb2hex";a:3:{s:4:"type";s:8:"function";s:4:"name";s:20:"Image_Color::rgb2hex";s:8:"explicit";b:1;}s:29:"function;Image_Color::hex2rgb";a:3:{s:4:"type";s:8:"function";s:4:"name";s:20:"Image_Color::hex2rgb";s:8:"explicit";b:1;}s:29:"function;Image_Color::hsv2rgb";a:3:{s:4:"type";s:8:"function";s:4:"name";s:20:"Image_Color::hsv2rgb";s:8:"explicit";b:1;}s:29:"function;Image_Color::hsv2hex";a:3:{s:4:"type";s:8:"function";s:4:"name";s:20:"Image_Color::hsv2hex";s:8:"explicit";b:1;}s:35:"function;Image_Color::allocateColor";a:3:{s:4:"type";s:8:"function";s:4:"name";s:26:"Image_Color::allocateColor";s:8:"explicit";b:1;}s:31:"function;Image_Color::color2RGB";a:3:{s:4:"type";s:8:"function";s:4:"name";s:22:"Image_Color::color2RGB";s:8:"explicit";b:1;}s:36:"function;Image_Color::namedColor2RGB";a:3:{s:4:"type";s:8:"function";s:4:"name";s:27:"Image_Color::namedColor2RGB";s:8:"explicit";b:1;}s:41:"function;Image_Color::percentageColor2RGB";a:3:{s:4:"type";s:8:"function";s:4:"name";s:32:"Image_Color::percentageColor2RGB";s:8:"explicit";b:1;}}s:8:"filelist";a:1:{s:9:"Color.php";a:4:{s:4:"role";s:3:"php";s:14:"baseinstalldir";s:5:"Image";s:6:"md5sum";s:32:"0a3867be550124574f04ac7142f54059";s:12:"installed_as";s:27:"C:\php\pear\Image\Color.php";}}s:10:"xsdversion";s:3:"1.0";s:15:"packagerversion";s:7:"1.4.0b1";s:7:"package";s:11:"Image_Color";s:7:"summary";s:46:"Manage and handles color data and conversions.";s:11:"description";s:49:"Manage and handles color data and conversions.
+ 
+";s:11:"maintainers";a:3:{i:0;a:4:{s:6:"handle";s:7:"drewish";s:4:"name";s:13:"Andrew Morton";s:5:"email";s:15:"drewish@php.net";s:4:"role";s:4:"lead";}i:1;a:4:{s:6:"handle";s:11:"jasonlotito";s:4:"name";s:12:"Jason Lotito";s:5:"email";s:19:"jason@lehighweb.com";s:4:"role";s:4:"lead";}i:2;a:4:{s:6:"handle";s:2:"uw";s:4:"name";s:10:"Ulf Wendel";s:5:"email";s:20:"ulf.wendel@phpdoc.de";s:4:"role";s:9:"developer";}}s:7:"version";s:5:"1.0.2";s:12:"release_date";s:10:"2005-09-12";s:15:"release_license";s:11:"PHP License";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:1236:"* FIXED: percentageColor2RGB() was dropping first character of each number
+  instead of the percent sign at the end.
+* FIXED: mixColors() and percentageColor2RGB() weren't rounding the values
+  correctly. 50% of 255 is 127.5 and should round to 128 instead of 127.
+* FIXED: setColors(). If the second parameter was omitted it would take on a
+  random-ish value. I changed the implementation of so that colors are only set
+  when they're provided.
+* FIXED: _makeWebSafe() was rounding values incorrectly. Significantly
+  simplified the implementation in the process.
+* Removed the private, unused Image_Color::$websafe member.
+* Marked Image_Color::$color1 and $color2 as public. It made no sense that they
+  were private considering that if you called changeLightness() the only way to
+  find the result was using $color1 and $color2.
+* Deprecated the _returnColor() function. All it was doing was converting RGB
+  arrays to hex strings. The more aptly named rgb2hex() was calling
+  _returnColor() which made no sense. _returnColor() now calls rgb2hex() and
+  will probably disappear after the next release.
+* Made major improvements to the comments and documentation and corrected
+  several violations of the PEAR coding standards.
+  
+";s:12:"release_deps";a:1:{i:1;a:3:{s:4:"type";s:3:"ext";s:3:"rel";s:3:"has";s:4:"name";s:2:"gd";}}s:9:"changelog";a:5:{i:0;a:4:{s:7:"version";s:5:"1.0.1";s:12:"release_date";s:10:"2004-05-25";s:13:"release_state";s:6:"stable";s:13:"release_notes";s:39:"* Removed newline at end of file.
+    
+";}i:1;a:3:{s:7:"version";s:5:"1.0.0";s:12:"release_date";s:10:"2004-04-17";s:13:"release_notes";s:171:"+ Added color2RGB() method.
+
+  (Contribution by Laurent Laville <pear@laurent-laville.org>)
+
+* allocateColor() now works with both color names and
+  hex color codes.
+    
+";}i:2;a:3:{s:7:"version";s:3:"0.4";s:12:"release_date";s:10:"2003-01-02";s:13:"release_notes";s:44:"* Made namedColor2RGB() method static.
+    
+";}i:3;a:3:{s:7:"version";s:3:"0.3";s:12:"release_date";s:10:"2002-04-08";s:13:"release_notes";s:135:"* First independent PEAR release.
+
+* Renamed RGB(.php) to Color(.php).
+
+* Merged in functionality from Experimental/Color_Helper.
+    
+";}i:4;a:3:{s:7:"version";s:3:"0.2";s:12:"release_date";s:10:"2002-03-14";s:13:"release_notes";s:75:"Added support for HSV2RGB and HSV2HEX - Thanks to Jurgen Schwietering
+    
+";}}s:12:"_lastversion";N;s:7:"dirtree";a:1:{s:17:"C:\php\pear\Image";b:1;}s:13:"_lastmodified";i:1229942703;}

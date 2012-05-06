@@ -1,0 +1,97 @@
+       +------------------------------------------------+
+       |                Mail Server Help.               |
+       +------------------------------------------------+
+
+The Mercury Mail Transport includes a simple mail server capable of
+performing a number of automatic operations in response to messages
+sent to it. Some or all operations may be restricted at some sites.
+
+To activate the mail server, send a message to the special mail
+server account at the site (usually MAISER@host.domain), with the
+subject of the message set to anything (the mail server will quote
+your subject line back to you in its reply), and the commands the
+mail server should perform listed one per line in the message body.
+The mail server stops parsing commands when it encounters the end
+of the message, or a blank line. If your mailer adds a signature
+to your messages, make sure you enter a blank line after the last
+command. Unrecognized commands are ignored and generate no error.
+
+The following commands are recognized by the mail server at this
+site;
+
+    HELP
+       - Takes no parameters, returns this text.
+
+    VERIFY <address>
+       - Determines whether a particular address is valid at
+         this site.
+
+    LOOKUP <string>
+       - Returns a list of users at this address who match
+         the string you supply. The string may contain * and
+         ? wildcard characters. This command may be disabled at
+         some sites.
+
+    FINGER <address>
+       - Returns information about a user at this address. The
+         information returned may contain the user's FULL NAME,
+         whether or not mail is enabled or forwarded, and whether
+         mail reading will be confirmed. Also the content of the
+         file PROFILE in the user's mail directory will be returned.
+         This command may be disabled at some sites.
+
+    BOUNCE
+       - Takes no parameters - returns your message to you,
+         headers intact.
+
+    LIST
+       - Shows all the mailing lists available at this site.
+
+    SUBSCRIBE <list-name>
+    or SUB <list-name>
+       - Asks Maiser to add you to a mailing list. If the list is
+         not a public list, you will receive an error message.
+
+    UNSUBSCRIBE <list-name>
+    or SIGNOFF <list-name>
+    or UNSUB <list-name>
+       - Asks Maiser to remove your address from a mailing list.
+
+    ADD <list-name> <address>
+       - If you are a moderator for the list, this command will
+         add an address to the list.
+
+    REMOVE <list-name> <address>
+       - If you are a moderator for the list, this command will
+         remove an address from the list.
+
+    ENUMERATE <list-name>
+    or REVIEW <list-name>
+       - Asks the maiser to send you the current subscribers to the
+         list. Enumeration of the list may be restricted on a list-
+         by-list basis unless you are a list moderator.
+
+    INDEX
+       - Asks the maiser for a list of files available by e-mail
+         at this site.
+
+    SEND <filename>
+       - Asks the mail server to send you a file. For a list of the
+         files available by e-mail from this site, see the INDEX command.
+
+    FINGER <address>
+       - Returns mail-specific information about the specified address
+         if it is local. Also returns the contents of the file PROFILE
+         if it exists in the user's new mail directory. The FINGER
+         command is intended to allow distribution of information such
+         as PGP keys and contact information.
+
+    EXIT
+       - Terminates mail server command processing for a message.
+
+If you have problems with this facility, or questions, please mail
+them to "postmaster" at this site.
+
+The Mercury Mail Transport System is Copyright (c) 1993-95, David
+Harris, All Rights Reserved.
+

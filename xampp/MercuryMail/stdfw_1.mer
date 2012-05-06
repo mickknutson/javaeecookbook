@@ -1,0 +1,42 @@
+;  Mercury/32 template file.
+;  Mercury Mail Transport System, Copyright 1993-2000, David Harris.
+;
+;  This file is used as the default template by Mercury when constructing
+;  Subscription "Farewell" messages for mailing lists that allow public
+;  subscription.
+;
+;  You can instruct Mercury/32 to use this file as a template by entering
+;  the word "standard" in the "Farewell file" field of the mailing list
+;  definition. Mercury will automatically determine the proper version of
+;  this template to use for the subscription.
+;
+;  You can edit this template using any text editor. Lines beginning with a
+;  ';', like this one, are comments and are ignored: all other lines are
+;  written into the message. You can place special markers in the body of the
+;  template, which Mercury will replace with information about the list: these
+;  markers consist of the two special characters ~p followed by a single digit
+;  identifying the piece of information you want substituted. The following
+;  substitutions are currently possible in this template file:
+;
+;     ~p0     The list's basic name (i.e, what appears to the left of the '@')
+;     ~p1     This system's hostname
+;     ~p2     The full title for the mailing list
+;     ~p3     The address of the mailing list's primary moderator
+;     ~p4     The subscriber's address
+;     ~p5     The subscriber's "personal name"
+;     ~p6     The formal mailing address for the list
+;
+Farewell from the ~p2 mailing list.
+
+Your subscription to this list has been closed down, either in response
+to an explicit request from your e-mail address, or to a command from the
+list's moderator.
+
+If you wish to re-subscribe to this list in future, please send a mail
+message to maiser@~p1, containing the following two lines:
+
+   SUBSCRIBE ~p0 ~p5
+   EXIT
+
+Best regards,
+The List Management.

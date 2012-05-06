@@ -1,0 +1,43 @@
+;  Sample alias file for Mercury.
+;  Copright (c) 1993-96, David Harris, All Rights Reserved.
+;
+;  The format for this file is:
+;
+;      alias == real_address
+;
+;  Lines starting with ';', '#' or '*' are considered comments
+;  and are ignored, as are blank lines. There may be trailing
+;  and leading whitespace on entries - it is all stripped out
+;  in the alias file. It is a limitation of this release of
+;  Mercury that you cannot have an alias or real address which
+;  contains '==' because no quoting mechanism is implemented.
+;
+;  Compile the file using MALIAS.EXE, and copy it to the place
+;  you have specified in MERCURY.INI. You can update Mercury's
+;  alias file while Mercury is running.
+;
+;  You can have an almost unlimited number of aliases, and you
+;  may have them resolve to anything you wish. Aliases are
+;  resolved before any other attempt at address resolution is
+;  made, so it is perfectly legal to have a local-looking alias
+;  resolve to an off-server address. Note, though, that aliases
+;  work strictly on the ADDRESS - they are not affected by any
+;  quoted or comment text which is attached to it. As an example
+;  of the impact of this, the aliasing mechanism regards these
+;  two addresses as identical:
+;
+;     "My what a funny day!" david@pmail.gen.nz
+;     (Master of the Lightbulbs) <david@pmail.gen.nz> "Pop!"
+;
+;  Aliases may be applied recursively up to four levels deep -
+;  that is, you may have aliases for aliases in this file.
+;  (although it still eludes me why anyone would do this).
+;
+;  Neither aliases nor real addresses are case-sensitive, 
+;  although case is preserved in real addresses.
+
+david@pmail.gen.nz                ==   support
+J.Smith@pmail.gen.nz              ==   julia
+Richard.Stevenson@pmail.gen.nz    ==   richard
+listserv@pmail.gen.nz             ==   maiser
+

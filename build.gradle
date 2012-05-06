@@ -2,20 +2,16 @@
  * Configuration for the root JavaEE Cookbook project
  *
  * @author Mick Knutson
- * <p><a href="http://www.baselogic.com">Blog: http://baselogic.com</a></p>
- * <p><a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a></p>
- * <p><a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a></p>
- * <p><a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a></p>
- * 
- * @see http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book
- * @see http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166
- * @see http://baselogic.com
- * @see http://linkedin.com/in/mickknutson
- * @see http://twitter.com/mickknutson
- * @see http://github.com/mickknutson
- * 
- * @since 2011
- * 
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
+ *
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 7 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 7 Cookbook Amazon</a>
+ *
+ * @since 2012
+ *
  */
 buildscript {
 
@@ -57,7 +53,7 @@ buildscript {
             glassfish_embedded_plugin: '3.1.1',
             glassfish: '3.1.1',
 
-            h2: '1.3.148',
+            h2: '1.3.165',
             hamcrest: '1.1',
             htmlunit: '2.9',
             httpclient: "4.1.2",
@@ -77,7 +73,8 @@ buildscript {
             jsr311: "1.1.1",
             junit: '4.10',
             jython: '2.5.0',
-            log4j: '1.2.16',
+            log4j: '1.2.16', // deprecated
+            logback: '1.0.1',
 
             mockito: '1.8.5',
             powermock: '1.4.11',
@@ -88,7 +85,7 @@ buildscript {
             selenium_server: '2.3.1',
             selenium: '2.3.1',
             servlet_api: '3.0.1',
-            slf4j: '1.6.4',
+            slf4j: '1.6.4', // deprecated
             xmlunit: '1.3',
             yuicompressor: '2.4.6',
     ]
@@ -199,12 +196,12 @@ buildscript {
     }
 
     ant.taskdef(name: 'yguard', classname: 'com.yworks.yguard.YGuardTask', classpath: 'libs/yguard.jar')
-}
+} // end buildscript
 
 allprojects {
-    logger.warn "--- allprojects ---"
-    configurations*.dependencies.each { println it }
-    logger.warn "-------------------------------------------------------------"
+    //logger.warn "--- allprojects ---"
+    //configurations*.dependencies.each { println it }
+    //logger.warn "-------------------------------------------------------------"
 
     configurations {
         obfuscate
@@ -228,9 +225,9 @@ subprojects {
     apply plugin: 'java'
     apply plugin: 'maven'  // Maven plugin to install artifact in local Maven repo.
 
-    logger.warn "--- subprojects ---"
-    configurations*.dependencies.each { println it }
-    logger.warn "-------------------------------------------------------------"
+    //logger.warn "--- subprojects ---"
+    //configurations*.dependencies.each { println it }
+    //logger.warn "-------------------------------------------------------------"
 
    /* task printDeps( dependsOn: build ) << {
         println "--------------------------------------"
@@ -256,7 +253,6 @@ subprojects {
         maven {url 'https://maven.java.net/content/groups/public/'}
         maven {url 'http://www.eclipse.org/downloads/download.php?r=1&nf=1&file=/rt/eclipselink/maven.repo'}
 
-
         //maven {url 'http://nexus.openqa.org/content/repositories/releases/'}
         //maven {url 'http://scala-tools.org/repo-releases'}
         maven {url 'http://repository.jboss.org/nexus/content/groups/public-jboss/'}
@@ -269,16 +265,12 @@ subprojects {
                 "joda-time:joda-time:${versions.joda}",
                 "org.apache.ant:ant:${versions.ant}"
 
-        compile "org.slf4j:jcl-over-slf4j:${versions.slf4j}",
-                "org.slf4j:jul-to-slf4j:${versions.slf4j}",
-                "org.slf4j:slf4j-log4j12:${versions.slf4j}"
+        // Logging:
+        compile "ch.qos.logback:logback-classic:${versions.logback}",
+                "ch.qos.logback:logback-core:${versions.logback}"
 
-        compile("log4j:log4j:${versions.log4j}") {
-            exclude group: "com.sun.jdmk", module: "jmxtools"
-            exclude group: "com.sun.jmx", module: "jmxri"
-            exclude group: "javax.mail", module: "mail"
-            exclude group: "javax.jms", module: "jms"
-        }
+        compile "org.slf4j:slf4j-api:${versions.slf4j}",
+                "org.slf4j:jcl-over-slf4j:${versions.slf4j}"
 
         testCompile "junit:junit:${versions.junit}",
                     "org.hamcrest:hamcrest-all:${versions.hamcrest}",
@@ -305,16 +297,32 @@ subprojects {
     // group will translate to groupId during pom generation and deployment
     group = 'com.baselogic.javaeecookbook'
     version = '1.0.2'
-    sourceCompatibility = '1.6'
+
+    //build stuff
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
 
     buildDir = 'target'
 
+    test {
+        //makes the standard streams (err and out) visible at console when running tests
+        testLogging.showStandardStreams = true
+
+        //listening to test execution events
+        beforeTest { descriptor ->
+            logger.lifecycle(">>> Running test: " + descriptor)
+        }
+        onOutput { descriptor, event ->
+            logger.lifecycle("--->Test: " + descriptor + " produced standard out/err: " + event.message )
+        }
+    }
 
 }
 
 // -----------------------------------------------------------------------------
 // Custom Tasks
 // -----------------------------------------------------------------------------
+
 
 import com.yahoo.platform.yui.compressor.*
 import org.mozilla.javascript.*
@@ -484,17 +492,11 @@ project('ch02') {
                 "org.apache.derby:derbyclient:${versions.derby}",
                 "org.apache.derby:derby:${versions.derby}"
 
+        compile common_dependencies
+        compile common_extended_dependencies
         compile javaee_provided_dependencies
 
         testCompile "org.dbunit:dbunit:${versions.dbunit}"
-    }
-
-
-    task obfuscate(type: Yguard) {
-        taskJar = file("../libs/yguard.jar")
-        originalJar = "${buildDir}/libs/ch02-${version}.jar"
-        targetJar = "${buildDir}/libs/ch02-${version}-obf.jar"
-        externalClasses = "${configurations.compile.asPath}"
     }
 
     jar {
@@ -509,10 +511,6 @@ project('ch02') {
 
     }
 
-    jar.doLast{
-    	println "obfuscate ch02 jar"
-    	obfuscate.execute()
-    }
 }
 
 
@@ -530,7 +528,7 @@ project('ch03') {
         compile project(':ch02')
         compile javaee_dependencies
 
-        provided_dependencies javaee_provided_dependencies
+        compile javaee_provided_dependencies
 
     }
 

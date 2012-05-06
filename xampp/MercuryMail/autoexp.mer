@@ -1,0 +1,13 @@
+Your subscription to the mailing list '~p2@~p4' 
+has expired.
+
+This mailing list operates on the basis of automatic expiration ~p6 days
+after you initially subscribed.
+
+If you wish to renew your subscription to this list, please send a
+mail message to maiser@~p4, containing the following
+two lines:
+
+SUB ~p2 ~p0
+EXIT
+

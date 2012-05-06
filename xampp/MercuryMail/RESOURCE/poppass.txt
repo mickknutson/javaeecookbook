@@ -1,0 +1,23 @@
+PopPass Extensions for Pegasus Mail
+-----------------------------------
+
+PopPass is a Pegasus Mail Extension (or plugin module) that allows
+users of Pegasus Mail v3.0 and later systems to change their POP3
+passwords using the MercuryW "change password" server, or a compatible
+server.
+
+To install the extension, follow these easy steps:
+
+1: Locate the directory where you have installed Pegasus Mail
+
+2: Look for a file called WINPMAIL.EXE - if you can find this file, 
+   then copy POPPASS.DLL and POPPASS.FFF into the directory.
+
+3: Look for a file called WINPM-32.EXE - if you can find this file,
+   then copy PPASS32.DLL and PPASS32.FFF into the directory.
+
+4: Restart your copy of Pegasus Mail.
+
+To use the extension, choose "Change POP3 Password" from the
+"Extensions" submenu of the "Tools" menu in Pegasus Mail.
+

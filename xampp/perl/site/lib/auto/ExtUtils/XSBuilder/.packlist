@@ -1,0 +1,12 @@
+\xampp\perl\site\lib\ExtUtils\XSBuilder.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder.pod
+\xampp\perl\site\lib\ExtUtils\XSBuilder\C\grammar.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\CallbackMap.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\FunctionMap.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\MapUtil.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\PODTemplate.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\ParseSource.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\StructureMap.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\TypeMap.pm
+\xampp\perl\site\lib\ExtUtils\XSBuilder\WrapXS.pm
+\xampp\perl\site\lib\ExtUtils\xsbuilder.osc2002.pod

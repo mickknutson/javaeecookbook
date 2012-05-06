@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0
+             http://maven.apache.org/xsd/profiles-1.0.0.xsd">
+
+    <!--
+    This file no longer supported in Maven 3
+    @see http://www.baselogic.com/blog/development/maven/maven-3-x-profiles-xml-is-no-longer-supported-and-was-ignored-please-use-the-settings-xml-instead
+    -->
+
+    <profiles>
+        <!--
+        there are basically two options here. You can either:
+         * create a profile with an arbitrary name (eg: baselogic) and
+         activate it explicitly (eg: mvn -Pbaselogic clean package) wherein
+         you need only override those properties or build settings which
+         you want to change from the sum of default build and active POM profiles.
+         You can also have this profile invoked automatically by adding a profile with
+         the same name in your ~/.m2/settings.xml file with activeByDefault set to true; or
+
+         * create a profile with the same name as an active POM profile (eg: developer)
+         overriding those properties you wish to change AND COPYING ALL PROPERTIES YOU
+         DON'T WANT TO OVERRIDE.
+        -->
+        <profile>
+            <id>baselogic</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+
+            <properties>
+                <glassfish.home>C:/usr/bin/glassfish-3.1-b42-02_11_2011/</glassfish.home>
+                <glassfish.adminUser>admin</glassfish.adminUser>
+                <glassfish.adminPassword>password</glassfish.adminPassword>
+                <glassfish.echo>false</glassfish.echo>
+                <glassfish.terse>true</glassfish.terse>
+                <glassfish.debug>true</glassfish.debug>
+
+                <database.password>qwerty</database.password>
+
+                <domain.log.dir>${project.build.directory}</domain.log.dir>
+            </properties>
+        </profile>
+    </profiles>
+</profilesXml>

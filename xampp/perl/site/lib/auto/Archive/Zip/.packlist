@@ -1,0 +1,15 @@
+\xampp\perl\bin\crc32
+\xampp\perl\bin\crc32.bat
+\xampp\perl\site\lib\Archive\Zip.pm
+\xampp\perl\site\lib\Archive\Zip\Archive.pm
+\xampp\perl\site\lib\Archive\Zip\BufferedFileHandle.pm
+\xampp\perl\site\lib\Archive\Zip\DirectoryMember.pm
+\xampp\perl\site\lib\Archive\Zip\FAQ.pod
+\xampp\perl\site\lib\Archive\Zip\FileMember.pm
+\xampp\perl\site\lib\Archive\Zip\Member.pm
+\xampp\perl\site\lib\Archive\Zip\MemberRead.pm
+\xampp\perl\site\lib\Archive\Zip\MockFileHandle.pm
+\xampp\perl\site\lib\Archive\Zip\NewFileMember.pm
+\xampp\perl\site\lib\Archive\Zip\StringMember.pm
+\xampp\perl\site\lib\Archive\Zip\Tree.pm
+\xampp\perl\site\lib\Archive\Zip\ZipFileMember.pm

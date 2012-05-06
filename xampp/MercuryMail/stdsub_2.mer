@@ -1,0 +1,100 @@
+;  Mercury/32 template file.
+;  Mercury Mail Transport System, Copyright 1993-2007, David Harris.
+;
+;  This file is used as the default template by Mercury when constructing
+;  Subscription "Welcome" messages for standard, unmoderated mailing lists
+;  that have a "digest" option.
+;
+;  You can instruct Mercury/32 to use this file as a template by entering
+;  the word "standard" in the "Welcome file" field of the mailing list
+;  definition. Mercury will automatically determine the proper version of
+;  this template to use for the subscription.
+;
+;  You can edit this template using any text editor. Lines beginning with a
+;  ';', like this one, are comments and are ignored: all other lines are
+;  written into the message. You can place special markers in the body of the
+;  template, which Mercury will replace with information about the list: these
+;  markers consist of the two special characters ~p followed by a single digit
+;  identifying the piece of information you want substituted. The following
+;  substitutions are currently possible in this template file:
+;
+;     ~p0     The list's basic name (i.e, what appears to the left of the '@')
+;     ~p1     This system's hostname
+;     ~p2     The full title for the mailing list
+;     ~p3     The address of the mailing list's primary moderator
+;     ~p4     The subscriber's address
+;     ~p5     The subscriber's "personal name"
+;     ~p6     The formal mailing address for the list
+;     ~p7     The user's password (v4.53 and later only)
+;
+Welcome to the ~p2 mailing list!
+
+You have been successfully subscribed to this list and can begin posting
+to it immediately if you wish. This welcome message contains some general
+information on your subscription and how to manage it.
+
+* To send mail to the list for all the subscribers to read, send it to:
+      ~p6
+
+* To receive your messages as "digests" (occasional messages containing
+  all the mail received for the list over a period of time) send a mail
+  message to maiser@~p1, placing the following two lines
+  in the body of the message:
+      SET ~p0 DIGEST
+      EXIT
+
+* To stop receiving mail from the list for "x" days, send a mail message
+  to maiser@~p1, placing the following two lines in the
+  body of the message:
+      SET ~p0 VACATION x
+      EXIT
+  Naturally, you should change the "x" to the proper number of days. The
+  list server will automatically re-enable your subscription at the end of
+  the period.
+
+* To stop receiving mail from the list for an indefinite period, send a
+  mail message to maiser@~p1, placing the following two
+  lines in the message body:
+      SET ~p0 NOMAIL
+      EXIT
+
+* To start receiving mail from the list again at any time, send a mail
+  message to maiser@~p1, placing the following two
+  lines in the message body:
+      SET ~p0 MAIL
+      EXIT
+
+* To unsubscribe from the list permanently, send a mail message to
+  maiser@~p1, placing the following two lines in the
+  message body:
+      UNSUBSCRIBE ~p0
+      EXIT
+
+For all the commands shown above, please ensure that the commands start
+hard against the left-hand margin of your mail message - do not indent
+them (they are indented as shown above simply for clarity).
+
+If your mail program supports hyperlinks, you can use the following links
+to generate the proper commands for this list:
+
+To receive the list mail in "digest" form:
+> mailto:maiser@~p1?body=SET%20~p0%20DIGEST%0D%0AEXIT
+
+To go on vacation for seven days:
+> mailto:maiser@~p1?body=SET%20~p0%20VACATION%207%0D%0AEXIT
+
+To go on vacation for four weeks:
+> mailto:maiser@~p1?body=SET%20~p0%20VACATION%2028%0D%0AEXIT
+
+To stop receiving mail for an indefinite period:
+> mailto:maiser@~p1?body=SET%20~p0%20NOMAIL%0D%0AEXIT
+
+To start receiving mail again:
+> mailto:maiser@~p1?body=SET%20~p0%20MAIL%0D%0AEXIT
+
+To unsubscribe from the list:
+> mailto:maiser@~p1?body=UNSUBSCRIBE%20~p0%0D%0AEXIT
+
+Best regards,
+The List Management.
+

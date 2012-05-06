@@ -1,18 +1,24 @@
 package com.baselogic.javaee6.domain;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.*;
 
 /**
  * Customer Class
- * <p/>
- * <h2>Java EE6 Cookbook for Securing, Tuning and Extending Enterprise applications.</h2>
- * <p>Packt Publishing (http://www.packtpub.com)</p>
+ * @author Mick Knutson
+ * @see <a href="http://www.baselogic.com">Blog: http://baselogic.com</a>
+ * @see <a href="http://linkedin.com/in/mickknutson">LinkedIN: http://linkedin.com/in/mickknutson</a>
+ * @see <a href="http://twitter.com/mickknutson">Twitter: http://twitter.com/mickknutson</a>
+ * @see <a href="http://github.com/mickknutson">Git hub: http://github.com/mickknutson</a>
  *
- * @author Mick Knutson (<a href="http://www.baselogic.com">http://www.baselogic.com</a>)
- *         <a href="http://www.mickknutson.com">http://www.mickknutson.com</a>
- * @since 2011
+ * @see <a href="http://www.packtpub.com/java-ee6-securing-tuning-extending-enterprise-applications-cookbook/book">JavaEE 6 Cookbook Packt</a>
+ * @see <a href="http://www.amazon.com/Cookbook-securing-extending-enterprise-applications/dp/1849683166">JavaEE 6 Cookbook Amazon</a>
+ *
+ * @since 2012
  */
 @XmlRootElement(name = "Customer")
 public class Customer implements Serializable {
@@ -25,6 +31,7 @@ public class Customer implements Serializable {
     private String username;
     private String firstName;
     private String lastName;
+    private Double discount;
 
     private Collection<String> hobbies = new HashSet<String>();
 
@@ -41,12 +48,14 @@ public class Customer implements Serializable {
     //-----------------------------------------------------------------------//
 
     public Customer() {
+        this.discount = 0.0;
     }
 
     public Customer(String username, String firstName, String lastName) {
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.discount = 0.0;
     }
 
     //-----------------------------------------------------------------------//
@@ -92,6 +101,14 @@ public class Customer implements Serializable {
         this.description = description;
     }
 
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
     public List<Phone> getPhones() {
         return phones;
     }
@@ -122,17 +139,7 @@ public class Customer implements Serializable {
 
     @Override
     public String toString() {
-        return new org.apache.commons.lang.builder.ToStringBuilder(this)
-                .append("id", id)
-                .append("username", username)
-                .append("firstName", firstName)
-                .append("lastName", lastName)
-                .append("hobbies", hobbies)
-                .append("phones", phones)
-                .append("addresses", addresses)
-                .append("contacts", contacts)
-                .append("description", description)
-                .toString();
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 
 }
