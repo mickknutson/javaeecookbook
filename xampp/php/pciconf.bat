@@ -12,4 +12,4 @@ rem @version    CVS: $Id: pciconf.bat,v 1.1 2008/11/29 18:18:55 farell Exp $
 rem @link       http://pear.php.net/package/PHP_CompatInfo
 rem @since      File available since Release 1.9.0b1
 
-"F:\xampp\php\.\php.exe" -f "\xampp\php\pciconf" -- %*
+"C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe" -f "\xampp\php\pciconf" -- %*

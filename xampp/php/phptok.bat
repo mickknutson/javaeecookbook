@@ -34,5 +34,5 @@ REM ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 REM POSSIBILITY OF SUCH DAMAGE.
 REM
 
-set PHPBIN="F:\xampp\php\.\php.exe"
-"F:\xampp\php\.\php.exe" "\xampp\php\phptok" %*
+set PHPBIN="C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe"
+"C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe" "\xampp\php\phptok" %*

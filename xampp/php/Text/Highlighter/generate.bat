@@ -26,7 +26,7 @@ shift
 if -%1- == -- GOTO noshift
 GOTO doshift
 :noshift
-F:\xampp\php\.\php.exe -q -d output_buffering=1 -d include_path="\xampp\php\pear" \xampp\php/Text/Highlighter/generate.bat %MHL_PARAMS%
+C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe -q -d output_buffering=1 -d include_path="\xampp\php\pear" \xampp\php/Text/Highlighter/generate.bat %MHL_PARAMS%
 
 GOTO finish
 <?php

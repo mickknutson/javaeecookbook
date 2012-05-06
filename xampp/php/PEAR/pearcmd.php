@@ -29,8 +29,8 @@ define('PEAR_IGNORE_BACKTRACE', 1);
 /**
  * @nodep Gtk
  */
-if ('F:\xampp\php\pear' != '@'.'include_path'.'@') {
-    ini_set('include_path', 'F:\xampp\php\pear');
+if ('C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\pear' != '@'.'include_path'.'@') {
+    ini_set('include_path', 'C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\pear');
     $raw = false;
 } else {
     // this is a raw, uninstalled pear, either a cvs checkout, or php distro

@@ -72,7 +72,7 @@ Please visit http://sourceforge.net/projects/filezilla/</Item>
 <Allowed/>
 </IpFilter>
 <Permissions>
-<Permission Dir="F:\xampp\anonymous">
+<Permission Dir="C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\anonymous">
 <Option Name="FileRead">1</Option>
 <Option Name="FileWrite">0</Option>
 <Option Name="FileDelete">0</Option>
@@ -84,7 +84,7 @@ Please visit http://sourceforge.net/projects/filezilla/</Item>
 <Option Name="IsHome">1</Option>
 <Option Name="AutoCreate">0</Option>
 </Permission>
-<Permission Dir="F:\xampp\anonymous\incoming">
+<Permission Dir="C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\anonymous\incoming">
 <Option Name="FileRead">1</Option>
 <Option Name="FileWrite">1</Option>
 <Option Name="FileDelete">0</Option>
@@ -115,7 +115,7 @@ Please visit http://sourceforge.net/projects/filezilla/</Item>
 <Allowed/>
 </IpFilter>
 <Permissions>
-<Permission Dir="F:\xampp\htdocs">
+<Permission Dir="C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\htdocs">
 <Option Name="FileRead">1</Option>
 <Option Name="FileWrite">1</Option>
 <Option Name="FileDelete">1</Option>

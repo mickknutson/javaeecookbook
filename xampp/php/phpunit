@@ -1,4 +1,4 @@
-#!F:\xampp\php\.\php.exe
+#!C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe
 <?php
 /* PHPUnit
  *
@@ -42,7 +42,7 @@ if (extension_loaded('xdebug')) {
     xdebug_disable();
 }
 
-if (strpos('F:\xampp\php\.\php.exe', '@php_bin') === 0) {
+if (strpos('C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe', '@php_bin') === 0) {
     set_include_path(dirname(__FILE__) . PATH_SEPARATOR . get_include_path());
 }
 

@@ -1,3 +1,0 @@
-Manifest-Version: ${project.version}
-Created-By: ${user.name}
-Bnd-LastModified: ${timestamp}

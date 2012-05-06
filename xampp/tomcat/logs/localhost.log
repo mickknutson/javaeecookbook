@@ -1,3 +1,0 @@
-12:21:57.571 [/examples] {pool-5-thread-1} INFO : ContextListener: contextInitialized()
-12:21:57.627 [/examples] {pool-5-thread-1} INFO : SessionListener: contextInitialized()
-12:21:57.652 [/examples] {pool-5-thread-1} INFO : ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@310ac5e8')

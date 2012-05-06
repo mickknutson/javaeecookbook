@@ -95,8 +95,8 @@ abstract class PHPUnit_Util_PHP
     public static function getPhpBinary()
     {
         if (self::$phpBinary === NULL) {
-            if (is_readable('F:\xampp\php\.\php.exe')) {
-                self::$phpBinary = 'F:\xampp\php\.\php.exe';
+            if (is_readable('C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe')) {
+                self::$phpBinary = 'C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\php\.\php.exe';
             }
 
             else if (PHP_SAPI == 'cli' && isset($_SERVER['_']) &&
