@@ -142,3 +142,18 @@
 [Sat May 05 16:24:55 2012] [error] [client ::1] File does not exist: F:/xampp/htdocs/abv/resources/images, referer: http://localhost/abv/abv.html
 [Sat May 05 16:30:38 2012] [error] [client ::1] File does not exist: F:/xampp/htdocs/abv/resources/images, referer: https://localhost/abv/abv.html
 [Sat May 05 16:30:39 2012] [error] [client ::1] File does not exist: F:/xampp/htdocs/abv/resources/images, referer: https://localhost/abv/abv.html
+[Sun May 06 17:23:11 2012] [warn] pid file C:/usr/SYNCH/projects/Git-Hub/javaeecookbook/xampp/apache/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Sun May 06 17:23:11 2012] [notice] Digest: generating secret for digest authentication ...
+[Sun May 06 17:23:11 2012] [notice] Digest: done
+[Sun May 06 17:23:14 2012] [notice] Apache/2.2.21 (Win32) mod_ssl/2.2.21 OpenSSL/1.0.0e PHP/5.3.8 mod_perl/2.0.4 Perl/v5.10.1 configured -- resuming normal operations
+[Sun May 06 17:23:14 2012] [notice] Server built: Sep 10 2011 11:34:11
+[Sun May 06 17:23:14 2012] [notice] Parent: Created child process 9132
+[Sun May 06 17:23:15 2012] [notice] Digest: generating secret for digest authentication ...
+[Sun May 06 17:23:15 2012] [notice] Digest: done
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Child process is running
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Acquired the start mutex.
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Starting 150 worker threads.
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Starting thread to listen on port 80.
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Starting thread to listen on port 80.
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Starting thread to listen on port 443.
+[Sun May 06 17:23:17 2012] [notice] Child 9132: Starting thread to listen on port 443.

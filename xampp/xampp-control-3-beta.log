@@ -252,3 +252,47 @@
 1:53:53 PM  [main] 	Deinitializing moduls
 1:53:53 PM  [main] 	Deinitializing main
 
+5:23:07 PM  [main] 	Initializing main
+5:23:07 PM  [main] 	Windows version: 6.1 (build 7601) - Service Pack 1
+5:23:07 PM  [main] 	Xampp version: 1.7.7
+5:23:07 PM  [main] 	Control center version: 3.0.2 [ Compiled: Jul 21th 2011 - build #1 ]
+5:23:07 PM  [main] 	Running as admin - good!
+5:23:07 PM  [main] 	Working with basedir: "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\"
+5:23:07 PM  [main] 	Initializing moduls
+5:23:07 PM  [apache] 	Initializing module...
+5:23:07 PM  [apache] 	Checking for service (name="Apache2.2"): Service not installed
+5:23:07 PM  [apache] 	Checking default ports...
+5:23:07 PM  [mysql] 	Initializing module...
+5:23:07 PM  [mysql] 	Checking for service (name="mysql"): Service not installed
+5:23:07 PM  [mysql] 	Checking default ports...
+5:23:07 PM  [filezilla] 	Initializing module...
+5:23:07 PM  [filezilla] 	Checking for service (name="FileZilla Server"): Service not installed
+5:23:07 PM  [filezilla] 	Checking default ports...
+5:23:07 PM  [mercury] 	Initializing module...
+5:23:07 PM  [mercury] 	Checking default ports...
+5:23:07 PM  [tomcat] 	Initializing module...
+5:23:07 PM  [tomcat] 	Checking default ports...
+5:23:07 PM  [main] 	Enabling autostart for module "apache"
+5:23:07 PM  [main] 	Enabling autostart for module "tomcat"
+5:23:07 PM  [main] 	Starting check-timer
+5:23:08 PM  [apache] 	Autostart active: starting...
+5:23:08 PM  [apache] 	Starting apache app...
+5:23:08 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\httpd.exe"
+5:23:08 PM  [tomcat] 	Autostart active: starting...
+5:23:08 PM  [tomcat] 	Starting tomcat app...
+5:23:08 PM  [tomcat] 	Executing "c:\Windows\sysnative\cmd.exe" "/c c:\usr\synch\projects\git-hub\javaeecookbook\xampp\catalina_start.bat"
+5:23:08 PM  [apache] 	Status change detected: running
+5:23:25 PM  [tomcat] 	Status change detected: running
+5:23:34 PM  [tomcat] 	Status change detected: stopped
+5:24:00 PM  [tomcat] 	Status change detected: running
+6:03:17 PM  [tomcat] 	Stopping
+6:03:17 PM  [tomcat] 	Executing "c:\Windows\sysnative\cmd.exe" "/c c:\usr\synch\projects\git-hub\javaeecookbook\xampp\catalina_stop.bat"
+6:03:19 PM  [tomcat] 	Status change detected: stopped
+6:03:20 PM  [apache] 	Stopping apache (PID: 2756)
+6:03:20 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\pv.exe -f -k -q -i 2756"
+6:03:20 PM  [apache] 	Stopping apache (PID: 9132)
+6:03:20 PM  [apache] 	Executing "c:\usr\synch\projects\git-hub\javaeecookbook\xampp\apache\bin\pv.exe -f -k -q -i 9132"
+6:03:21 PM  [apache] 	Status change detected: stopped
+6:03:24 PM  [main] 	Deinitializing moduls
+6:03:24 PM  [main] 	Deinitializing main
+
