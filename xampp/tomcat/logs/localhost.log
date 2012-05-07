@@ -1,0 +1,5 @@
+17:23:24.776 [/examples] {pool-4-thread-1} INFO : ContextListener: contextInitialized()
+17:23:24.776 [/examples] {pool-4-thread-1} INFO : SessionListener: contextInitialized()
+17:23:24.817 [/examples] {pool-4-thread-1} INFO : ContextListener: attributeAdded('org.apache.jasper.compiler.TldLocationsCache', 'org.apache.jasper.compiler.TldLocationsCache@106d4886')
+18:03:18.860 [/examples] {pool-4-thread-2} INFO : SessionListener: contextDestroyed()
+18:03:18.860 [/examples] {pool-4-thread-2} INFO : ContextListener: contextDestroyed()

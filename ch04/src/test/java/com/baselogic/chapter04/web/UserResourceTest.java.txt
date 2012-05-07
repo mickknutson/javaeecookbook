@@ -1,0 +1,77 @@
+package com.baselogic.javaee6.web;
+
+import com.baselogic.javaee6.dao.UserDao;
+import com.baselogic.javaee6.domain.Customer;
+import com.baselogic.javaee6.service.UserResource;
+import com.baselogic.test.CustomerFixture;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
+
+/**
+ * [Class_Name]
+ *
+ * @author Mick Knutson
+ *         <a href="http://www.baselogic.com>Blog</a>< /br>
+ *         <a href="http://linkedin.com/in/mickknutson>LinkedIN</a>< /br>
+ *         <a href="http://twitter.com/mickknutson>Twitter</a>< /br>
+ *         <a href="http://www.mickknutson.com>Personal</a>< /br>
+ * @since 2011
+ *        <i>To change this template use File | Settings | File Templates.</i>
+ */
+public class UserResourceTest {
+
+    //-----------------------------------------------------------------------//
+    // Attributes
+    //-----------------------------------------------------------------------//
+    public UserResource userResource;
+
+    public UserDao userDaoMock;
+
+    //-----------------------------------------------------------------------//
+    // Lifecycle Methods
+    //-----------------------------------------------------------------------//
+    @Before
+    public void before() throws Exception {
+        userResource = new UserResource();
+
+        // Create Mock UserDao
+        userDaoMock = mock(UserDao.class);
+
+        // set userDaoMock into UserService.
+        this.userResource.userDao = userDaoMock;
+    }
+
+    @After
+    public void after() throws Exception {
+        //
+    }
+
+    //-----------------------------------------------------------------------//
+    // Unit Tests
+    //-----------------------------------------------------------------------//
+
+    @Test
+    public void test_Create_and_Read_All_Customers() throws Exception {
+
+        // Create test data for Mock to return
+        Customer customer = CustomerFixture.createSingleCustomer();
+
+        // Set conditions for Mock object.
+        when(userDaoMock.findCustomer(any(String.class)))
+                .thenReturn(customer);
+
+        // Execute service.
+        String result = userResource.findCustomer("mickknutson");
+
+        // Assert result.
+        assertThat(result, is("here"));
+
+        // Assert Mock executed.
+        verify(userDaoMock);
+    }
+}

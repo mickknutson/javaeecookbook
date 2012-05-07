@@ -1,0 +1,41 @@
+
+
+mvn org.glassfish.maven.plugin:maven-glassfish-plugin:start-domain -e -X
+mvn clean package org.glassfish.maven.plugin:maven-glassfish-plugin:start-domain -e
+mvn               org.glassfish.maven.plugin:maven-glassfish-plugin:stop-domain -e
+mvn clean package org.glassfish.maven.plugin:maven-glassfish-plugin:deploy -e
+
+mvn clean package glassfish:start-domain -e -X
+
+mvn org.codehaus.mojo:exec-maven-plugin:exec -e
+
+mvn org.codehaus.cargo:cargo-maven2-plugin:1.0.5:start -e
+mvn org.codehaus.cargo:cargo-maven2-plugin:1.0.5:stop -e
+
+mvn org.codehaus.cargo:cargo-maven2-plugin:1.0.5:deploy -e
+
+
+%GLASSFISH_HOME%\\asadmin --host localhost --port 4848 --user admin --passwordfile C:\DOCUME~1\MKNUTS~1\LOCALS~1\Temp\mgfp9040175523989125567.tmp --interactive=false --echo=true --terse=false start-domain --verbose=false --upgrade=false --debug=true --domaindir "C:\\usr\\bin\\glassfish-3.1-b42-02_11_2011\\domains" domain1
+
+
+
+
+
+potential Recipes:
+
+JAAS (Form)
+
+JAAS (Basic)
+
+GSS-API ?
+
+JCE ?
+
+JSSE ?
+
+SASL ?
+
+
+
+
+Also to potentially talk about:

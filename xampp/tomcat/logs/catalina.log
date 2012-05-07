@@ -1,0 +1,13 @@
+17:23:11.441 INFO  {main} [o.a.catalina.core.AprLifecycleListener] : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\usr\bin\Java\jdk1.7.0_03\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\usr\bin\ansi151\x86;C:\Program Files\Dell\DW WLAN Card;C:\Program Files (x86)\RSA SecurID Token Common;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\usr\bin\Java\jdk1.6.0_31\bin;C:\usr\bin\jruby\jruby-1.6.3\bin;C:\usr\bin\jruby\jruby-1.6.3\lib\ruby\gems\1.8\bin;C:\usr\bin\gradle-1.0-milestone-9\bin;C:\usr\bin\groovy-1.8.6\bin;C:\usr\bin\apache-maven-3.0.4\bin;C:\usr\bin\apache-ant-1.8.2\bin;C:\usr\bin\scala-2.9.1.final\bin;C:\Program Files\VanDyke Software\Clients\;.
+17:23:12.004 INFO  {main} [org.apache.catalina.startup.Catalina] : Initialization processed in 1085 ms
+17:23:12.046 INFO  {main} [org.apache.catalina.core.StandardService] : Starting service Catalina
+17:23:12.048 INFO  {main} [org.apache.catalina.core.StandardEngine] : Starting Servlet Engine: Apache Tomcat/7.0.27
+17:23:12.435 INFO  {pool-4-thread-1} [org.apache.catalina.startup.HostConfig] : Deploying web application archive C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\tomcat\webapps\ch06-web-mobile.war
+17:23:24.599 INFO  {pool-4-thread-1} [org.apache.catalina.startup.HostConfig] : Deploying web application directory C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\tomcat\webapps\docs
+17:23:24.629 INFO  {pool-4-thread-1} [org.apache.catalina.startup.HostConfig] : Deploying web application directory C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\tomcat\webapps\examples
+17:23:24.819 INFO  {pool-4-thread-1} [org.apache.catalina.startup.HostConfig] : Deploying web application directory C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\tomcat\webapps\host-manager
+17:23:24.866 INFO  {pool-4-thread-1} [org.apache.catalina.startup.HostConfig] : Deploying web application directory C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\tomcat\webapps\manager
+17:23:24.910 INFO  {pool-4-thread-1} [org.apache.catalina.startup.HostConfig] : Deploying web application directory C:\usr\SYNCH\projects\Git-Hub\javaeecookbook\xampp\tomcat\webapps\ROOT
+17:23:24.977 INFO  {main} [org.apache.catalina.startup.Catalina] : Server startup in 12972 ms
+18:03:18.581 INFO  {main} [org.apache.catalina.core.StandardServer] : A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+18:03:18.688 INFO  {main} [org.apache.catalina.core.StandardService] : Stopping service Catalina
